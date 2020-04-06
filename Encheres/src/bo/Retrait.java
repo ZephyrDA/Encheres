@@ -4,48 +4,61 @@ import java.io.Serializable;
 
 public class Retrait implements Serializable {
 
-	private static final long serialVersionUID = 2L;
-	private int identifiant;
-	private String nom;
-	private int leRepas;
-	
-	public int getIdentifiant() {
-		return identifiant;
-	}
-	public void setIdentifiant(int identifiant) {
-		this.identifiant = identifiant;
-	}
-
-	public String getNom() {
-		return this.nom;
-	}
-	
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	
-	public int getLeRepas() {
-		return this.leRepas;
-	}
-	
-	public void setLeRepas(int leRepas) {
-		this.leRepas = leRepas;
-	}
+	private static final long serialVersionUID = 1L;
+	private Article article;
+	private String rue;
+	private String code_postal;
+	private String ville;
 	
 	public Retrait() {
 		super();
 	}
-	public Retrait(String nom, int leRepas) {
-		this();
-		this.nom = nom;
-		this.leRepas = leRepas;
+
+	public Retrait(Article article, String rue, String code_postal, String ville) {
+		super();
+		this.article = article;
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
 	}
-	public Retrait(int identifiant, String nom, int leRepas) {
-		this(nom,leRepas);
-		this.identifiant = identifiant;
+
+	public Article getArticle() {
+		return article;
 	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	public String getRue() {
+		return rue;
+	}
+
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
+
+	public String getCode_postal() {
+		return code_postal;
+	}
+
+	public void setCode_postal(String code_postal) {
+		this.code_postal = code_postal;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
 	@Override
 	public String toString() {
-		return "Repas [identifiant=" + identifiant + ", nom=" + nom.toString() + ", leRepas=" + leRepas + "]";
+		return "Retrait [rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + "]";
 	}
+	
+	
+	
 }

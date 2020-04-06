@@ -1,51 +1,58 @@
 package bo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Enchere implements Serializable {
 
-	private static final long serialVersionUID = 2L;
-	private int identifiant;
-	private String nom;
-	private int leRepas;
-	
-	public int getIdentifiant() {
-		return identifiant;
-	}
-	public void setIdentifiant(int identifiant) {
-		this.identifiant = identifiant;
-	}
-
-	public String getNom() {
-		return this.nom;
-	}
-	
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	
-	public int getLeRepas() {
-		return this.leRepas;
-	}
-	
-	public void setLeRepas(int leRepas) {
-		this.leRepas = leRepas;
-	}
+	private static final long serialVersionUID = 1L;
+	private Date dateEnchere;
+	private int montantEnchere;
+	private Utilisateur utilisateur;
 	
 	public Enchere() {
 		super();
 	}
-	public Enchere(String nom, int leRepas) {
-		this();
-		this.nom = nom;
-		this.leRepas = leRepas;
+
+	public Enchere(Date dateEnchere, int montantEnchere, Utilisateur utilisateur) {
+		super();
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
+		this.utilisateur = utilisateur;
 	}
-	public Enchere(int identifiant, String nom, int leRepas) {
-		this(nom,leRepas);
-		this.identifiant = identifiant;
+
+	public Date getDateEnchere() {
+		return dateEnchere;
 	}
+
+	public void setDateEnchere(Date dateEnchere) {
+		this.dateEnchere = dateEnchere;
+	}
+
+	public int getMontantEnchere() {
+		return montantEnchere;
+	}
+
+	public void setMontantEnchere(int montantEnchere) {
+		this.montantEnchere = montantEnchere;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Repas [identifiant=" + identifiant + ", nom=" + nom.toString() + ", leRepas=" + leRepas + "]";
+		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + ", utilisateur="
+				+ utilisateur + "]";
 	}
+	
+	
+	
 }
