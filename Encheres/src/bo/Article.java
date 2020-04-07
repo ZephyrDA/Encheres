@@ -1,15 +1,14 @@
 package bo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
-/**
- * 
- * @author Elian
- * Classe Article
- */
+
 public class Article implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	private int no_article;
 	private String nom_article;
@@ -19,29 +18,15 @@ public class Article implements Serializable {
 	private int prix_initial;
 	private int prix_vente;
 	private Categorie categorie;
-	private List<Enchere> encheres;  
+	private List<Enchere> encheres; 
+	private Utilisateur vendeur;
 	
-	/**
-	 * Constructeur de la classe Article
-	 */
 	public Article() {
 		super();
 	}
-	
-	/**
-	 * Constructeur de la classe Article
-	 * @param no_article
-	 * @param nom_article
-	 * @param description
-	 * @param date_debut_encheres
-	 * @param date_fin_encheres
-	 * @param prix_initial
-	 * @param prix_vente
-	 * @param categorie
-	 * @param encheres
-	 */
+
 	public Article(int no_article, String nom_article, String description, Date date_debut_encheres,
-			Date date_fin_encheres, int prix_initial, int prix_vente, Categorie categorie, List<Enchere> encheres) {
+			Date date_fin_encheres, int prix_initial, int prix_vente, Categorie categorie, List<Enchere> encheres, Utilisateur vendeur) {
 		super();
 		this.no_article = no_article;
 		this.nom_article = nom_article;
@@ -52,6 +37,7 @@ public class Article implements Serializable {
 		this.prix_vente = prix_vente;
 		this.categorie = categorie;
 		this.encheres = encheres;
+		this.vendeur = vendeur;
 	}
 
 	public int getNo_article() {
@@ -126,14 +112,23 @@ public class Article implements Serializable {
 		this.encheres = encheres;
 	}
 
+	public Utilisateur getVendeur() {
+		return vendeur;
+	}
+
+	public void setVendeur(Utilisateur vendeur) {
+		this.vendeur = vendeur;
+	}
+
 	@Override
 	public String toString() {
 		return "Article [no_article=" + no_article + ", nom_article=" + nom_article + ", description=" + description
 				+ ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres=" + date_fin_encheres
 				+ ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente + ", categorie=" + categorie
-				+ ", encheres=" + encheres + "]";
+				+ ", encheres=" + encheres + ", vendeur=" + vendeur + "]";
 	}
-	
+
+
 	
 	
 }

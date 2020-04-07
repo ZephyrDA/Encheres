@@ -1,11 +1,7 @@
 package bo;
 
 import java.io.Serializable;
-/**
- * Classe Retrait
- * @author Elian
- *
- */
+
 public class Retrait implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,20 +10,10 @@ public class Retrait implements Serializable {
 	private String code_postal;
 	private String ville;
 	
-	/**
-	 * Constructeur de la classe Retrait
-	 */
 	public Retrait() {
 		super();
 	}
-	
-	/**
-	 * Constructeur de la classe Retrait
-	 * @param article
-	 * @param rue
-	 * @param code_postal
-	 * @param ville
-	 */
+
 	public Retrait(Article article, String rue, String code_postal, String ville) {
 		super();
 		this.article = article;
