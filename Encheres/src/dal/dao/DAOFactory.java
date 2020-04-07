@@ -1,16 +1,32 @@
 package dal.dao;
 
-import fr.eni.suivirepas.dal.RepasDAO;
+import bo.Categorie;
+
 
 public abstract class DAOFactory {
 	
-	public static UtilisateurDAO getRepasDAO()
+	public static UtilisateurDAO getUtilisateurDAO()
 	{
 		return new UtilisateurDAOJdbcImpl();
 	}
 	
-	public static ArticleDAO getAlimentsDAO()
+	public static ArticleDAO getArticleDAO()
 	{
 		return new ArticleDAOJdbcImpl();
+	}
+	
+	public static CategorieDAO getCategorieDAO()
+	{
+		return new CategorieDAOJdbcImpl();
+	}
+	
+	public static EnchereDAO getEnchereDAO()
+	{
+		return new EnchereDAOJdbcImpl();
+	}
+	
+	public static RetraitDAO getRetraitDAO()
+	{
+		return new RetraitDAOJdbcImpl();
 	}
 }
