@@ -1,4 +1,4 @@
-package fr.eni.suivirepas.dal;
+package dal;
 
 import java.sql.Connection;
 import java.sql.SQLException;
