@@ -12,7 +12,7 @@ public interface UtilisateurDAO {
 	 * @param avis
 	 * @throws BusinessException
 	 */
-	public void insert(Categorie repas) throws BusinessException;
+	public void insert(Categorie2 repas) throws BusinessException;
 	
-	public ArrayList<Categorie> selectAll() throws BusinessException;
+	public ArrayList<Categorie2> selectAll() throws BusinessException;
 }

@@ -1,6 +1,6 @@
 package dal.dao;
 
-import bo.Categorie;
+import bo.Categorie2;
 
 
 public abstract class DAOFactory {
