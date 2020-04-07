@@ -1,8 +1,5 @@
 package dal.dao;
 
-
-import java.util.ArrayList;
-
 import bo.Article;
 import be.BusinessException;
 
@@ -16,4 +13,6 @@ public interface ArticleDAO {
 	public void insert(Article article) throws BusinessException;
 	
 	public void update(int id) throws BusinessException;
+	
+	public void delete(int id) throws BusinessException;
 }

@@ -1,5 +1,4 @@
 package be;
-package ;
 
 import java.util.ArrayList;
 import java.util.List;

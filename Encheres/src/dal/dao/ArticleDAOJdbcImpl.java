@@ -1,33 +1,42 @@
 package dal.dao;
 
+import be.BusinessException;
+import bo.Article;
+import dal.DALException;
+import dal.CodesResultatDAL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import fr.eni.suivirepas.BusinessException;
-import fr.eni.suivirepas.bo.Aliments;
-import fr.eni.suivirepas.bo.Aliments;
+import utils.DBConnectPool;
 
 class ArticleDAOJdbcImpl implements ArticleDAO {
 
-	private static final String INSERT="INSERT INTO ALIMENTS(nom, leRepas) VALUES(?,?) ;";
+	private static final String INSERT="INSERT INTO ARTICLES_VENDUS(no_article, nom_article, description,"
+			+ " date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
+			+ " VALUES(?,?,?,?,?,?,?,?,?) ;";
 	private static final String SELECT="SELECT * FROM ALIMENTS WHERE leRepas = ? ;";
 	@Override
-	public void insert(Utilisateur aliment) throws BusinessException {
-		if(aliment==null)
+	public void insert(Article article) throws BusinessException {
+		if(article==null)
 		{
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
 			throw businessException;
 		}
 		
-		try(Connection cnx = ConnectionProvider.getConnection())
+		try(Connection cnx = DBConnectPool.seConnecter())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, aliment.getNom());
-			pstmt.setInt(2, aliment.getLeRepas());
+			pstmt.setInt(1, article.getNo_article());
+			pstmt.setString(2, article.getNom_article());
+			pstmt.setString(3,  article.getDescription());
+			pstmt.setString(3,  article.getDate_debut_encheres());
+			pstmt.setString(3,  article.getDescription());
+			pstmt.setString(3,  article.getDescription());
+			pstmt.setString(3,  article.getDescription());
+			pstmt.setString(3,  article.getDescription());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next())
