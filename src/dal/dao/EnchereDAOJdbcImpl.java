@@ -17,14 +17,14 @@ import dal.ConnectionProvider;
 
 class EnchereDAOJdbcImpl implements EnchereDAO {
 
-	private static final String INSERT="INSERT INTO CATEGORIE(libelle) VALUES(?);";
-	private static final String UPDATE="UPDATE CATEGORIE SET libelle = ? WHERE no_categorie = ?";
-	private static final String DELETE="DELETE FROM CATEGORIE WHERE no_categorie = ?";
-	private static final String SELECTBYID="SELECT * FROM CATEGORIE WHERE no_categorie = ? ;";
-	private static final String SELECTALL="SELECT * FROM CATEGORIE;";
+	private static final String INSERT="INSERT INTO ENCHERE(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES(?,?,?,?);";
+	private static final String UPDATE="UPDATE ENCHERE SET libelle = ? WHERE no_article = ? AND no_utilisateur = ?";
+	private static final String DELETE="DELETE FROM ENCHERE WHERE no_article = ? AND no_utilisateur = ?";
+	private static final String SELECTBYID="SELECT * FROM ENCHERE WHERE no_article = ? AND no_utilisateur = ? ;";
+	private static final String SELECTALL="SELECT * FROM ENCHERE;";
 	
 	@Override
-	public void insert(Enchere enchere) throws BusinessException {
+	public void insert(Enchere enchere, int idArticle) throws BusinessException {
 		if(enchere==null)
 		{
 			BusinessException businessException = new BusinessException();
@@ -34,14 +34,12 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
-			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, enchere.getLibelle());
+			PreparedStatement pstmt = cnx.prepareStatement(INSERT);
+			pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+			pstmt.setInt(2, idArticle);
+			pstmt.setDate(3, enchere.getDateEnchere());
+			pstmt.setInt(4, enchere.getMontantEnchere());
 			pstmt.executeUpdate();
-			ResultSet rs = pstmt.getGeneratedKeys();
-			if(rs.next())
-			{
-				enchere.setNo_categorie(rs.getInt(1));
-			}
 		}
 		catch(Exception e)
 		{

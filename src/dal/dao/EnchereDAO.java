@@ -15,7 +15,7 @@ public interface EnchereDAO {
 	 * @param avis
 	 * @throws BusinessException
 	 */
-	public void insert(Enchere enchere) throws BusinessException;
+	public void insert(Enchere enchere,int idArticle) throws BusinessException;
 	
 	public void update(Enchere enchere) throws BusinessException;
 	

@@ -1,7 +1,7 @@
 package bo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Classe Enchere
