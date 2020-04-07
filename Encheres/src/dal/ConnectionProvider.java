@@ -8,7 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public abstract class ConnectionProvider {
+abstract class ConnectionProvider {
 	private static DataSource dataSource;
 	
 	/**

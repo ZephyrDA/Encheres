@@ -1,4 +1,4 @@
-package dal;
+package fr.eni.suivirepas.dal;
 
 /**
  * Les codes disponibles sont entre 10000 et 19999

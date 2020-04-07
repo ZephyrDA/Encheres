@@ -1,6 +1,5 @@
 package dal.dao;
 
-import dal.ConnectionProvider;
 import be.BusinessException;
 import bo.Article;
 import dal.DALException;
@@ -27,24 +26,22 @@ class ArticleDAOJdbcImpl implements ArticleDAO {
 			throw businessException;
 		}
 		
-		try(Connection cnx = ConnectionProvider.getConnection())
+		try(Connection cnx = DBConnectPool.seConnecter())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, article.getNo_article());
 			pstmt.setString(2, article.getNom_article());
-			pstmt.setString(3, article.getDescription());
-			pstmt.setDate(4,  article.getDate_debut_encheres());
-			pstmt.setDate(5,  article.getDate_fin_encheres());
-			pstmt.setInt(6,  article.getPrix_initial());
-			pstmt.setInt(7,  article.getPrix_vente());
-			pstmt.setInt(8,  article.getVendeur().getNoUtilisateur());
-			pstmt.setInt(9,  article.getCategorie().getNo_categorie());
-
+			pstmt.setString(3,  article.getDescription());
+			pstmt.setString(3,  article.getDate_debut_encheres());
+			pstmt.setString(3,  article.getDescription());
+			pstmt.setString(3,  article.getDescription());
+			pstmt.setString(3,  article.getDescription());
+			pstmt.setString(3,  article.getDescription());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next())
 			{
-				article.setNo_article(rs.getInt(1));
+				aliment.setIdentifiant(rs.getInt(1));
 			}
 		}
 		catch(Exception e)
