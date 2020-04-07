@@ -5,16 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import be.BusinessException;
 import bo.Article;
 import bo.Categorie;
 import dal.CodesResultatDAL;
+import dal.ConnectionProvider;
 
-class CategorieDAOJdbcImpl implements ArticleDAO {
+class CategorieDAOJdbcImpl implements CategorieDAO {
 
-	private static final String INSERT="INSERT INTO ALIMENTS(nom, leRepas) VALUES(?,?) ;";
-	private static final String SELECT="SELECT * FROM ALIMENTS WHERE leRepas = ? ;";
+	private static final String INSERT="INSERT INTO CATEGORIE(libelle) VALUES(?);";
+	private static final String UPDATE="UPDATE CATEGORIE SET libelle = ? WHERE no_categorie = ?";
+	private static final String DELETE="DELETE FROM CATEGORIE WHERE no_categorie = ?";
+	private static final String SELECTBYID="SELECT * FROM CATEGORIE WHERE no_categorie = ? ;";
+	private static final String SELECTALL="SELECT * FROM CATEGORIE;";
+	
 	@Override
 	public void insert(Categorie categorie) throws BusinessException {
 		if(categorie==null)
@@ -27,13 +33,12 @@ class CategorieDAOJdbcImpl implements ArticleDAO {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, categorie.getNom());
-			pstmt.setInt(2, categorie.getLeRepas());
+			pstmt.setString(1, categorie.getLibelle());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next())
 			{
-				categorie.setIdentifiant(rs.getInt(1));
+				categorie.setNo_categorie(rs.getInt(1));
 			}
 		}
 		catch(Exception e)
@@ -57,7 +62,7 @@ class CategorieDAOJdbcImpl implements ArticleDAO {
 		Categorie al;
 		try {
 			if(rs != null) {
-				al = new Categorie(rs.getInt("id_categorie"),rs.getString("nom"),rs.getInt("leRepas"));
+				al = new Categorie(rs.getInt("no_categorie"),rs.getString("libelle"));
 			}else {
 				al = new Categorie();
 				BusinessException businessException = new BusinessException();
@@ -76,14 +81,28 @@ class CategorieDAOJdbcImpl implements ArticleDAO {
 
 
 	@Override
-	public void insert(Article article) throws BusinessException {
+	public void delete(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void update(int id) throws BusinessException {
+	public void update(Categorie categorie) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void selectById(int id) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void selectAll() throws BusinessException {
 		// TODO Auto-generated method stub
 		
 	}
