@@ -101,9 +101,26 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 
 
 	@Override
-	public void selectAll() throws BusinessException {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Categorie> selectAll() throws BusinessException {
+		ArrayList<Categorie> listeCategorie= new ArrayList<Categorie>();
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTALL);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+					Categorie a = itemBuilder(rs);	
+					listeCategorie.add(a);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_REPAS_ECHEC);
+			throw businessException;
+		}	
+		return listeCategorie;		
 	}
 
 }

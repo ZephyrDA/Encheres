@@ -2,6 +2,9 @@ package dal.dao;
 
 
 import bo.Categorie;
+
+import java.util.List;
+
 import be.BusinessException;
 
 
@@ -17,7 +20,7 @@ public interface CategorieDAO {
 	
 	public void selectById(int id) throws BusinessException;
 	
-	public void selectAll() throws BusinessException;
+	public List<Categorie> selectAll() throws BusinessException;
 	
 	public void delete(int id) throws BusinessException;
 }
