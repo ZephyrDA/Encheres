@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import fr.eni.suivirepas.BusinessException;
-import fr.eni.suivirepas.bo.Repas;
+import bo.Categorie;
+import be.BusinessException;
 
 class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 

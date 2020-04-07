@@ -78,7 +78,7 @@ public class ServletAjout extends HttpServlet {
 			String paliments=request.getParameter("txtAliments");
 			
 			EncheresManager repasManager = new EncheresManager();
-			Categorie repas=null;
+			Categorie2 repas=null;
 			try {
 				 repas=repasManager.ajouterRepas(date, heure);
 			}
@@ -100,7 +100,7 @@ public class ServletAjout extends HttpServlet {
 			
 			//Recuperation Repas MAJ
 			try {
-				ArrayList<Categorie> lesRepas = repasManager.getLesRepas();
+				ArrayList<Categorie2> lesRepas = repasManager.getLesRepas();
 				request.setAttribute("lesRepas", lesRepas);
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block

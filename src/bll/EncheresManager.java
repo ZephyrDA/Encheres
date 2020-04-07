@@ -36,11 +36,11 @@ public class EncheresManager {
 	 * @return un objet Repas en cas de succcès
 	 * @throws BusinessException 
 	 */
-	public Categorie ajouterRepas(Date dateRepas, Time heureRepas) throws BusinessException
+	public Categorie2 ajouterRepas(Date dateRepas, Time heureRepas) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 		
-		Categorie repas = new Categorie(dateRepas, heureRepas);
+		Categorie2 repas = new Categorie2(dateRepas, heureRepas);
 		
 		this.validerHeure(repas,exception);
 		this.validerDate(repas,exception);
@@ -63,11 +63,11 @@ public class EncheresManager {
 	 * @return un objet Repas en cas de succcès 
 	 * @throws BusinessException 
 	 */
-	public Utilisateur ajouterAliment(String nom, int leRepas) throws BusinessException
+	public Utilisateur2 ajouterAliment(String nom, int leRepas) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 		
-		Utilisateur aliments = new Utilisateur(nom, leRepas);
+		Utilisateur2 aliments = new Utilisateur2(nom, leRepas);
 		
 		if(!exception.hasErreurs())
 		{
@@ -87,7 +87,7 @@ public class EncheresManager {
 	 * @param repas
 	 * @param businessException 
 	 */
-	private void validerHeure(Categorie repas, BusinessException businessException)
+	private void validerHeure(Categorie2 repas, BusinessException businessException)
 	{
 		if(repas.getHeureRepas() == null)
 		{
@@ -101,7 +101,7 @@ public class EncheresManager {
 	 * @param repas
 	 * @param businessException
 	 */
-	private void validerDate(Categorie repas, BusinessException businessException) 
+	private void validerDate(Categorie2 repas, BusinessException businessException) 
 	{
 		if(repas.getDateRepas()==null)
 		{
@@ -109,7 +109,7 @@ public class EncheresManager {
 		}
 	}
 	
-	public ArrayList<Categorie> getLesRepas() throws BusinessException{
+	public ArrayList<Categorie2> getLesRepas() throws BusinessException{
 		return this.repasDAO.selectAll();
 	}
 }

@@ -51,7 +51,7 @@ public class ServletRedirection extends HttpServlet {
 			else if(choixUt.equals("Historique")) {
 				try {
 					EncheresManager repasManager = new EncheresManager();
-					ArrayList<Categorie> lesRepas = repasManager.getLesRepas();
+					ArrayList<Categorie2> lesRepas = repasManager.getLesRepas();
 					request.setAttribute("lesRepas", lesRepas);
 				}catch(Exception e) {
 					e.printStackTrace();
