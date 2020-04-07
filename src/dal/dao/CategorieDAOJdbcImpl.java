@@ -45,14 +45,7 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			if(e.getMessage().contains("CK_AVIS_note"))
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_ALIMENTS_ECHEC);
-			}
-			else
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_CATEGORIE_ECHEC);			
 			throw businessException;
 		}	
 	}
@@ -85,7 +78,7 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 		if(id<0)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_ID_NULL);
 			throw businessException;
 		}
 		
@@ -99,14 +92,7 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			if(e.getMessage().contains("CK_AVIS_note"))
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_ALIMENTS_ECHEC);
-			}
-			else
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_CATEGORIE_ECHEC);
 			throw businessException;
 		}	
 	}
@@ -116,22 +102,16 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 	public void update(Categorie categorie) throws BusinessException {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
-			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
-			pstmt.setInt(1, categorie.getNo_categorie());
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
+			pstmt.setString(1, categorie.getLibelle());
+			pstmt.setInt(2, categorie.getNo_categorie());
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			if(e.getMessage().contains("CK_AVIS_note"))
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_ALIMENTS_ECHEC);
-			}
-			else
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_CATEGORIE_ECHEC);
 			throw businessException;
 		}
 	}
@@ -148,15 +128,17 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 			if (rs.next()){
 				 c = itemBuilder(rs);
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
 			throw businessException;
-		}	finally {
+		}	
+		finally {
 			if(c == null) {
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
 				throw businessException;	
 			}
 		}
@@ -181,7 +163,7 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_REPAS_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
 			throw businessException;
 		}	
 		return listeCategorie;		

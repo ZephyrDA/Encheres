@@ -176,7 +176,7 @@ class ArticleDAOJdbcImpl implements ArticleDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_ARTICLE_ECHEC);			
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_ECHEC);			
 			throw businessException;
 		}	
 	}
