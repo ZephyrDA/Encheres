@@ -3,7 +3,7 @@ package dal.dao;
 
 import java.util.ArrayList;
 
-import bo.Article2;
+import bo.Article;
 import be.BusinessException;
 
 
@@ -13,7 +13,7 @@ public interface EnchereDAO {
 	 * @param avis
 	 * @throws BusinessException
 	 */
-	public void insert(Article2 article) throws BusinessException;
+	public void insert(Article article) throws BusinessException;
 	
 	public void update(int id) throws BusinessException;
 	

@@ -18,6 +18,12 @@ public class Categorie implements Serializable {
 		super();
 		this.libelle = libelle;
 	}
+	
+	public Categorie(int no_categorie, String libelle) {
+		super();
+		this.no_categorie = no_categorie;
+		this.libelle = libelle;
+	}
 	public int getNo_categorie() {
 		return no_categorie;
 	}
