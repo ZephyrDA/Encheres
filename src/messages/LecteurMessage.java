@@ -1,4 +1,4 @@
-package fr.eni.suivirepas.messages;
+package messages;
 
 import java.util.ResourceBundle;
 

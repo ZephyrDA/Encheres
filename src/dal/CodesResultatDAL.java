@@ -40,4 +40,33 @@ public abstract class CodesResultatDAL {
 	
 	public static final int BUILDER_REPAS_ECHEC=10008;
 	public static final int BUILDER_REPAS_EXCEPTION=10009;
+
+	public static final int SELECT_OBJET_NULL = 10010;
+
+	public static final int BUILDER_ARTICLE_ECHEC = 10011;
+
+	public static final int BUILDER_ARTICLE_EXCEPTION = 10013;
+
+	public static final int INSERT_ARTICLE_ECHEC = 10014;
+
+	public static final int UPDATE_ARTICLE_NULL = 10015;
+
+	public static final int DELETE_ID_NULL = 10016;
+
+	public static final int SELECT_ARTICLE_NULL = 10017;
+
+	public static final int BUILDER_UTILISATEUR_EXCEPTION = 10018;
+
+	public static final int UPDATE_UTILISATEUR_NULL = 10019;
+
+	public static final int INSERT_UTILISATEUR_ECHEC = 10020;
+
+	public static final int UPDATE_UTILISATEUR_ECHEC = 10021;
+
+	public static final int DELETE_UTILISATEUR_ECHEC = 10022;
+
+	public static final int SELECT_UTILISATEUR_NULL = 10023;
+
+	public static final int SELECT_UTILISATEUR_ECHEC = 10024;
+
 }
