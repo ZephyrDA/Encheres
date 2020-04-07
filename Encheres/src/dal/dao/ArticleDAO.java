@@ -3,9 +3,9 @@ package dal.dao;
 
 import java.util.ArrayList;
 
-import fr.eni.suivirepas.BusinessException;
-import fr.eni.suivirepas.bo.Aliments;
-import fr.eni.suivirepas.bo.Repas;
+import bo.Article;
+import be.BusinessException;
+
 
 public interface ArticleDAO {
 	/**
@@ -13,7 +13,7 @@ public interface ArticleDAO {
 	 * @param avis
 	 * @throws BusinessException
 	 */
-	public void insert(Utilisateur aliment) throws BusinessException;
+	public void insert(Article article) throws BusinessException;
 	
-	public ArrayList<Utilisateur> selectByIdRepas(int id) throws BusinessException;
+	public void update(int id) throws BusinessException;
 }

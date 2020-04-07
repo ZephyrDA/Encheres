@@ -3,12 +3,13 @@ package bo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * 
+ * @author Elian
+ * Classe Article
+ */
 public class Article implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int no_article;
 	private String nom_article;
@@ -20,10 +21,25 @@ public class Article implements Serializable {
 	private Categorie categorie;
 	private List<Enchere> encheres;  
 	
+	/**
+	 * Constructeur de la classe Article
+	 */
 	public Article() {
 		super();
 	}
-
+	
+	/**
+	 * Constructeur de la classe Article
+	 * @param no_article
+	 * @param nom_article
+	 * @param description
+	 * @param date_debut_encheres
+	 * @param date_fin_encheres
+	 * @param prix_initial
+	 * @param prix_vente
+	 * @param categorie
+	 * @param encheres
+	 */
 	public Article(int no_article, String nom_article, String description, Date date_debut_encheres,
 			Date date_fin_encheres, int prix_initial, int prix_vente, Categorie categorie, List<Enchere> encheres) {
 		super();

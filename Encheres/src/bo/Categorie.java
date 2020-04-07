@@ -3,16 +3,30 @@ package bo;
 import java.io.Serializable;
 
 
-
+/**
+ * Classe Categorie
+ * @author Elian
+ *
+ */
 public class Categorie implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
 	private int no_categorie;
 	private String libelle;
+	
+	/**
+	 * Constructeur de la classe Categorie
+	 */
 	public Categorie() {
 		super();
 	}
+	
+	/**
+	 * Constructeur de la classe Categorie
+	 * @param no_categorie
+	 * @param libelle
+	 */
 	public Categorie(int no_categorie, String libelle) {
 		super();
 		this.no_categorie = no_categorie;

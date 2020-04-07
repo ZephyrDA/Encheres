@@ -1,5 +1,10 @@
 package bo;
 
+/**
+ * Classe Utilisateur
+ * @author Elian
+ *
+ */
 public class Utilisateur {
 
 	private int noUtilisateur;
@@ -14,10 +19,27 @@ public class Utilisateur {
 	private String motDePasse;
 	private Boolean administrateur;
 	
+	/**
+	 * Constructeur de la classe Utilisateur
+	 */
 	public Utilisateur() {
 		super();
 	}
 
+	/**
+	 * Constructeur de la classe utilisateur
+	 * @param noUtilisateur
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 * @param administrateur
+	 */
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, Boolean administrateur) {
 		super();
