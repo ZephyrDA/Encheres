@@ -13,7 +13,7 @@ import bo.Categorie;
 import dal.CodesResultatDAL;
 import dal.ConnectionProvider;
 
-class CategorieDAOJdbcImpl implements CategorieDAO {
+class EnchereDAOJdbcImpl implements CategorieDAO {
 
 	private static final String INSERT="INSERT INTO CATEGORIE(libelle) VALUES(?);";
 	private static final String UPDATE="UPDATE CATEGORIE SET libelle = ? WHERE no_categorie = ?";
