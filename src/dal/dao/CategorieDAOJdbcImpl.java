@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.BusinessException;
-import bo.Article2;
 import bo.Categorie;
-import bo.Categorie2;
 import dal.CodesResultatDAL;
 import dal.ConnectionProvider;
 
