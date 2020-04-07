@@ -3,8 +3,8 @@ package dal.dao;
 
 import java.util.ArrayList;
 
-import fr.eni.suivirepas.BusinessException;
-import fr.eni.suivirepas.bo.Repas;
+import bo.Utilisateur;
+import be.BusinessException;
 
 public interface UtilisateurDAO {
 	/**
@@ -12,7 +12,9 @@ public interface UtilisateurDAO {
 	 * @param avis
 	 * @throws BusinessException
 	 */
-	public void insert(Categorie repas) throws BusinessException;
-	
-	public ArrayList<Categorie> selectAll() throws BusinessException;
+	public void insert(Utilisateur utilisateur) throws BusinessException;
+	public void update(Utilisateur utilisateur) throws BusinessException;
+	public void delete (int id) throws BusinessException;
+	public Utilisateur selectById(int id) throws BusinessException;
+	public ArrayList<Utilisateur> selectAll() throws BusinessException;
 }

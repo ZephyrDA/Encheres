@@ -13,13 +13,14 @@ public class Utilisateur {
 	private String ville;
 	private String motDePasse;
 	private Boolean administrateur;
+	private int credit;
 	
 	public Utilisateur() {
 		super();
 	}
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, Boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, Boolean administrateur, int credit) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -31,6 +32,24 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 		this.administrateur = administrateur;
+		this.credit=credit;
+	}
+
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, Boolean administrateur, int credit) {
+		super();
+		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.motDePasse = motDePasse;
+		this.administrateur = administrateur;
+		this.credit = credit;
 	}
 
 	public int getNoUtilisateur() {
@@ -119,6 +138,14 @@ public class Utilisateur {
 
 	public void setAdministrateur(Boolean administrateur) {
 		this.administrateur = administrateur;
+	}
+
+	public int getCredit() {
+		return credit;
+	}
+
+	public void setCredit(int credit) {
+		this.credit = credit;
 	}
 
 	@Override

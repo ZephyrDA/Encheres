@@ -22,5 +22,5 @@ public interface ArticleDAO {
 
 	public Article selectById(int id) throws BusinessException;
 	
-	public  List<Article> selectAll() throws BusinessException;
+	public  ArrayList<Article> selectAll() throws BusinessException;
 }
