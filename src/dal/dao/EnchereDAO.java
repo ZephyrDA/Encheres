@@ -2,8 +2,10 @@ package dal.dao;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import bo.Article;
+import bo.Enchere;
 import be.BusinessException;
 
 
@@ -13,13 +15,17 @@ public interface EnchereDAO {
 	 * @param avis
 	 * @throws BusinessException
 	 */
-	public void insert(Article article) throws BusinessException;
+	public void insert(Enchere enchere) throws BusinessException;
 	
-	public void update(int id) throws BusinessException;
+	public void update(Enchere enchere) throws BusinessException;
 	
-	public void selectById(int id) throws BusinessException;
+	public Enchere selectById(int idArticle,int idUtilisateur) throws BusinessException;
 	
-	public void selectAll(int id) throws BusinessException;
+	public List<Enchere> selectByNoArticle(int id) throws BusinessException;
+	
+	public List<Enchere> selectByNoUtilisateur(int id) throws BusinessException;
+	
+	public List<Enchere> selectAll() throws BusinessException;
 	
 	public void delete(int id) throws BusinessException;
 }

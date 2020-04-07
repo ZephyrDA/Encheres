@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
  
 import be.BusinessException;
-import bo.Categorie;
+import bo.Article;
+import bo.Enchere;
+import bo.Utilisateur;
 import dal.CodesResultatDAL;
 import dal.ConnectionProvider;
 
-class EnchereDAOJdbcImpl implements CategorieDAO {
+class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String INSERT="INSERT INTO CATEGORIE(libelle) VALUES(?);";
 	private static final String UPDATE="UPDATE CATEGORIE SET libelle = ? WHERE no_categorie = ?";
@@ -22,8 +24,8 @@ class EnchereDAOJdbcImpl implements CategorieDAO {
 	private static final String SELECTALL="SELECT * FROM CATEGORIE;";
 	
 	@Override
-	public void insert(Categorie categorie) throws BusinessException {
-		if(categorie==null)
+	public void insert(Enchere enchere) throws BusinessException {
+		if(enchere==null)
 		{
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
@@ -33,12 +35,12 @@ class EnchereDAOJdbcImpl implements CategorieDAO {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, categorie.getLibelle());
+			pstmt.setString(1, enchere.getLibelle());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next())
 			{
-				categorie.setNo_categorie(rs.getInt(1));
+				enchere.setNo_categorie(rs.getInt(1));
 			}
 		}
 		catch(Exception e)
@@ -58,28 +60,6 @@ class EnchereDAOJdbcImpl implements CategorieDAO {
 	}
 
 	
-	private Categorie itemBuilder(ResultSet rs) throws BusinessException{
-		Categorie al;
-		try {
-			if(rs != null) {
-				al = new Categorie(rs.getInt("no_categorie"),rs.getString("libelle"));
-			}else {
-				al = new Categorie();
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_ECHEC);
-				throw businessException;
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_EXCEPTION);
-			throw businessException;
-		}
-
-		return al;
-	}
-
-
 	@Override
 	public void delete(int id) throws BusinessException {
 		if(id<0)
@@ -113,11 +93,11 @@ class EnchereDAOJdbcImpl implements CategorieDAO {
 
 
 	@Override
-	public void update(Categorie categorie) throws BusinessException {
+	public void update(Enchere enchere) throws BusinessException {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
-			pstmt.setInt(1, categorie.getNo_categorie());
+			pstmt.setInt(1, enchere.getNo_categorie());
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)
@@ -138,8 +118,8 @@ class EnchereDAOJdbcImpl implements CategorieDAO {
 
 
 	@Override
-	public Categorie selectById(int id) throws BusinessException {
-		Categorie c = null;
+	public Enchere selectById(int idArticle, int idUtilisateur) throws BusinessException {
+		Enchere c = null;
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
 			pstmt.setInt(1, id);
@@ -165,16 +145,16 @@ class EnchereDAOJdbcImpl implements CategorieDAO {
 
 
 	@Override
-	public ArrayList<Categorie> selectAll() throws BusinessException {
-		ArrayList<Categorie> listeCategorie= new ArrayList<Categorie>();
+	public ArrayList<Enchere> selectAll() throws BusinessException {
+		ArrayList<Enchere> listeEnchere= new ArrayList<Enchere>();
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTALL);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
 			{
-					Categorie a = itemBuilder(rs);	
-					listeCategorie.add(a);
+					Enchere a = itemBuilder(rs);	
+					listeEnchere.add(a);
 			}
 		}
 		catch(Exception e)
@@ -184,6 +164,45 @@ class EnchereDAOJdbcImpl implements CategorieDAO {
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_REPAS_ECHEC);
 			throw businessException;
 		}	
-		return listeCategorie;		
+		return listeEnchere;		
 	}
+
+
+	@Override
+	public ArrayList<Enchere> selectByNoArticle(int id) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public ArrayList<Enchere> selectByNoUtilisateur(int id) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Enchere itemBuilder(ResultSet rs) throws BusinessException{
+		Enchere al;
+		Utilisateur util;
+		UtilisateurDAO UtilDAO = DAOFactory.getUtilisateurDAO();
+		try {
+			if(rs != null) {
+				util = UtilDAO.selectById(rs.getInt("no_utilisateur"));
+				al = new Enchere(rs.getDate("date_enchere"),rs.getInt("montant_enchere"),util);
+			}else {
+				al = new Enchere();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_ECHEC);
+				throw businessException;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_EXCEPTION);
+			throw businessException;
+		}
+
+		return al;
+	}
+
 }

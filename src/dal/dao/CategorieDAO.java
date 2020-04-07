@@ -24,5 +24,4 @@ public interface CategorieDAO {
 	
 	public List<Categorie> selectAll() throws BusinessException;
 	
-	
 }
