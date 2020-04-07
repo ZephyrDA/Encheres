@@ -1,4 +1,4 @@
-package fr.eni.suivirepas.servlets;
+package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,9 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import fr.eni.suivirepas.bll.RepasManager;
-import fr.eni.suivirepas.bo.Repas;
 
 
 /**
@@ -31,7 +28,7 @@ public class ServletRedirection extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
 
 	/**
