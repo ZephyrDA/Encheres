@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bll.EncheresManager;
+import bo.Categorie;
+
 
 /**
  * Servlet implementation class ServletVisu
@@ -48,7 +51,7 @@ public class ServletRedirection extends HttpServlet {
 			else if(choixUt.equals("Historique")) {
 				try {
 					EncheresManager repasManager = new EncheresManager();
-					ArrayList<Categorie2> lesRepas = repasManager.getLesRepas();
+					ArrayList<Categorie> lesRepas = repasManager.getLesCategories();
 					request.setAttribute("lesRepas", lesRepas);
 				}catch(Exception e) {
 					e.printStackTrace();
