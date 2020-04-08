@@ -27,5 +27,5 @@ public interface EnchereDAO {
 	
 	public List<Enchere> selectAll() throws BusinessException;
 	
-	public void delete(int id) throws BusinessException;
+	public void delete(int idArticle,int idUtil) throws BusinessException;
 }

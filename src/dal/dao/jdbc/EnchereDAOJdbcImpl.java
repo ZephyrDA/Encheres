@@ -59,8 +59,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	
 	@Override
-	public void delete(int id) throws BusinessException {
-		if(id<0)
+	public void delete(int idArticle, int idUtil) throws BusinessException {
+		if(idArticle<0 || idUtil < 0)
 		{
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_ENCHERE_NULL);
@@ -70,7 +70,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, idArticle);
+			pstmt.setInt(2, idUtil);
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)

@@ -51,7 +51,7 @@ public class Article implements Serializable {
 		this.prix_vente = prix_vente;
 		this.categorie = categorie;
 		this.encheres = encheres;
-		this.vendeur = vendeur;
+		this.vendeur = vendeur;		
 	}
 
 	public int getNo_article() {
