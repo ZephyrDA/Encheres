@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../header/header.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <body>
 
 
-<h2>ENI-Encheres <a style="cursor:pointer; font-size: large;" class="float-right text-primary pointeur">Se connecter/S'inscrire</a></h2> 
+
 
 <div class="font-weight-bold display-5" style="text-align-last: center;font-size: xx-large;">Liste des enchères</div>
 
@@ -24,16 +25,35 @@
     aria-label="Search">
 </form>
 
-
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
+<div class="d-flex mt-4 align-items-center font-weight-bold">
+	<label style="margin-left: auto;margin-right: auto;">Catégories : 
+		<select name="category" class="dropdown btn btn-secondary" >
+		    <option value="category_id">Informatique</option>
+		    <option value="category_id">Ameublement</option>
+		    <option value="category_id">Vêtements</option>
+		    <option value="category_id">Sport et Loisirs</option>
+		</select>
+	</label>
+	<input type="button" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Rechercher">
 </div>
+<div class="d-flex mt-5" >
+<div class="p-2 bg-primary ml-2 text-white" style="width: 35%;height: 100%">
+	<img src="../jsp/assets/pc.jpg" class="height: 100%">
+	<div class="float-right">
+	<div >Titre produit</div>
+	<div>Prix : 100 points</div>
+	<div>Fin de l'enchère : date</div>
+	<div>Vendeur : Nom Vendeur</div>
+	</div>
+</div>
+<div class="p-2 bg-dark text-white float-right mr-2" style="width: 35%;height: 100%;margin-left: auto;">
+	<div class="height: 100%">Image</div>
+	<div class="float-right">
+	<div >Titre produit</div>
+	<div>Prix : 100 points</div>
+	<div>Fin de l'enchère : date</div>
+	<div>Vendeur : Nom Vendeur</div>
+	</div>
+</div></div>
 </body>
 </html>
