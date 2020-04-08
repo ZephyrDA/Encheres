@@ -3,18 +3,12 @@
 .formulaire h3{
 	margin-bottom: 50px;
 }
-
 .formulaire input{
 	margin-bottom: 10px;
 }
 .erreur{
 	color: red;
 	text-decoration: underline;
-}
-.logo{
-	width: 12%;
-	height: 12%;
-	margin: 10px;
 }
 .blocProfil{
 	border : 1px solid;
