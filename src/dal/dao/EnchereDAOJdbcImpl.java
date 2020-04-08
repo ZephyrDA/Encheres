@@ -18,10 +18,12 @@ import dal.ConnectionProvider;
 class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String INSERT="INSERT INTO ENCHERE(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES(?,?,?,?);";
-	private static final String UPDATE="UPDATE ENCHERE SET libelle = ? WHERE no_article = ? AND no_utilisateur = ?";
+	private static final String UPDATE="UPDATE ENCHERE SET date_enchere = ? , montant_enchere WHERE no_article = ? AND no_utilisateur = ?";
 	private static final String DELETE="DELETE FROM ENCHERE WHERE no_article = ? AND no_utilisateur = ?";
 	private static final String SELECTBYID="SELECT * FROM ENCHERE WHERE no_article = ? AND no_utilisateur = ? ;";
 	private static final String SELECTALL="SELECT * FROM ENCHERE;";
+	private static final String SELECTBYUTIL="SELECT * FROM ENCHERE WHERE no_utilisateur = ? ;";
+	private static final String SELECTBYARTICLE="SELECT * FROM ENCHERE WHERE no_utilisateur = ? ;";
 	
 	@Override
 	public void insert(Enchere enchere, int idArticle) throws BusinessException {
@@ -45,14 +47,9 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			if(e.getMessage().contains("CK_AVIS_note"))
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_ALIMENTS_ECHEC);
-			}
-			else
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
+
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			
 			throw businessException;
 		}	
 	}
@@ -77,39 +74,26 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			if(e.getMessage().contains("CK_AVIS_note"))
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_ALIMENTS_ECHEC);
-			}
-			else
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
 			throw businessException;
 		}	
 	}
 
 
 	@Override
-	public void update(Enchere enchere) throws BusinessException {
+	public void update(Enchere enchere,int idArticle) throws BusinessException {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
-			pstmt.setInt(1, enchere.getNo_categorie());
+			pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+			pstmt.setInt(2, idArticle);
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			if(e.getMessage().contains("CK_AVIS_note"))
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_ALIMENTS_ECHEC);
-			}
-			else
-			{
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
 			throw businessException;
 		}
 	}
@@ -120,7 +104,8 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		Enchere c = null;
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, idArticle);
+			pstmt.setInt(1, idUtilisateur);
 
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()){
@@ -168,15 +153,51 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public ArrayList<Enchere> selectByNoArticle(int id) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		Enchere c = null;
+		ArrayList<Enchere> listeEnchere = new ArrayList<Enchere>();
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYARTICLE);
+			pstmt.setInt(1, id);
+
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+					Enchere a = itemBuilder(rs);	
+					listeEnchere.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;	
+		}
+		return listeEnchere;
+
 	}
 
 
 	@Override
 	public ArrayList<Enchere> selectByNoUtilisateur(int id) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		Enchere c = null;
+		ArrayList<Enchere> listeEnchere= new ArrayList<Enchere>();
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYUTIL);
+			pstmt.setInt(1, id);
+
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+					Enchere a = itemBuilder(rs);	
+					listeEnchere.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
+		}
+		return listeEnchere;
+
 	}
 
 	private Enchere itemBuilder(ResultSet rs) throws BusinessException{
