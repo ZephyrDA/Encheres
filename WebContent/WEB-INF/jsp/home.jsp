@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<meta charset="UTF-8">
-<title>Enchères</title>
-</head>
-<body>
-
-
-
 
 <div class="font-weight-bold display-5" style="text-align-last: center;font-size: xx-large;">Liste des enchères</div>
 
@@ -38,7 +25,7 @@
 </div>
 <div class="d-flex mt-5" >
 <div class="p-2 bg-primary ml-2 text-white" style="width: 35%;height: 100%">
-	<img src="../jsp/assets/pc.jpg" class="height: 100%">
+	<img src="./assets/pc.jpg" class="height: 100%" alt="pc">
 	<div class="float-right">
 	<div >Titre produit</div>
 	<div>Prix : 100 points</div>
