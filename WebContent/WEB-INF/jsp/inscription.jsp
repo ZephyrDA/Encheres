@@ -43,14 +43,13 @@
  				<% 
  					}
  				%> 
- 			</div>  			
+ 			</div>  			 			
 			<div class="row"> 
- 				<button type="submit" class="bouton col-md-4 btn btn-default">Creer</button>
+ 				<button type="submit" class="bouton col-md-3 btn btn-default">Creer</button>  				
+ 				<button type="reset" class="bouton col-md-3 btn btn-default">Annuler</button>
  			</div>  	
  		</form>
- 		<form action="<%=request.getContextPath()%>/home" method="get"> 						  		
- 				<button type="submit" class="bouton col-md-4 btn btn-default">Annuler</button>
- 		</form> 
+ 		
  	</div> 						
 </div>
 </body>
