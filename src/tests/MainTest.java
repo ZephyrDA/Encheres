@@ -25,12 +25,12 @@ public class MainTest {
 	
 	static EncheresManager manager = new EncheresManager();
 	
-	public static void Main (String[] args) throws BusinessException {
+	public static void main(String[] args) {
 	
 		//Tests Utilisateurs
 		try{
 						
-			Utilisateur userInsert1 = manager.ajouterUtilisateur("Wabbit", "Levené", "Elian", "elevenefly@gmail.com", "0658599369", "12 Square Henri Dunant",
+			Utilisateur userInsert1 = manager.ajouterUtilisateur("Wabbit", "Levenï¿½", "Elian", "elevenefly@gmail.com", "0658599369", "12 Square Henri Dunant",
 					 "35700", "Rennes", "mdp", "mdp", false); 			
 			Utilisateur userGet1 = manager.getUtilisateur(1);
 			ArrayList<Utilisateur> lesUtilisateurs = manager.getLesUtilisateurs();
@@ -68,10 +68,10 @@ public class MainTest {
 			
 		}
 		catch(BusinessException e){
-			throw e;
+			e.printStackTrace();
 		}
 		
-		//Tests Catégories
+		//Tests Catï¿½gories
 		try{
 						
 			Categorie catInsert1 = manager.ajouterCategorie("CategorieTest1"); 			
@@ -92,7 +92,7 @@ public class MainTest {
 			System.out.println("----------------------------------------------");
 			
 			Categorie updateCat = lesCategories.get(1);
-			updateCat.setLibelle("La meilleur catégorie");
+			updateCat.setLibelle("La meilleur catï¿½gorie");
 			manager.modifierCategorie(updateCat);
 			
 			System.out.println("update Categorie 2 :");
@@ -110,7 +110,7 @@ public class MainTest {
 			
 		}
 		catch(BusinessException e){
-			throw e;
+			e.printStackTrace();
 		}
 		
 		//Tests Article
@@ -120,7 +120,7 @@ public class MainTest {
 			Date date2 = new Date(2020, 12, 12);
 			Utilisateur vendeur = manager.getUtilisateur(1);
 
-			Article artInsert1 = manager.ajouterArticle("Ballon de volley", "Parfait état, jamais servi", cat, 15, date1, date2,
+			Article artInsert1 = manager.ajouterArticle("Ballon de volley", "Parfait ï¿½tat, jamais servi", cat, 15, date1, date2,
 					"1 Rue des Lilas", "22130", "Dinan", vendeur); 			
 			Article artGet1 = manager.getArticle(1);
 			ArrayList<Article> lesArticles = manager.getLesArticles();
@@ -155,7 +155,7 @@ public class MainTest {
 			System.out.println("----------------------------------------------");			
 		}
 		catch(BusinessException e){
-			throw e;
+			e.printStackTrace();
 		}
 		
 		//Tests Retrait
@@ -196,7 +196,7 @@ public class MainTest {
 			System.out.println("----------------------------------------------");			
 		}
 		catch(BusinessException e){
-			throw e;
+			e.printStackTrace();
 		}
 		
 		//Tests Enchere
@@ -238,7 +238,7 @@ public class MainTest {
 			System.out.println("----------------------------------------------");			
 		}
 		catch(BusinessException e){
-			throw e;
+			e.printStackTrace();
 		}
 	}
 }
