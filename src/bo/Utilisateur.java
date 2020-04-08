@@ -1,5 +1,7 @@
 package bo;
 
+import be.BusinessException;
+
 public class Utilisateur {
 
 	private int noUtilisateur;
@@ -15,28 +17,29 @@ public class Utilisateur {
 	private Boolean administrateur;
 	private int credit;
 	
-	public Utilisateur() {
-		super();
+	public Utilisateur(){
+		
 	}
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, Boolean administrateur) {
-		super();
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
-		this.administrateur = administrateur;
+		
+			this.pseudo = pseudo;
+			this.nom = nom;
+			this.prenom = prenom;
+			this.email = email;
+			this.telephone = telephone;
+			this.rue = rue;
+			this.codePostal = codePostal;
+			this.ville = ville;
+			this.motDePasse = motDePasse;
+			this.administrateur = administrateur;
+		
+		
 	}
 
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, Boolean administrateur, int credit) {
-		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;

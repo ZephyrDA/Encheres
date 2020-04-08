@@ -61,7 +61,8 @@ public class EncheresManager {
 	 * @return objet Article
 	 * @throws BusinessException
 	 */
-	public Article ajouterArticle(String libelle, String description, Categorie categorie, int prixInitial, Date dateDebut, Date dateFin, String rueRetrait, String cpRetrait, String villeRetrait, Utilisateur vendeur) throws BusinessException
+	public Article ajouterArticle(String libelle, String description, Categorie categorie, int prixInitial, Date dateDebut, Date dateFin,
+			String rueRetrait, String cpRetrait, String villeRetrait, Utilisateur vendeur) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 		this.validerDateDebut(dateDebut, exception);
@@ -209,12 +210,12 @@ public class EncheresManager {
 	 * @param id
 	 * @throws BusinessException
 	 */
-	public void supprimerEnchere(int id) throws BusinessException {
+	public void supprimerEnchere(int idArticle, int idAcheteur) throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
 		
 		if(!exception.hasErreurs()) {
-			this.enchereDAO.delete(id);
+			this.enchereDAO.delete(idArticle,idAcheteur);
 		}
 		else {
 			throw exception;
@@ -386,7 +387,7 @@ public class EncheresManager {
 	 * @throws BusinessException
 	 */
 	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String mdp1, String mdp2, Boolean administrateur) throws BusinessException
+			String rue, String codePostal, String ville, String mdp1, String mdp2, boolean administrateur) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 		this.validerMotDePasse(mdp1, mdp2, exception);
@@ -432,7 +433,7 @@ public class EncheresManager {
 	 * @param id
 	 * @throws BusinessException
 	 */
-	public void deleteUtilisateur(int id) throws BusinessException
+	public void supprimerUtilisateur(int id) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 		
@@ -495,7 +496,7 @@ public class EncheresManager {
 	 * @param ville
 	 * @throws BusinessException
 	 */
-	public void ajouterRetrait(Article article, String rue, String code_postal, String ville) throws BusinessException
+	public Retrait ajouterRetrait(Article article, String rue, String code_postal, String ville) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 		
@@ -510,6 +511,7 @@ public class EncheresManager {
 		{
 			throw exception;
 		}
+		return retrait;
 	}
 	
 	/**
