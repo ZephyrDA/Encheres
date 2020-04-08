@@ -38,7 +38,7 @@
 </div>
 <div class="d-flex mt-5" >
 <div class="p-2 bg-primary ml-2 text-white" style="width: 35%;height: 100%">
-	<img src="../jsp/assets/pc.jpg" class="height: 100%">
+	<img src="../assets/pc.jpg" class="height: 100%" >
 	<div class="float-right">
 	<div >Titre produit</div>
 	<div>Prix : 100 points</div>
