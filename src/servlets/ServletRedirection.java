@@ -60,7 +60,7 @@ public class ServletRedirection extends HttpServlet {
 			}
 			else {
 				doGet(request, response);
-				System.out.println("else");
+				System.out.println("else"); 
 			}
 		}
 	}
