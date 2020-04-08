@@ -27,7 +27,7 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 		if(categorie==null)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_CATEGORIE_NULL);
 			throw businessException;
 		}
 		
@@ -60,13 +60,13 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 			}else {
 				al = new Categorie();
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.BUILDER_CATEGORIE_NULL);
 				throw businessException;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_EXCEPTION);
+			businessException.ajouterErreur(CodesResultatDAL.BUILDER_CATEGORIE_ECHEC);
 			throw businessException;
 		}
 
@@ -79,7 +79,7 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 		if(id<0)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.DELETE_ID_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_CATEGORIE_NULL);
 			throw businessException;
 		}
 		
@@ -101,6 +101,11 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	@Override
 	public void update(Categorie categorie) throws BusinessException {
+		if(categorie == null){
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_CATEGORIE_NULL);
+			throw businessException;
+		}
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
@@ -120,7 +125,12 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	@Override
 	public Categorie selectById(int id) throws BusinessException {
-		Categorie c = null;
+		Categorie c = new Categorie();
+		if(id < 0 ) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_NULL);
+			throw businessException;
+		}
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
 			pstmt.setInt(1, id);
@@ -135,13 +145,6 @@ class CategorieDAOJdbcImpl implements CategorieDAO {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
 			throw businessException;
-		}	
-		finally {
-			if(c == null) {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
-				throw businessException;	
-			}
 		}
 		return c;
 	}

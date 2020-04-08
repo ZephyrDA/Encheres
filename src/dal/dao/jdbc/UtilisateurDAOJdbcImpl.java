@@ -22,28 +22,35 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECTBYID="SELECT * FROM UTILISATEURS WHERE no_utilisateur=?;";
 	
 	private Utilisateur itemBuilder(ResultSet rs) throws BusinessException{
+		Utilisateur rep;
 		try {
-			Utilisateur rep = new Utilisateur(
-					rs.getInt("no_utilisateur"),
-					rs.getString("pseudo"),
-					rs.getString("nom"),
-					rs.getString("prenom"),
-					rs.getString("email"),
-					rs.getString("telephone"),
-					rs.getString("rue"),
-					rs.getString("code_postal"),
-					rs.getString("ville"),
-					rs.getString("mot_de_passe"),
-					rs.getBoolean("administrateur"),
-					rs.getInt("credit")
-					);
-			return rep;
+			if(rs!=null) {
+				 rep = new Utilisateur(
+						rs.getInt("no_utilisateur"),
+						rs.getString("pseudo"),
+						rs.getString("nom"),
+						rs.getString("prenom"),
+						rs.getString("email"),
+						rs.getString("telephone"),
+						rs.getString("rue"),
+						rs.getString("code_postal"),
+						rs.getString("ville"),
+						rs.getString("mot_de_passe"),
+						rs.getBoolean("administrateur"),
+						rs.getInt("credit")
+						);
+			}else {
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.BUILDER_UTILISATEUR_NULL);
+				throw businessException;	
+			}			
 		}catch(SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.BUILDER_UTILISATEUR_EXCEPTION);
+			businessException.ajouterErreur(CodesResultatDAL.BUILDER_UTILISATEUR_ECHEC);
 			throw businessException;
 		}	
+		return rep;
 	}
 	
 	@Override
@@ -51,7 +58,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		if(utilisateur==null)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_UTILISATEUR_NULL);
 			throw businessException;
 		}
 		
@@ -129,7 +136,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		if(id==0)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.DELETE_ID_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_UTILISATEUR_NULL);
 			throw businessException;
 		}
 		
@@ -172,7 +179,7 @@ class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_ARTICLE_ECHEC);			
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_UTILISATEUR_ECHEC);			
 			throw businessException;
 		}	
 	}

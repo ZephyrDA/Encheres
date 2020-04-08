@@ -6,14 +6,14 @@ package dal;
 public abstract class CodesResultatDAL {
 	
 	/**
-	 * Echec général quand erreur non gérée à la création d'un objet
+	 * Echec général quand création d'un objet null
 	 */
-	public static final int BUILDER_OBJET_ECHEC=10000;
+	public static final int BUILDER_OBJET_NULL=10000;
 	
 	/**
-	 * Echec général quand exception non gérée à la création d'un objet
+	 * Echec général quand erreur non gérée à la création d'un objet
 	 */
-	public static final int BUILDER_OBJET_EXCEPTION=10001;
+	public static final int BUILDER_OBJET_ECHEC=10001;
 	
 	/**
 	 * Echec général quand erreur non gérée à l'insertion 
@@ -52,8 +52,8 @@ public abstract class CodesResultatDAL {
 	/**
 	 * ARTICLE
 	 */
-	public static final int BUILDER_ARTICLE_ECHEC = 10009;
-	public static final int BUILDER_ARTICLE_EXCEPTION = 10010;
+	public static final int BUILDER_ARTICLE_NULL = 10009;
+	public static final int BUILDER_ARTICLE_ECHEC = 10010;
 	public static final int INSERT_ARTICLE_NULL=10011;
 	public static final int INSERT_ARTICLE_ECHEC = 10012;
 	public static final int UPDATE_ARTICLE_NULL = 10013;
@@ -66,8 +66,8 @@ public abstract class CodesResultatDAL {
 	/**
 	 * UTILISATEUR
 	 */
-	public static final int BUILDER_UTILISATEUR_ECHEC = 10019;
-	public static final int BUILDER_UTILISATEUR_EXCEPTION = 10020;
+	public static final int BUILDER_UTILISATEUR_NULL = 10019;
+	public static final int BUILDER_UTILISATEUR_ECHEC = 10020;
 	public static final int INSERT_UTILISATEUR_NULL = 10021;
 	public static final int INSERT_UTILISATEUR_ECHEC = 10022;
 	public static final int UPDATE_UTILISATEUR_NULL = 10023;
@@ -80,8 +80,8 @@ public abstract class CodesResultatDAL {
 	/**
 	 * CATEGORIE
 	 */
-	public static final int BUILDER_CATEGORIE_ECHEC = 10029;
-	public static final int BUILDER_CATEGORIE_EXCEPTION = 10030;
+	public static final int BUILDER_CATEGORIE_NULL = 10029;
+	public static final int BUILDER_CATEGORIE_ECHEC = 10030;
 	public static final int INSERT_CATEGORIE_NULL = 10031;
 	public static final int INSERT_CATEGORIE_ECHEC = 10032;
 	public static final int UPDATE_CATEGORIE_NULL = 10033;
@@ -94,22 +94,22 @@ public abstract class CodesResultatDAL {
 	/**
 	 * ENCHERES
 	 */
-	public static final int BUILDER_ENCHERES_ECHEC = 10039;
-	public static final int BUILDER_ENCHERES_EXCEPTION = 10040;
-	public static final int INSERT_ENCHERES_NULL = 10041;
-	public static final int INSERT_ENCHERES_ECHEC = 10042;
-	public static final int UPDATE_ENCHERES_NULL = 10043;
-	public static final int UPDATE_ENCHERES_ECHEC = 10044;
-	public static final int DELETE_ENCHERES_NULL = 10045;
-	public static final int DELETE_ENCHERES_ECHEC = 10046;
-	public static final int SELECT_ENCHERES_NULL = 10047;
-	public static final int SELECT_ENCHERES_ECHEC = 10048;
+	public static final int BUILDER_ENCHERE_NULL = 10039;
+	public static final int BUILDER_ENCHERE_ECHEC = 10040;
+	public static final int INSERT_ENCHERE_NULL = 10041;
+	public static final int INSERT_ENCHERE_ECHEC = 10042;
+	public static final int UPDATE_ENCHERE_NULL = 10043;
+	public static final int UPDATE_ENCHERE_ECHEC = 10044;
+	public static final int DELETE_ENCHERE_NULL = 10045;
+	public static final int DELETE_ENCHERE_ECHEC = 10046;
+	public static final int SELECT_ENCHERE_NULL = 10047;
+	public static final int SELECT_ENCHERE_ECHEC = 10048;
 	
 	/**
 	 * RETRAIT
 	 */
-	public static final int BUILDER_RETRAIT_ECHEC = 10049;
-	public static final int BUILDER_RETRAIT_EXCEPTION = 10050;
+	public static final int BUILDER_RETRAIT_NULL = 10049;
+	public static final int BUILDER_RETRAIT_ECHEC = 10050;
 	public static final int INSERT_RETRAIT_NULL = 10051;
 	public static final int INSERT_RETRAIT_ECHEC = 10052;
 	public static final int UPDATE_RETRAIT_NULL = 10053;

@@ -44,13 +44,13 @@ class ArticleDAOJdbcImpl implements ArticleDAO {
 			else {
 				al = new Article();
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ARTICLE_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ARTICLE_NULL);
 				throw businessException;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.BUILDER_ARTICLE_EXCEPTION);
+			businessException.ajouterErreur(CodesResultatDAL.BUILDER_ARTICLE_ECHEC);
 			throw businessException;
 		}
 
@@ -63,7 +63,7 @@ class ArticleDAOJdbcImpl implements ArticleDAO {
 		if(article==null)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_ARTICLE_NULL);
 			throw businessException;
 		}
 		
@@ -124,7 +124,7 @@ class ArticleDAOJdbcImpl implements ArticleDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_ARTICLE_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ARTICLE_ECHEC);
 			throw businessException;
 		}	
 	}
@@ -150,7 +150,7 @@ class ArticleDAOJdbcImpl implements ArticleDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_ARTICLE_ECHEC);			
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_ARTICLE_ECHEC);			
 			throw businessException;
 		}	
 	}
@@ -200,7 +200,7 @@ class ArticleDAOJdbcImpl implements ArticleDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_ARTICLE_ECHEC);			
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_ECHEC);			
 			throw businessException;
 		}	
 	}

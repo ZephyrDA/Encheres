@@ -33,7 +33,7 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		if(enchere==null)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_ENCHERE_NULL);
 			throw businessException;
 		}
 		
@@ -51,7 +51,7 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_ENCHERE_ECHEC);
 			
 			throw businessException;
 		}	
@@ -63,7 +63,7 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		if(id<0)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_ENCHERE_NULL);
 			throw businessException;
 		}
 		
@@ -77,7 +77,7 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_ENCHERE_ECHEC);
 			throw businessException;
 		}	
 	}
@@ -85,6 +85,11 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public void update(Enchere enchere,int idArticle) throws BusinessException {
+		if(enchere == null || idArticle < 0) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_NULL);
+			throw businessException;
+		}
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
@@ -96,7 +101,7 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_ECHEC);
 			throw businessException;
 		}
 	}
@@ -104,7 +109,12 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public Enchere selectById(int idArticle, int idUtilisateur) throws BusinessException {
-		Enchere c = null;
+		Enchere c = new Enchere();
+		if(idArticle < 0 || idUtilisateur < 0) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ENCHERE_NULL);
+			throw businessException;	
+		}
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
 			pstmt.setInt(1, idArticle);
@@ -117,14 +127,8 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ENCHERE_ECHEC);
 			throw businessException;
-		}	finally {
-			if(c == null) {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-				throw businessException;	
-			}
 		}
 		return c;
 	}
@@ -147,7 +151,7 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_REPAS_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ENCHERE_ECHEC);
 			throw businessException;
 		}	
 		return listeEnchere;		
@@ -156,8 +160,14 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public ArrayList<Enchere> selectByNoArticle(int id) throws BusinessException {
-		Enchere c = null;
+		Enchere c = new Enchere();
 		ArrayList<Enchere> listeEnchere = new ArrayList<Enchere>();
+		
+		if(id < 0){
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ENCHERE_NULL);
+			throw businessException;	
+		}
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYARTICLE);
 			pstmt.setInt(1, id);
@@ -171,7 +181,7 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ENCHERE_ECHEC);
 			throw businessException;	
 		}
 		return listeEnchere;
@@ -181,8 +191,14 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public ArrayList<Enchere> selectByNoUtilisateur(int id) throws BusinessException {
-		Enchere c = null;
+		Enchere c = new Enchere();
 		ArrayList<Enchere> listeEnchere= new ArrayList<Enchere>();
+		
+		if(id < 0){
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ENCHERE_NULL);
+			throw businessException;	
+		}
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYUTIL);
 			pstmt.setInt(1, id);
@@ -196,7 +212,7 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_ENCHERE_ECHEC);
 			throw businessException;
 		}
 		return listeEnchere;
@@ -214,13 +230,13 @@ class EnchereDAOJdbcImpl implements EnchereDAO {
 			}else {
 				al = new Enchere();
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ENCHERE_NULL);
 				throw businessException;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_EXCEPTION);
+			businessException.ajouterErreur(CodesResultatDAL.BUILDER_ENCHERE_ECHEC);
 			throw businessException;
 		}
 

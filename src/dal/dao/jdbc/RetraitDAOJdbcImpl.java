@@ -30,7 +30,7 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		if(retrait==null)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_RETRAIT_NULL);
 			throw businessException;
 		}
 		
@@ -47,7 +47,7 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_RETRAIT_ECHEC);
 			throw businessException;
 		}	
 	}
@@ -64,13 +64,13 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 			}else {
 				al = new Retrait();
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.BUILDER_RETRAIT_NULL);
 				throw businessException;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_EXCEPTION);
+			businessException.ajouterErreur(CodesResultatDAL.BUILDER_RETRAIT_ECHEC);
 			throw businessException;
 		}
 
@@ -83,7 +83,7 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		if(id<0)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_RETRAIT_NULL);
 			throw businessException;
 		}
 		
@@ -97,7 +97,7 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_RETRAIT_ECHEC);
 			throw businessException;
 		}	
 	}
@@ -105,6 +105,12 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 
 	@Override
 	public void update(Retrait retrait) throws BusinessException {
+		if(retrait == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_RETRAIT_NULL);
+			throw businessException;
+		}
+		
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
@@ -118,7 +124,7 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_RETRAIT_ECHEC);
 			throw businessException;
 		}
 	}
@@ -127,6 +133,11 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 	@Override
 	public Retrait selectById(int id) throws BusinessException {
 		Retrait c = null;
+		if(id < 0) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_RETRAIT_NULL);
+			throw businessException;
+		}
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
 			pstmt.setInt(1, id);
@@ -138,14 +149,8 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_RETRAIT_ECHEC);
 			throw businessException;
-		}	finally {
-			if(c == null) {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-				throw businessException;	
-			}
 		}
 		return c;
 	}
@@ -168,7 +173,7 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_REPAS_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_RETRAIT_ECHEC);
 			throw businessException;
 		}	
 		return listeRetrait;		
