@@ -1,6 +1,11 @@
 package dal.dao;
 
 import bo.Categorie;
+import dal.dao.jdbc.ArticleDAOJdbcImpl;
+import dal.dao.jdbc.CategorieDAOJdbcImpl;
+import dal.dao.jdbc.EnchereDAOJdbcImpl;
+import dal.dao.jdbc.RetraitDAOJdbcImpl;
+import dal.dao.jdbc.UtilisateurDAOJdbcImpl;
 
 
 public abstract class DAOFactory {

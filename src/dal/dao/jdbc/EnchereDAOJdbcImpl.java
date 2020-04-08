@@ -1,4 +1,4 @@
-package dal.dao;
+package dal.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +14,9 @@ import bo.Enchere;
 import bo.Utilisateur;
 import dal.CodesResultatDAL;
 import dal.ConnectionProvider;
+import dal.dao.DAOFactory;
+import dal.dao.EnchereDAO;
+import dal.dao.UtilisateurDAO;
 
 class EnchereDAOJdbcImpl implements EnchereDAO {
 

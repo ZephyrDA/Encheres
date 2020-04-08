@@ -1,10 +1,11 @@
-package dal.dao;
+package dal.dao.jdbc;
 
 import dal.ConnectionProvider;
 import be.BusinessException;
 import bo.Article;
 import bo.Categorie;
 import dal.DALException;
+import dal.dao.ArticleDAO;
 import dal.CodesResultatDAL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -134,7 +135,7 @@ class ArticleDAOJdbcImpl implements ArticleDAO {
 		if(id==0)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.DELETE_ID_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_ARTICLE_NULL);
 			throw businessException;
 		}
 		

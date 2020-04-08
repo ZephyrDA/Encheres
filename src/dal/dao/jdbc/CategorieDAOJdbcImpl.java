@@ -1,4 +1,4 @@
-package dal.dao;
+package dal.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,22 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
  
 import be.BusinessException;
-import bo.Article;
-import bo.Retrait;
+import bo.Categorie;
 import dal.CodesResultatDAL;
 import dal.ConnectionProvider;
+import dal.dao.CategorieDAO;
 
-class RetraitDAOJdbcImpl implements RetraitDAO {
+class CategorieDAOJdbcImpl implements CategorieDAO {
 
-	private static final String INSERT="INSERT INTO RETRAIT(no_article,rue,code_postal,ville) VALUES(?,?,?,?);";
-	private static final String UPDATE="UPDATE RETRAIT SET rue = ?, code_postal = ?, ville = ? WHERE no_artcle = ?";
-	private static final String DELETE="DELETE FROM RETRAIT WHERE no_article = ?";
-	private static final String SELECTBYID="SELECT * FROM RETRAIT WHERE no_article = ? ;";
-	private static final String SELECTALL="SELECT * FROM RETRAIT;";
+	private static final String INSERT="INSERT INTO CATEGORIE(libelle) VALUES(?);";
+	private static final String UPDATE="UPDATE CATEGORIE SET libelle = ? WHERE no_categorie = ?";
+	private static final String DELETE="DELETE FROM CATEGORIE WHERE no_categorie = ?";
+	private static final String SELECTBYID="SELECT * FROM CATEGORIE WHERE no_categorie = ? ;";
+	private static final String SELECTALL="SELECT * FROM CATEGORIE;";
 	
 	@Override
-	public void insert(Retrait retrait) throws BusinessException {
-		if(retrait==null)
+	public void insert(Categorie categorie) throws BusinessException {
+		if(categorie==null)
 		{
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
@@ -33,33 +33,32 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
-			PreparedStatement pstmt = cnx.prepareStatement(INSERT);
-			pstmt.setInt(1, retrait.getArticle().getNo_article());
-			pstmt.setString(2, retrait.getRue());
-			pstmt.setString(3, retrait.getCode_postal());
-			pstmt.setString(4, retrait.getVille());
-			pstmt.executeUpdate();			
+			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, categorie.getLibelle());
+			pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next())
+			{
+				categorie.setNo_categorie(rs.getInt(1));
+			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_CATEGORIE_ECHEC);			
 			throw businessException;
 		}	
 	}
 
 	
-	private Retrait itemBuilder(ResultSet rs) throws BusinessException{
-		Retrait al;
-		Article a;
-		ArticleDAO articleDAO= DAOFactory.getArticleDAO();
+	private Categorie itemBuilder(ResultSet rs) throws BusinessException{
+		Categorie al;
 		try {
 			if(rs != null) {
-				a = articleDAO.selectById(rs.getInt("no_article"));
-				al = new Retrait(a,rs.getString("rue"),rs.getString("code_postal"),rs.getString("ville"));
+				al = new Categorie(rs.getInt("no_categorie"),rs.getString("libelle"));
 			}else {
-				al = new Retrait();
+				al = new Categorie();
 				BusinessException businessException = new BusinessException();
 				businessException.ajouterErreur(CodesResultatDAL.BUILDER_ALIMENTS_ECHEC);
 				throw businessException;
@@ -80,7 +79,7 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		if(id<0)
 		{
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_ID_NULL);
 			throw businessException;
 		}
 		
@@ -94,36 +93,34 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_CATEGORIE_ECHEC);
 			throw businessException;
 		}	
 	}
 
 
 	@Override
-	public void update(Retrait retrait) throws BusinessException {
+	public void update(Categorie categorie) throws BusinessException {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
-			pstmt.setString(1, retrait.getRue());
-			pstmt.setString(2, retrait.getCode_postal());
-			pstmt.setString(3, retrait.getVille());
-			pstmt.setInt(1, retrait.getArticle().getNo_article());
+			pstmt.setString(1, categorie.getLibelle());
+			pstmt.setInt(2, categorie.getNo_categorie());
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_CATEGORIE_ECHEC);
 			throw businessException;
 		}
 	}
 
 
 	@Override
-	public Retrait selectById(int id) throws BusinessException {
-		Retrait c = null;
+	public Categorie selectById(int id) throws BusinessException {
+		Categorie c = null;
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
 			pstmt.setInt(1, id);
@@ -132,15 +129,17 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 			if (rs.next()){
 				 c = itemBuilder(rs);
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
 			throw businessException;
-		}	finally {
+		}	
+		finally {
 			if(c == null) {
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
 				throw businessException;	
 			}
 		}
@@ -149,25 +148,25 @@ class RetraitDAOJdbcImpl implements RetraitDAO {
 
 
 	@Override
-	public ArrayList<Retrait> selectAll() throws BusinessException {
-		ArrayList<Retrait> listeRetrait = new ArrayList<Retrait>();
+	public ArrayList<Categorie> selectAll() throws BusinessException {
+		ArrayList<Categorie> listeCategorie= new ArrayList<Categorie>();
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTALL);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
 			{
-					Retrait a = itemBuilder(rs);	
-					listeRetrait.add(a);
+					Categorie a = itemBuilder(rs);	
+					listeCategorie.add(a);
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_REPAS_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
 			throw businessException;
 		}	
-		return listeRetrait;		
+		return listeCategorie;		
 	}
 }

@@ -1,4 +1,4 @@
-package dal.dao;
+package dal.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import bo.Utilisateur;
 import dal.CodesResultatDAL;
 import dal.ConnectionProvider;
+import dal.dao.UtilisateurDAO;
 import be.BusinessException;
 
 class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
