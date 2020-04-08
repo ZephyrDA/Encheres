@@ -127,13 +127,14 @@ public class EncheresManager {
 	public Article getArticle(int id) throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
-		
+		Article article = new Article();
 		if(!exception.hasErreurs()) {
-			return this.articleDAO.selectById(id);
+			article= this.articleDAO.selectById(id);
 		}
 		else {
 			throw exception;
-		}			
+		}		
+		return article;
 	}
 	
 	/**
@@ -145,13 +146,14 @@ public class EncheresManager {
 	public ArrayList<Article> getLesArticles() throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
-		
+		ArrayList<Article> articles = new ArrayList<Article>();
 		if(!exception.hasErreurs()) {
-			return this.articleDAO.selectAll();
+			articles = this.articleDAO.selectAll();
 		}
 		else {
 			throw exception;
-		}			
+		}	
+		return articles;
 	}
 	
 	/**
@@ -229,13 +231,14 @@ public class EncheresManager {
 	public Enchere getEnchere(int idArticle, int idUtilisateur) throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
-		
+		Enchere enchere= new Enchere();
 		if(!exception.hasErreurs()) {
-			return this.enchereDAO.selectById(idArticle,idUtilisateur);
+			enchere = this.enchereDAO.selectById(idArticle,idUtilisateur);
 		}
 		else {
 			throw exception;
-		}			
+		}	
+		return enchere;
 	}
 	
 	/**
@@ -246,13 +249,14 @@ public class EncheresManager {
 	public ArrayList<Enchere> getLesEncheres() throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
-		
+		ArrayList<Enchere> encheres = new ArrayList<Enchere>();
 		if(!exception.hasErreurs()) {
-			return (ArrayList<Enchere>) this.enchereDAO.selectAll();
+			encheres = (ArrayList<Enchere>) this.enchereDAO.selectAll();
 		}
 		else {
 			throw exception;
-		}			
+		}		
+		return encheres;
 	}
 	
 	
@@ -335,13 +339,14 @@ public class EncheresManager {
 	public Categorie getCategorie(int id) throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
-		
+		Categorie cat= new Categorie();
 		if(!exception.hasErreurs()) {
-			return this.categorieDAO.selectById(id);
+			cat= this.categorieDAO.selectById(id);
 		}
 		else {
 			throw exception;
 		}			
+		return cat;
 	}
 	
 	/**
@@ -353,15 +358,33 @@ public class EncheresManager {
 	public ArrayList<Categorie> getLesCategories() throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
-		
+		ArrayList<Categorie> cat= new ArrayList<Categorie>();
 		if(!exception.hasErreurs()) {
-			return (ArrayList<Categorie>) this.categorieDAO.selectAll();
+			 cat= (ArrayList<Categorie>) this.categorieDAO.selectAll();
 		}
 		else {
 			throw exception;
 		}			
+		return cat;
 	}
 	
+	/**
+	 * 
+	 * Méthode en charge de l'ajout d'un utilisateur
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param mdp1
+	 * @param mdp2
+	 * @param administrateur
+	 * @return
+	 * @throws BusinessException
+	 */
 	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String mdp1, String mdp2, Boolean administrateur) throws BusinessException
 	{
@@ -379,6 +402,88 @@ public class EncheresManager {
 			throw exception;
 		}
 		return utilisateur;
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la modification d'un utilisateur
+	 * @param utilisateur
+	 * @return
+	 * @throws BusinessException
+	 */
+	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs())
+		{
+			this.utilisateurDAO.update(utilisateur);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la suppression d'un utilisateur
+	 * @param id
+	 * @throws BusinessException
+	 */
+	public void deleteUtilisateur(int id) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs())
+		{
+			this.utilisateurDAO.delete(id);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+	} 
+	
+	/**
+	 * 
+	 * Méthode en charge de la récupération d'un objet Utilisateur
+	 * @param id
+	 * @return Utilisateur
+	 * @throws BusinessException
+	 */
+	public Utilisateur getUtilisateur(int id) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		Utilisateur user = new Utilisateur();
+		if(!exception.hasErreurs()) {
+			user= this.utilisateurDAO.selectById(id);
+		}
+		else {
+			throw exception;
+		}	
+		return user;
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la récupération des utilisateurs
+	 * @return  ArrayList<Utilisateur>
+	 * @throws BusinessException
+	 */
+	public ArrayList<Utilisateur> getLesUtilisateurs() throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		ArrayList<Utilisateur> users = new ArrayList<Utilisateur>();
+		if(!exception.hasErreurs()) {
+			users = this.utilisateurDAO.selectAll();
+		}
+		else {
+			throw exception;
+		}
+		return users;
 	}
 	
 	/**
@@ -406,6 +511,87 @@ public class EncheresManager {
 			throw exception;
 		}
 	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la modification d'un objet retrait
+	 * @param retrait
+	 * @throws BusinessException
+	 */
+	public void modifierRetrait(Retrait retrait) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+				
+		if(!exception.hasErreurs())
+		{
+			this.retraitDAO.update(retrait);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la suppression d'un objet Retrait
+	 * @param id
+	 * @throws BusinessException
+	 */
+	public void supprimerRetrait(int id) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+				
+		if(!exception.hasErreurs())
+		{
+			this.retraitDAO.delete(id);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+	}
+	/**
+	 * 
+	 * Méthode en charge de la récupération d'un objet Retrait
+	 * @param id
+	 * @return retrait
+	 * @throws BusinessException
+	 */
+	public Retrait getRetrait(int id) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+		Retrait retrait=new Retrait();
+		if(!exception.hasErreurs())
+		{
+			retrait= this.retraitDAO.selectById(id);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+		return retrait;
+	}
+	
+	public ArrayList<Retrait> getLesRetraits() throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+		ArrayList<Retrait> retraits = new ArrayList<Retrait>();
+		if(!exception.hasErreurs())
+		{
+			retraits= (ArrayList<Retrait>) this.retraitDAO.selectAll();
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+		return retraits;
+	}
+	
 	
 	/**
 	 * 
