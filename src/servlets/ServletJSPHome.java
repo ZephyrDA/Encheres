@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletJSPHome
  */
-@WebServlet("src/servlets/ServletAjout")
+@WebServlet("src/servlets/ServletJSPHome")
 public class ServletJSPHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
