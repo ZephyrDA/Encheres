@@ -1,115 +1,448 @@
 package bll;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import fr.eni.suivirepas.BusinessException;
-import fr.eni.suivirepas.bo.Aliments;
-import fr.eni.suivirepas.bo.Repas;
-import fr.eni.suivirepas.dal.RepasDAO;
-import fr.eni.suivirepas.dal.AlimentsDAO;
-import fr.eni.suivirepas.dal.DAOFactory;
+import be.BusinessException;
+import bo.Article;
+import bo.Categorie;
+import bo.Enchere;
+import bo.Retrait;
+import bo.Utilisateur;
+import dal.dao.ArticleDAO;
+import dal.dao.CategorieDAO;
+import dal.dao.EnchereDAO;
+import dal.dao.RetraitDAO;
+import dal.dao.UtilisateurDAO;
+import dal.dao.DAOFactory;
+
+
 
 /**
  * 
  * @author Administrator
  *
- * Cette classe permet d'effectuer les traitements attendus sur la classe Repas
+ * Cette classe permet d'effectuer les traitements attendus
  */
 public class EncheresManager {
 	
-	private UtilisateurDAO repasDAO;
-	private ArticleDAO alimentsDAO;
+	private UtilisateurDAO utilisateurDAO;
+	private ArticleDAO articleDAO;
+	private CategorieDAO categorieDAO;
+	private RetraitDAO retraitDAO;
+	private EnchereDAO enchereDAO;
 	
 	/**
-	 * Le constructeur permet d'initialiser la variable membre repasDAO pour 
+	 * Le constructeur permet d'initialiser les variables DAO pour 
 	 * permettre une communication avec la base de donnÃ©es. 
 	 */
 	public EncheresManager() {
-		this.repasDAO=DAOFactory.getRepasDAO();
-		this.alimentsDAO=DAOFactory.getAlimentsDAO();
+		this.utilisateurDAO=DAOFactory.getUtilisateurDAO();
+		this.articleDAO=DAOFactory.getArticleDAO();
+		this.categorieDAO=DAOFactory.getCategorieDAO();
+		this.retraitDAO=DAOFactory.getRetraitDAO();
+		this.enchereDAO=DAOFactory.getEnchereDAO();
 	}
+	
 	/**
+	 * 
+	 * Méthode en charge de l'ajout d'article
+	 * @param libelle
 	 * @param description
-	 * @param note
-	 * @return un objet Repas en cas de succcÃ¨s
-	 * @throws BusinessException 
+	 * @param categorie
+	 * @param prixInitial
+	 * @param dateDebut
+	 * @param dateFin
+	 * @param rueRetrait
+	 * @param cpRetrait
+	 * @param villeRetrait
+	 * @param vendeur
+	 * @return objet Article
+	 * @throws BusinessException
 	 */
-	public Categorie2 ajouterRepas(Date dateRepas, Time heureRepas) throws BusinessException
+	public Article ajouterArticle(String libelle, String description, Categorie categorie, int prixInitial, Date dateDebut, Date dateFin, String rueRetrait, String cpRetrait, String villeRetrait, Utilisateur vendeur) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
-		
-		Categorie2 repas = new Categorie2(dateRepas, heureRepas);
-		
-		this.validerHeure(repas,exception);
-		this.validerDate(repas,exception);
+		this.validerDateDebut(dateDebut, exception);
+		this.validerDateFin(dateDebut, dateFin, exception);
+		Article article = new Article(libelle, description,dateDebut,dateFin,prixInitial,categorie,vendeur);	
 
 		if(!exception.hasErreurs())
 		{
-			this.repasDAO.insert(repas);
+			this.articleDAO.insert(article);
+			this.ajouterRetrait(article, rueRetrait, cpRetrait, villeRetrait);
 		}
 		
 		if(exception.hasErreurs())
 		{
 			throw exception;
 		}
-		return repas;
+		return article;
 	}
 	
 	/**
-	 * @param description
-	 * @param note
-	 * @return un objet Repas en cas de succcÃ¨s 
-	 * @throws BusinessException 
+	 * 
+	 * Méthode en charge de la modification d'un Article
+	 * @param article
+	 * @throws BusinessException
 	 */
-	public Utilisateur2 ajouterAliment(String nom, int leRepas) throws BusinessException
+	public void modifierArticle(Article article) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			this.articleDAO.update(article);
+		}
+		else {
+			throw exception;
+		}	
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la suppression d'un Article
+	 * @param id
+	 * @throws BusinessException
+	 */
+	public void supprimerArticle(int id) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			this.articleDAO.delete(id);
+		}
+		else {
+			throw exception;
+		}	
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la récupération d'un objet article
+	 * @param id
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Article getArticle(int id) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			return this.articleDAO.selectById(id);
+		}
+		else {
+			throw exception;
+		}			
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la récupérations des objets article
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ArrayList<Article> getLesArticles() throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			return this.articleDAO.selectAll();
+		}
+		else {
+			throw exception;
+		}			
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de l'ajout d'une enchere
+	 * @param montant
+	 * @param acheteur
+	 * @param idArticle
+	 * @return Enchere
+	 * @throws BusinessException
+	 */
+	public Enchere ajouterEnchere(int montant, Utilisateur acheteur, int idArticle) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 		
-		Utilisateur2 aliments = new Utilisateur2(nom, leRepas);
+		Date date = new Date(Calendar.getInstance().getTime().getTime());	
+		Enchere enchere=new Enchere(date,montant,acheteur);
 		
 		if(!exception.hasErreurs())
 		{
-			this.alimentsDAO.insert(aliments);
+			this.enchereDAO.insert(enchere, idArticle);
 		}
 		
 		if(exception.hasErreurs())
 		{
 			throw exception;
 		}
-		return aliments;
+		return enchere;
+	}
+	
+	
+	/**
+	 * 
+	 * Méthode en charge de la modification d'une enchère
+	 * @param article
+	 * @throws BusinessException
+	 */
+	public void modifierEnchere(Enchere enchere, int idArticle) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			this.enchereDAO.update(enchere, idArticle);
+		}
+		else {
+			throw exception;
+		}	
 	}
 	
 	/**
-	 * Cette mÃ©thode permet de vÃ©rifier les rÃ¨gles Ã  respecter sur la variable membre note.
-	 * En cas d'erreur, le code d'erreur est enregistrÃ© dans l'objet businessException.
-	 * @param repas
-	 * @param businessException 
+	 * 
+	 * Méthode en charge de la suppression d'une enchere
+	 * @param id
+	 * @throws BusinessException
 	 */
-	private void validerHeure(Categorie2 repas, BusinessException businessException)
+	public void supprimerEnchere(int id) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			this.enchereDAO.delete(id);
+		}
+		else {
+			throw exception;
+		}	
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la récupération d'un objet enchere
+	 * @param id
+	 * @return Enchere
+	 * @throws BusinessException
+	 */
+	public Enchere getEnchere(int idArticle, int idUtilisateur) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			return this.enchereDAO.selectById(idArticle,idUtilisateur);
+		}
+		else {
+			throw exception;
+		}			
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la récupérations des objets enchere
+	 * @throws BusinessException
+	 */
+	public ArrayList<Enchere> getLesEncheres() throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			return (ArrayList<Enchere>) this.enchereDAO.selectAll();
+		}
+		else {
+			throw exception;
+		}			
+	}
+	
+	
+	/**
+	 * 
+	 * Méthode en charge de l'ajout d'une categorie
+	 * @param montant
+	 * @param acheteur
+	 * @param idArticle
+	 * @return Categorie
+	 * @throws BusinessException
+	 */
+	public Categorie ajouterCategorie(String libelle) throws BusinessException
 	{
-		if(repas.getHeureRepas() == null)
+		BusinessException exception = new BusinessException();
+		
+		Categorie categorie=new Categorie(libelle);
+		
+		if(!exception.hasErreurs())
 		{
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_HEURE_REPAS_ERREUR);
+			this.categorieDAO.insert(categorie);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+		return categorie;
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la modification d'une categorie
+	 * @param libelle
+	 * @throws BusinessException
+	 */
+	public void modifierCategorie(Categorie categorie) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+				
+		if(!exception.hasErreurs())
+		{
+			this.categorieDAO.update(categorie);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la suppression d'une catégorie.
+	 * @param id
+	 * @throws BusinessException
+	 */
+	public void supprimerCategorie(int id) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+				
+		if(!exception.hasErreurs())
+		{
+			this.categorieDAO.delete(id);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+	}
+	
+	/**
+	 * 	 
+	 * Méthode en charge de la récupération d'un objet categorie
+	 * @param id
+	 * @return Categorie
+	 * @throws BusinessException
+	 */
+	public Categorie getCategorie(int id) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			return this.categorieDAO.selectById(id);
+		}
+		else {
+			throw exception;
+		}			
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de la récupérations des objets enchere
+	 * @return Categories
+	 * @throws BusinessException
+	 */
+	public ArrayList<Categorie> getLesCategories() throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if(!exception.hasErreurs()) {
+			return (ArrayList<Categorie>) this.categorieDAO.selectAll();
+		}
+		else {
+			throw exception;
+		}			
+	}
+	
+	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String mdp1, String mdp2, Boolean administrateur) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+		this.validerMotDePasse(mdp1, mdp2, exception);
+		Utilisateur utilisateur = new Utilisateur( pseudo,  nom,  prenom,  email,  telephone, rue,  codePostal,  ville,  mdp1,  administrateur);
+		
+		if(!exception.hasErreurs())
+		{
+			this.utilisateurDAO.insert(utilisateur);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+		return utilisateur;
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de l'ajout d'un Retrait
+	 * @param article
+	 * @param rue
+	 * @param code_postal
+	 * @param ville
+	 * @throws BusinessException
+	 */
+	public void ajouterRetrait(Article article, String rue, String code_postal, String ville) throws BusinessException
+	{
+		BusinessException exception = new BusinessException();
+		
+		Retrait retrait = new Retrait(article, rue,code_postal ,ville);
+		
+		if(!exception.hasErreurs())
+		{
+			this.retraitDAO.insert(retrait);
+		}
+		
+		if(exception.hasErreurs())
+		{
+			throw exception;
+		}
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de vérifier que la date de début d'enchère n'est pas passé. 
+	 * En cas d'erreur le code est enregistré dans l'objet BusinessException.
+	 * @param date
+	 * @param businessException
+	 */
+	private void validerDateDebut(Date date, BusinessException businessException)
+	{
+		Date d = new Date(Calendar.getInstance().getTime().getTime());
+		if(date.compareTo(d)>=0)
+		{
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_DATE_DEBUT_ENCHERE);
 		}
 	}
 		
 	/**
-	 * Cette mÃ©thode permet de vÃ©rifier les rÃ¨gles Ã  respecter sur la variable membre description.
-	 * En cas d'erreur, le code d'erreur est enregistrÃ© dans l'objet businessException.
-	 * @param repas
+	 * 
+	 * Méthode en charge de vérifier que la date de fin d'enchère n'est pas avant la date de début. 
+	 * En cas d'erreur le code est enregistré dans l'objet BusinessException.
+	 * @param date
 	 * @param businessException
 	 */
-	private void validerDate(Categorie2 repas, BusinessException businessException) 
+	private void validerDateFin(Date dateDebut,Date dateFin, BusinessException businessException)
 	{
-		if(repas.getDateRepas()==null)
+		if(dateFin.compareTo(dateDebut)<0)
 		{
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_DATE_REPAS_ERREUR);
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_DATE_FIN_ENCHERE);
 		}
 	}
 	
-	public ArrayList<Categorie2> getLesRepas() throws BusinessException{
-		return this.repasDAO.selectAll();
+	private void validerMotDePasse(String mdp1, String mdp2, BusinessException businessException)
+	{
+		if(mdp1!=mdp2)
+		{
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_MOTSDEPASSE_DIFFRENTS);
+		}
 	}
 }

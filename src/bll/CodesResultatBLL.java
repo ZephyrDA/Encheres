@@ -6,22 +6,16 @@ package bll;
 public abstract class CodesResultatBLL {
 	
 	/**
-	 * Echec quand la description de l'avis ne respecte pas les règles définies
+	 * Echec quand la date de debut d'ench�re est pass�e
 	 */
-	public static final int REGLE_DATE_REPAS_ERREUR=20000;
-	/**
-	 * Echec quand la note de l'avis ne respecte pas les règles définies
-	 */
-	public static final int REGLE_HEURE_REPAS_ERREUR=20001;
+	public static final int REGLE_DATE_DEBUT_ENCHERE = 20000;
 	
 	/**
-	 * Echec quand la description de l'avis ne respecte pas les règles définies
+	 * Echec quand la date de fin d'ench�re est avant la date de d�but
 	 */
-	public static final int REGLE_NOM_ALIMENT_ERREUR=20002;
-	/**
-	 * Echec quand la note de l'avis ne respecte pas les règles définies
-	 */
-	public static final int REGLE_LE_REPAS_ERREUR=20003;
+	public static final int REGLE_DATE_FIN_ENCHERE = 20001;
+
+	public static final int REGLE_MOTSDEPASSE_DIFFRENTS = 20002;
 	
 	
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface ArticleDAO {
 	/**
 	 * En cas d'erreur, le code d'erreur est enregistré dans l'objet businessException.
-	 * @param avis
+	 * @param article
 	 * @throws BusinessException
 	 */
 	public void insert(Article article) throws BusinessException;

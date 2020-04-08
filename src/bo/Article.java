@@ -2,6 +2,7 @@ package bo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Article implements Serializable {
@@ -18,7 +19,7 @@ public class Article implements Serializable {
 	private int prix_initial;
 	private int prix_vente;
 	private Categorie categorie;
-	private List<Enchere> encheres; 
+	private ArrayList<Enchere> encheres; 
 	private Utilisateur vendeur;
 	
 	public Article() {
@@ -26,21 +27,19 @@ public class Article implements Serializable {
 	}
 
 	public Article(String nom_article, String description, Date date_debut_encheres,
-			Date date_fin_encheres, int prix_initial, int prix_vente, Categorie categorie, List<Enchere> encheres, Utilisateur vendeur) {
+			Date date_fin_encheres, int prix_initial, Categorie categorie, Utilisateur vendeur) {
 		super();
 		this.nom_article = nom_article;
 		this.description = description;
 		this.date_debut_encheres = date_debut_encheres;
 		this.date_fin_encheres = date_fin_encheres;
 		this.prix_initial = prix_initial;
-		this.prix_vente = prix_vente;
 		this.categorie = categorie;
-		this.encheres = encheres;
 		this.vendeur = vendeur;
 	}
 	
 	public Article(int no_article, String nom_article, String description, Date date_debut_encheres,
-			Date date_fin_encheres, int prix_initial, int prix_vente, Categorie categorie, List<Enchere> encheres,
+			Date date_fin_encheres, int prix_initial, int prix_vente, Categorie categorie, ArrayList<Enchere> encheres,
 			Utilisateur vendeur) {
 		super();
 		this.no_article = no_article;
@@ -119,11 +118,11 @@ public class Article implements Serializable {
 		this.categorie = categorie;
 	}
 
-	public List<Enchere> getEncheres() {
+	public ArrayList<Enchere> getEncheres() {
 		return encheres;
 	}
 
-	public void setEncheres(List<Enchere> encheres) {
+	public void setEncheres(ArrayList<Enchere> encheres) {
 		this.encheres = encheres;
 	}
 
