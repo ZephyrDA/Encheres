@@ -17,7 +17,7 @@ import dal.dao.ArticleDAO;
 import dal.dao.DAOFactory;
 import dal.dao.RetraitDAO;
 
-class RetraitDAOJdbcImpl implements RetraitDAO {
+public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 	private static final String INSERT="INSERT INTO RETRAIT(no_article,rue,code_postal,ville) VALUES(?,?,?,?);";
 	private static final String UPDATE="UPDATE RETRAIT SET rue = ?, code_postal = ?, ville = ? WHERE no_artcle = ?";

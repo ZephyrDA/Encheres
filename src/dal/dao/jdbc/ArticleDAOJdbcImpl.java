@@ -16,7 +16,7 @@ import java.util.List;
 
 import utils.DBConnectPool;
 
-class ArticleDAOJdbcImpl implements ArticleDAO {
+public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private static final String INSERT="INSERT INTO ARTICLES_VENDUS(nom_article, description,"
 			+ " date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"

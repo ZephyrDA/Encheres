@@ -14,7 +14,7 @@ import dal.CodesResultatDAL;
 import dal.ConnectionProvider;
 import dal.dao.CategorieDAO;
 
-class CategorieDAOJdbcImpl implements CategorieDAO {
+public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	private static final String INSERT="INSERT INTO CATEGORIE(libelle) VALUES(?);";
 	private static final String UPDATE="UPDATE CATEGORIE SET libelle = ? WHERE no_categorie = ?";

@@ -18,7 +18,7 @@ import dal.dao.DAOFactory;
 import dal.dao.EnchereDAO;
 import dal.dao.UtilisateurDAO;
 
-class EnchereDAOJdbcImpl implements EnchereDAO {
+public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String INSERT="INSERT INTO ENCHERE(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES(?,?,?,?);";
 	private static final String UPDATE="UPDATE ENCHERE SET date_enchere = ? , montant_enchere WHERE no_article = ? AND no_utilisateur = ?";
