@@ -69,4 +69,14 @@ public abstract class CodesResultatDAL {
 
 	public static final int SELECT_UTILISATEUR_ECHEC = 10024;
 
+	public static final int INSERT_CATEGORIE_ECHEC = 10025;
+
+	public static final int DELETE_CATEGORIE_ECHEC = 10026;
+
+	public static final int UPDATE_CATEGORIE_ECHEC = 10027;
+
+	public static final int SELECT_CATEGORIE_ECHEC = 10028;
+
+	public static final int SELECT_ARTICLE_ECHEC = 10029;
+
 }
