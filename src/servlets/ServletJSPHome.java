@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletJSPHome
  */
-@WebServlet("src/servlets/ServletJSPHome")
+@WebServlet("/ServletJSPHome")
 public class ServletJSPHome extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
        
     /**
      * @see HttpServlet#HttpServlet()
