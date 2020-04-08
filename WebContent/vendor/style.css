@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.formulaire h3{
+	margin-bottom: 50px;
+}
+
+.formulaire input{
+	margin-bottom: 3px;
+}
+.erreur{
+	color: red;
+	text-decoration: underline;
+}
+.logo{
+	width: 12%;
+	height: 12%;
+	margin: 10px;
+}
+.blocProfil{
+	border : 1px solid;
+	border-color:#E8E8E8;
+	border-radius: 8px;
+	padding: 20px;
+	box-shadow: 3px 3px 15px #aaa;
+}
+.bouton{
+	margin-top: 10px;
+	margin-left: 20px;
+	border : 1px solid;
+	border-color:#E8E8E8;
+	border-radius: 8px;
+}

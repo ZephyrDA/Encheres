@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath() %>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-
+<link href="<%=request.getContextPath() %>/vendor/style.css" rel="stylesheet" type="text/css" />
 <title>Enchères</title>
 </head>
 <body class="container-fluid">
