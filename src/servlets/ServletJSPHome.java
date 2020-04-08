@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/ServletJSPHome")
 public class ServletJSPHome extends HttpServlet {
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
