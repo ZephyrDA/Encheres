@@ -30,7 +30,7 @@ public class MainTest {
 		//Tests Utilisateurs
 		try{
 						
-			Utilisateur userInsert1 = manager.ajouterUtilisateur("Wabbit", "Leven�", "Elian", "elevenefly@gmail.com", "0658599369", "12 Square Henri Dunant",
+			Utilisateur userInsert1 = manager.ajouterUtilisateur("Wabbit", "Levené", "Elian", "elevenefly@gmail.com", "0658599369", "12 Square Henri Dunant",
 					 "35700", "Rennes", "mdp", "mdp", false); 			
 			Utilisateur userGet1 = manager.getUtilisateur(1);
 			ArrayList<Utilisateur> lesUtilisateurs = manager.getLesUtilisateurs();
