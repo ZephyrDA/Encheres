@@ -1,7 +1,5 @@
 package bo;
 
-import be.BusinessException;
-
 public class Utilisateur {
 
 	private int noUtilisateur;
