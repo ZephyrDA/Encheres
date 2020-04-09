@@ -10,7 +10,7 @@ DBCC CHECKIDENT (CATEGORIES, RESEED, 0)
 INSERT INTO CATEGORIES(libelle) VALUES
 	('Informatique'),
 	('Ameublement'),
-	('Vêtements'),
+	('Vetements'),
 	('Sport et Loisirs');
 
 INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES
@@ -18,16 +18,16 @@ INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville
 	('JeffBezos','Bezos','Jeff','jeffbezos@yahoo.de','0767676767','Amazon','55555','New York','JeffBezos',0,0),
 	('KarlLagerfeld','Lagerfeld','Karl','vetements@gmail.com','0712345678','Chapelle sixtine','00120','Vatican','KarlLagerfeld',0,0),
 	('TiboInShape','InShape','Tibo','enormeetsec@orange.fr','0696969420','100 AV DU PRESIDENT','75016','Paris','TiboInShape',0,0),
-	('Manu','Macron','Emmanuel','sybethsaitpasmettreunmasque@neuf.Fr','0600000000','55 Rue du Faubourg Saint-Honoré','75008','Paris','Manu',6000000,0);
+	('Manu','Macron','Emmanuel','sybethsaitpasmettreunmasque@neuf.Fr','0600000000','55 Rue du Faubourg Saint-Honorï¿½','75008','Paris','Manu',6000000,0);
 
 INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) VALUES
 	('AlienWare','PC Gaming','2020/04/06','2020/04/10',1000,10000,1,1),
 	('souris ROCCAT','Souris gaming','2020/04/06','2020/04/10',100000,2000000,1,1),
-	('Table Ikea','Gifi des idées de génie','2020/04/06','2020/04/10',500,20000,2,2),
-	('Armoire Castorama','Décathlon, à fond la forme !','2020/04/06','2020/04/10',20000,21000,2,2),
-	('Robe de soiée','Plein de paillettes, partout','2020/04/06','2020/04/10',15,20,3,3),
+	('Table Ikea','Gifi des idees de genie','2020/04/06','2020/04/10',500,20000,2,2),
+	('Armoire Castorama','Decathlon, a fond la forme !','2020/04/06','2020/04/10',20000,21000,2,2),
+	('Robe de soiree','Plein de paillettes, partout','2020/04/06','2020/04/10',15,20,3,3),
 	('Talon Haut','Pour les gens qui aiment marcher sur la pointe des pieds tout en faisant du bruit','2020/04/06','2020/04/10',2000,20000000,3,3),
-	('Ballon de foot','Zidane a joué avec quand il était gosse','2020/04/06','2020/04/10',50,60,4,4),
+	('Ballon de foot','Zidane a joue avec quand il etait gosse','2020/04/06','2020/04/10',50,60,4,4),
 	('Raquette de tennis','Une raquette magique qui permet de gagner tous les matchs','2020/04/06','2020/04/10',10,450,4,4);
 
 INSERT INTO RETRAITS(no_article,rue,code_postal,ville) VALUES
