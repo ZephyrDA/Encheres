@@ -119,7 +119,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
 			pstmt.setInt(1, idArticle);
-			pstmt.setInt(1, idUtilisateur);
+			pstmt.setInt(2, idUtilisateur);
 
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()){

@@ -47,7 +47,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de l'ajout d'article
+	 * Mï¿½thode en charge de l'ajout d'article
 	 * @param libelle
 	 * @param description
 	 * @param categorie
@@ -73,10 +73,7 @@ public class EncheresManager {
 		{
 			this.articleDAO.insert(article);
 			this.ajouterRetrait(article, rueRetrait, cpRetrait, villeRetrait);
-		}
-		
-		if(exception.hasErreurs())
-		{
+		}else {
 			throw exception;
 		}
 		return article;
@@ -84,7 +81,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la modification d'un Article
+	 * Mï¿½thode en charge de la modification d'un Article
 	 * @param article
 	 * @throws BusinessException
 	 */
@@ -102,7 +99,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la suppression d'un Article
+	 * Mï¿½thode en charge de la suppression d'un Article
 	 * @param id
 	 * @throws BusinessException
 	 */
@@ -120,7 +117,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la récupération d'un objet article
+	 * Mï¿½thode en charge de la rï¿½cupï¿½ration d'un objet article
 	 * @param id
 	 * @return
 	 * @throws BusinessException
@@ -140,7 +137,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la récupérations des objets article
+	 * Mï¿½thode en charge de la rï¿½cupï¿½rations des objets article
 	 * @return
 	 * @throws BusinessException
 	 */
@@ -159,7 +156,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de l'ajout d'une enchere
+	 * Mï¿½thode en charge de l'ajout d'une enchere
 	 * @param montant
 	 * @param acheteur
 	 * @param idArticle
@@ -188,7 +185,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la modification d'une enchère
+	 * Mï¿½thode en charge de la modification d'une enchï¿½re
 	 * @param article
 	 * @throws BusinessException
 	 */
@@ -206,7 +203,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la suppression d'une enchere
+	 * Mï¿½thode en charge de la suppression d'une enchere
 	 * @param id
 	 * @throws BusinessException
 	 */
@@ -224,7 +221,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la récupération d'un objet enchere
+	 * Mï¿½thode en charge de la rï¿½cupï¿½ration d'un objet enchere
 	 * @param id
 	 * @return Enchere
 	 * @throws BusinessException
@@ -244,7 +241,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la récupérations des objets enchere
+	 * Mï¿½thode en charge de la rï¿½cupï¿½rations des objets enchere
 	 * @throws BusinessException
 	 */
 	public ArrayList<Enchere> getLesEncheres() throws BusinessException {
@@ -263,7 +260,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de l'ajout d'une categorie
+	 * Mï¿½thode en charge de l'ajout d'une categorie
 	 * @param montant
 	 * @param acheteur
 	 * @param idArticle
@@ -290,7 +287,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la modification d'une categorie
+	 * Mï¿½thode en charge de la modification d'une categorie
 	 * @param libelle
 	 * @throws BusinessException
 	 */
@@ -311,7 +308,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la suppression d'une catégorie.
+	 * Mï¿½thode en charge de la suppression d'une catï¿½gorie.
 	 * @param id
 	 * @throws BusinessException
 	 */
@@ -332,7 +329,7 @@ public class EncheresManager {
 	
 	/**
 	 * 	 
-	 * Méthode en charge de la récupération d'un objet categorie
+	 * Mï¿½thode en charge de la rï¿½cupï¿½ration d'un objet categorie
 	 * @param id
 	 * @return Categorie
 	 * @throws BusinessException
@@ -352,7 +349,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la récupérations des objets enchere
+	 * Mï¿½thode en charge de la rï¿½cupï¿½rations des objets enchere
 	 * @return Categories
 	 * @throws BusinessException
 	 */
@@ -371,7 +368,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de l'ajout d'un utilisateur
+	 * Mï¿½thode en charge de l'ajout d'un utilisateur
 	 * @param pseudo
 	 * @param nom
 	 * @param prenom
@@ -407,7 +404,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la modification d'un utilisateur
+	 * Mï¿½thode en charge de la modification d'un utilisateur
 	 * @param utilisateur
 	 * @return
 	 * @throws BusinessException
@@ -429,7 +426,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la suppression d'un utilisateur
+	 * Mï¿½thode en charge de la suppression d'un utilisateur
 	 * @param id
 	 * @throws BusinessException
 	 */
@@ -450,7 +447,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la récupération d'un objet Utilisateur
+	 * Mï¿½thode en charge de la rï¿½cupï¿½ration d'un objet Utilisateur
 	 * @param id
 	 * @return Utilisateur
 	 * @throws BusinessException
@@ -470,7 +467,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la récupération des utilisateurs
+	 * Mï¿½thode en charge de la rï¿½cupï¿½ration des utilisateurs
 	 * @return  ArrayList<Utilisateur>
 	 * @throws BusinessException
 	 */
@@ -489,7 +486,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de l'ajout d'un Retrait
+	 * Mï¿½thode en charge de l'ajout d'un Retrait
 	 * @param article
 	 * @param rue
 	 * @param code_postal
@@ -516,7 +513,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la modification d'un objet retrait
+	 * Mï¿½thode en charge de la modification d'un objet retrait
 	 * @param retrait
 	 * @throws BusinessException
 	 */
@@ -537,7 +534,7 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de la suppression d'un objet Retrait
+	 * Mï¿½thode en charge de la suppression d'un objet Retrait
 	 * @param id
 	 * @throws BusinessException
 	 */
@@ -557,7 +554,7 @@ public class EncheresManager {
 	}
 	/**
 	 * 
-	 * Méthode en charge de la récupération d'un objet Retrait
+	 * Mï¿½thode en charge de la rï¿½cupï¿½ration d'un objet Retrait
 	 * @param id
 	 * @return retrait
 	 * @throws BusinessException
@@ -597,8 +594,8 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * Méthode en charge de vérifier que la date de début d'enchère n'est pas passé. 
-	 * En cas d'erreur le code est enregistré dans l'objet BusinessException.
+	 * Mï¿½thode en charge de vï¿½rifier que la date de dï¿½but d'enchï¿½re n'est pas passï¿½. 
+	 * En cas d'erreur le code est enregistrï¿½ dans l'objet BusinessException.
 	 * @param date
 	 * @param businessException
 	 */
@@ -613,8 +610,8 @@ public class EncheresManager {
 		
 	/**
 	 * 
-	 * Méthode en charge de vérifier que la date de fin d'enchère n'est pas avant la date de début. 
-	 * En cas d'erreur le code est enregistré dans l'objet BusinessException.
+	 * Mï¿½thode en charge de vï¿½rifier que la date de fin d'enchï¿½re n'est pas avant la date de dï¿½but. 
+	 * En cas d'erreur le code est enregistrï¿½ dans l'objet BusinessException.
 	 * @param date
 	 * @param businessException
 	 */

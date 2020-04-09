@@ -24,7 +24,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private Utilisateur itemBuilder(ResultSet rs) throws BusinessException{
 		Utilisateur rep;
 		try {
-			if(rs!=null) {
+			if(rs != null) {
 				 rep = new Utilisateur(
 						rs.getInt("no_utilisateur"),
 						rs.getString("pseudo"),
@@ -168,12 +168,15 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
-			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID, PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYID);
 			pstmt.setInt(1, id);			
 
-			pstmt.executeQuery();
-			ResultSet rs = pstmt.getGeneratedKeys();
-			return itemBuilder(rs);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return itemBuilder(rs);
+			}else {
+				return new Utilisateur();
+			}
 		}
 		catch(Exception e)
 		{

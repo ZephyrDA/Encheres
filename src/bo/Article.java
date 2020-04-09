@@ -34,6 +34,7 @@ public class Article implements Serializable {
 		this.date_debut_encheres = date_debut_encheres;
 		this.date_fin_encheres = date_fin_encheres;
 		this.prix_initial = prix_initial;
+		this.prix_vente = -1;
 		this.categorie = categorie;
 		this.vendeur = vendeur;
 	}
