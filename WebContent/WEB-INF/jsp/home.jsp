@@ -43,7 +43,7 @@
 <div class="p-2 bg-dark text-white float-right mr-2" style="width: 30%;height: 100%;margin-left: auto;">
 	<div class="height: 100%">Image</div>
 	<div class="float-right">
-	<div >Titre produit</div>
+	<div>Titre produit</div>
 	<div>Prix : 100 points</div>
 	<div>Fin de l'enchère : date</div>
 	<div>Vendeur : Nom Vendeur</div>
