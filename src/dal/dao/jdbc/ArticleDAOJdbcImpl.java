@@ -189,7 +189,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			ArrayList<Article> liste = new ArrayList<Article>();
-			PreparedStatement pstmt = cnx.prepareStatement(SELECTALL);			
+
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTALL);
+
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				liste.add(itemBuilder(rs));

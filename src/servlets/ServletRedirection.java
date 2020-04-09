@@ -46,7 +46,7 @@ public class ServletRedirection extends HttpServlet {
 		String choixUt=request.getParameter("choixUtilisateur");
 		System.out.println(choixUt);
 		if(choixUt==null) {
-		doGet(request, response);
+			doGet(request, response);
 		}
 		else {
 			if(choixUt.equals("Saisie")) {
