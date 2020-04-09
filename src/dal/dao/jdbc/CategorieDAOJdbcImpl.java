@@ -16,11 +16,11 @@ import dal.dao.CategorieDAO;
 
 public class CategorieDAOJdbcImpl implements CategorieDAO {
 
-	private static final String INSERT="INSERT INTO CATEGORIE(libelle) VALUES(?);";
-	private static final String UPDATE="UPDATE CATEGORIE SET libelle = ? WHERE no_categorie = ?";
-	private static final String DELETE="DELETE FROM CATEGORIE WHERE no_categorie = ?";
-	private static final String SELECTBYID="SELECT * FROM CATEGORIE WHERE no_categorie = ? ;";
-	private static final String SELECTALL="SELECT * FROM CATEGORIE;";
+	private static final String INSERT="INSERT INTO CATEGORIES(libelle) VALUES(?);";
+	private static final String UPDATE="UPDATE CATEGORIES SET libelle = ? WHERE no_categorie = ?";
+	private static final String DELETE="DELETE FROM CATEGORIES WHERE no_categorie = ?";
+	private static final String SELECTBYID="SELECT * FROM CATEGORIES WHERE no_categorie = ? ;";
+	private static final String SELECTALL="SELECT * FROM CATEGORIES;";
 	
 	@Override
 	public void insert(Categorie categorie) throws BusinessException {

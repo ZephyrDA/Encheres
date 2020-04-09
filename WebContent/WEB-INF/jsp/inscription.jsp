@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<div class="container">			
- 	<div class="formulaire text-center">  		
+<div class="container-fluid text-center col-md-10 offset-2">			
+ 	<div class="formulaire">  		
  		<form action="<%=request.getContextPath()%>/GestionInscription"	method="post">  			
  			<div class=" row col-md-offset-2 col-md-9 col-xs-12 blocProfil mt-5"> 
  				<h3 class="col-md-12">Création de mon Profil</h3><br>	
- 				<div class="col-md-3 "> 
+ 				<div class="col-md-2 text-right "> 
  					<p>Pseudo :</p> 
  					<p>Prenom :</p> 
  					<p>Telephone :</p> 
@@ -21,7 +21,7 @@
  					<input type="text" name="codePostalInscription" value="${fn:escapeXml(codePostalInscription)}"><br> 
  					<input type="password" name="motDePasseInscription" value="${fn:escapeXml(motDePasseInscription)}"> 
  				</div> 
- 				<div class="col-md-3"> 
+ 				<div class="col-md-2 text-right"> 
  					<p>Nom :</p> 
  					<p>Email :</p> 
  					<p>Rue :</p> 
@@ -43,14 +43,13 @@
  				<% 
  					}
  				%> 
- 			</div>  			
+ 			</div>  			 			
 			<div class="row"> 
- 				<button type="submit" class="bouton col-md-4 btn btn-default">Creer</button>
+ 				<button type="submit" class="bouton col-md-3 btn btn-default">Creer</button>  				
+ 				<button type="reset" class="bouton col-md-3 btn btn-default">Annuler</button>
  			</div>  	
  		</form>
- 		<form action="<%=request.getContextPath()%>/home" method="get"> 						  		
- 				<button type="submit" class="bouton col-md-4 btn btn-default">Annuler</button>
- 		</form> 
+ 		
  	</div> 						
 </div>
 </body>

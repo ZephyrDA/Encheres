@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.DBConnectPool;
-
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private static final String INSERT="INSERT INTO ARTICLES_VENDUS(nom_article, description,"
