@@ -20,7 +20,7 @@ import dal.dao.RetraitDAO;
 public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 	private static final String INSERT="INSERT INTO RETRAITS(no_article,rue,code_postal,ville) VALUES(?,?,?,?);";
-	private static final String UPDATE="UPDATE RETRAITS SET rue = ?, code_postal = ?, ville = ? WHERE no_artcle = ?";
+	private static final String UPDATE="UPDATE RETRAITS SET rue = ?, code_postal = ?, ville = ? WHERE no_article = ?";
 	private static final String DELETE="DELETE FROM RETRAITS WHERE no_article = ?";
 	private static final String SELECTBYID="SELECT * FROM RETRAITS WHERE no_article = ? ;";
 	private static final String SELECTALL="SELECT * FROM RETRAITS;";
@@ -117,7 +117,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 			pstmt.setString(1, retrait.getRue());
 			pstmt.setString(2, retrait.getCode_postal());
 			pstmt.setString(3, retrait.getVille());
-			pstmt.setInt(1, retrait.getArticle().getNo_article());
+			pstmt.setInt(4, retrait.getArticle().getNo_article());
 			pstmt.executeUpdate();
 		}
 		catch(Exception e)

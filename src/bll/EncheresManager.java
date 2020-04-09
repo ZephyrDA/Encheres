@@ -108,6 +108,12 @@ public class EncheresManager {
 		BusinessException exception = new BusinessException();
 		
 		if(!exception.hasErreurs()) {
+			ArrayList<Retrait> retraits = this.getLesRetraits();
+			for(Retrait ret : retraits) {
+				if(ret.getArticle().getNo_article()==id) {
+					this.supprimerRetrait(id);
+				}
+			}
 			this.articleDAO.delete(id);
 		}
 		else {

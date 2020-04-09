@@ -182,14 +182,10 @@ public class ServletTestDAL extends HttpServlet {
 					"1 Rue des Lilas", "22130", "Dinan", vendeur); 			
 			Article artGet1 = manager.getArticle(artInsert1.getNo_article());
 			
-			Retrait retInsert1 = manager.ajouterRetrait(artInsert1, "Carimel", "22130", "Languenan");			
 			Retrait retGet1 = manager.getRetrait(1);
 			ArrayList<Retrait> lesRetraits = manager.getLesRetraits();
 			
-			System.out.println("-----------------------Test Retraits-----------------------");
-			System.out.println("Insertion Retrait 1 :");
-			System.out.println(retInsert1.toString());
-			System.out.println("----------------------------------------------");
+			System.out.println("-----------------------Test Retraits-----------------------");			
 			System.out.println("Get Retrait 1 :");
 			System.out.println(retGet1.toString());
 			System.out.println("----------------------------------------------");
@@ -207,7 +203,7 @@ public class ServletTestDAL extends HttpServlet {
 			System.out.println(updateRet.toString());
 			System.out.println("----------------------------------------------");
 			
-			manager.supprimerRetrait(retInsert1.getArticle().getNo_article());
+			manager.supprimerRetrait(artInsert1.getNo_article());
 			manager.supprimerArticle(artInsert1.getNo_article());
 			lesRetraits=manager.getLesRetraits();
 			
