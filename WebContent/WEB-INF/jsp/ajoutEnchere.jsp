@@ -1,40 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-    
+   
 <%@ include file="../header/header.jspf"%>
-<div class="row" style="margin-top:20%;">
+
+<div class="row" style="margin-top:15%;">
 	<div class="col-lg-6 offset-lg-3 col-xs-12  border border-primary p-2" >
-		<form action="<%= request.getContextPath()%>/NouvelleEnchere" method="post" style="margin-left: 25%;">
-	<label >Catégories : 
+		<form action="<%= request.getContextPath()%>/NouvelleEnchere" method="post" style="margin-left: 35%;">
+	<span style="margin-left: auto;margin-right: auto;">Catégories : <br>
 		<select name="category" class="dropdown btn btn-secondary" >
 		    <option name="catInfo" value="${fn:escapeXml(catInformatique)}">Informatique</option>
 		    <option name="catAmeublement" value="${fn:escapeXml(catAmeublement)}">Ameublement</option>
 		    <option name="catVetement" value="${fn:escapeXml(catVetement)}">Vêtements</option>
 		    <option name="cartSportLoisir" value="${fn:escapeXml(catSportLoisir)}">Sport et Loisirs</option>
 		</select>
-	</label>
+	</span>
 	<br>
-	<label> Prix : 
+	<span> Prix : <br>
 		<input type="number" value="prix">
-	</label>
+	</span>
 	<br>
-	<label for="desc"> Nom de l'article : 
+	<span > Nom de l'article : <br>
 		<input type="number" value="prix">
-	</label>
+	</span>
 	<br>
-	<label> Descriptif : </label>
+	<span> Descriptif : 
 	<br>
 		<textarea style="resize: none" id="desc" rows="4" cols="50"></textarea>
-	
+	</span>
 	<br>
-	<label> Fin de l'enchère : 
+	<span> Fin de l'enchère : <br>
 		<input type="date" value="date">
-	</label>
+	</span>
 	<br>
-	<input type="submit" class="btn btn-primary" style="margin-left:20%" value="Valider">
-		</form>
+	<input type="submit" class="btn btn-primary mt-2" style="margin-left:20%" value="Valider">
+	</form>
+		</div>
 	</div>
-</div>
-</body>
-</html>
+

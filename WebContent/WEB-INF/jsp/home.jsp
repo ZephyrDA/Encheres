@@ -12,11 +12,6 @@
     aria-label="Search">
 </form>
 
-<form method="post">
-	<input class="btn btn-primary" value="Saisie" name="choixUtilisateur" type="submit"/>					
-	<input class="btn btn-primary"  value="Historique" name="choixUtilisateur" type="submit"/>
-</form>
-
 <div class="d-flex mt-4 align-items-center font-weight-bold">
 <form action="<%=request.getContextPath()%>/categories" method="post">
 	<label style="margin-left: auto;margin-right: auto;">Catégories : 
@@ -49,5 +44,10 @@
 	<div>Vendeur : Nom Vendeur</div>
 	</div>
 </div></div>
+
+<form method="post" class="d-flex mt-4 align-items-center font-weight-bold">
+	<input class="btn btn-primary" value="Saisie" name="choixUtilisateur" type="submit"/>					
+	<input class="btn btn-primary"  value="Historique" name="choixUtilisateur" type="submit"/>
+</form><
 </body>
 </html>
