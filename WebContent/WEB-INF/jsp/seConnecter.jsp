@@ -24,6 +24,10 @@
 			<button type="submit" class=" col-lg-4 btn btn-default">
 				<p>Connexion</p>
 			</button>			
+		</form>
+		<form action="LireCookie" method="post">
+			<label for="souvenir">Se souvenir de moi</label>
+        	<input type="checkbox" id="souvenir" name="souvenir" />
 		</form>				
 		<a href="#ServletPourGestionEnvoiMail">Mot de passe oublié</a>
 		<br>
