@@ -20,13 +20,13 @@ import dal.dao.UtilisateurDAO;
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 
-	private static final String INSERT="INSERT INTO ENCHERE(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES(?,?,?,?);";
-	private static final String UPDATE="UPDATE ENCHERE SET date_enchere = ? , montant_enchere WHERE no_article = ? AND no_utilisateur = ?";
-	private static final String DELETE="DELETE FROM ENCHERE WHERE no_article = ? AND no_utilisateur = ?";
-	private static final String SELECTBYID="SELECT * FROM ENCHERE WHERE no_article = ? AND no_utilisateur = ? ;";
-	private static final String SELECTALL="SELECT * FROM ENCHERE;";
-	private static final String SELECTBYUTIL="SELECT * FROM ENCHERE WHERE no_utilisateur = ? ;";
-	private static final String SELECTBYARTICLE="SELECT * FROM ENCHERE WHERE no_utilisateur = ? ;";
+	private static final String INSERT="INSERT INTO ENCHERES(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES(?,?,?,?);";
+	private static final String UPDATE="UPDATE ENCHERES SET date_enchere = ? , montant_enchere WHERE no_article = ? AND no_utilisateur = ?";
+	private static final String DELETE="DELETE FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?";
+	private static final String SELECTBYID="SELECT * FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ? ;";
+	private static final String SELECTALL="SELECT * FROM ENCHERES;";
+	private static final String SELECTBYUTIL="SELECT * FROM ENCHERES WHERE no_utilisateur = ? ;";
+	private static final String SELECTBYARTICLE="SELECT * FROM ENCHERES WHERE no_utilisateur = ? ;";
 	
 	@Override
 	public void insert(Enchere enchere, int idArticle) throws BusinessException {
