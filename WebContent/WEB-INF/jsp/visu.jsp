@@ -131,6 +131,9 @@ HISTORIQUE
 			out.print(art.getNo_article());
 			out.print("</td>");
 			out.print("<td>");
+			out.print(art.getNom_article());
+			out.print("</td>");
+			out.print("<td>");
 			out.print(art.getDescription());
 			out.print("</td>");
 			out.print("<td>");
@@ -200,7 +203,7 @@ HISTORIQUE
 		<%for(Retrait ret : lesRetraits){
 			out.print("<tr>");
 			out.print("<td>");
-			out.print(ret.getArticle());
+			out.print(ret.getArticle().getNom_article());
 			out.print("</td>");
 			out.print("<td>");
 			out.print(ret.getRue());
