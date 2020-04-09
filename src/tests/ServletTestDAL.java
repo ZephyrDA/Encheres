@@ -3,6 +3,7 @@ package tests;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +42,7 @@ public class ServletTestDAL extends HttpServlet {
 		//Tests Utilisateurs
 		try{
 						
-			Utilisateur userInsert1 = manager.ajouterUtilisateur("Wabbit", "Leven�", "Elian", "elevenefly@gmail.com", "0658599369", "12 Square Henri Dunant",
+			Utilisateur userInsert1 = manager.ajouterUtilisateur("Wabbit", "Levené", "Elian", "elevenefly@gmail.com", "0658599369", "12 Square Henri Dunant",
 					 "35700", "Rennes", "mdp", "mdp", false); 			
 			Utilisateur userGet1 = manager.getUtilisateur(1);
 			ArrayList<Utilisateur> lesUtilisateurs = manager.getLesUtilisateurs();
@@ -111,7 +112,7 @@ public class ServletTestDAL extends HttpServlet {
 			System.out.println("----------------------------------------------");
 			
 			manager.supprimerCategorie(catInsert1.getNo_categorie());
-			
+			lesCategories=manager.getLesCategories();
 			System.out.println("delete inserted Categorie :");
 			for(Categorie u : lesCategories) {
 				System.out.println(u.toString());
@@ -127,8 +128,8 @@ public class ServletTestDAL extends HttpServlet {
 		//Tests Article
 		try{
 			Categorie cat = manager.getCategorie(1);			
-			Date date1 = new Date(2020, 8, 12);
-			Date date2 = new Date(2020, 12, 12);
+			Date date1 = new java.sql.Date(new GregorianCalendar(2020, 8, 12).getTimeInMillis());			
+			Date date2 = new java.sql.Date(new GregorianCalendar(2020, 11, 12).getTimeInMillis());	
 			Utilisateur vendeur = manager.getUtilisateur(1);
 
 			Article artInsert1 = manager.ajouterArticle("Ballon de volley", "Parfait etat, jamais servi", cat, 15, date1, date2,
@@ -158,7 +159,8 @@ public class ServletTestDAL extends HttpServlet {
 			System.out.println("----------------------------------------------");
 			
 			manager.supprimerArticle(artInsert1.getNo_article());
-			
+			lesArticles = manager.getLesArticles();
+
 			System.out.println("delete inserted Article :");
 			for(Article u : lesArticles) {
 				System.out.println(u.toString());
@@ -172,15 +174,15 @@ public class ServletTestDAL extends HttpServlet {
 		//Tests Retrait
 		try{
 			Categorie cat = manager.getCategorie(1);			
-			Date date1 = new Date(2020, 8, 12);
-			Date date2 = new Date(2020, 12, 12);
+			Date date1 = new java.sql.Date(new GregorianCalendar(2020, 8, 12).getTimeInMillis());			
+			Date date2 = new java.sql.Date(new GregorianCalendar(2020, 11, 12).getTimeInMillis());	
 			Utilisateur vendeur = manager.getUtilisateur(1);
 
 			Article artInsert1 = manager.ajouterArticle("Ballon de volley", "Parfait etat, jamais servi", cat, 15, date1, date2,
 					"1 Rue des Lilas", "22130", "Dinan", vendeur); 			
-			Article artGet1 = manager.getArticle(9);
+			Article artGet1 = manager.getArticle(artInsert1.getNo_article());
 			
-			Retrait retInsert1 = manager.ajouterRetrait(artGet1, "Carimel", "22130", "Languenan");			
+			Retrait retInsert1 = manager.ajouterRetrait(artInsert1, "Carimel", "22130", "Languenan");			
 			Retrait retGet1 = manager.getRetrait(1);
 			ArrayList<Retrait> lesRetraits = manager.getLesRetraits();
 			
@@ -207,6 +209,7 @@ public class ServletTestDAL extends HttpServlet {
 			
 			manager.supprimerRetrait(retInsert1.getArticle().getNo_article());
 			manager.supprimerArticle(artInsert1.getNo_article());
+			lesRetraits=manager.getLesRetraits();
 			
 			System.out.println("delete inserted Retrait :");
 			for(Retrait u : lesRetraits) {
@@ -249,7 +252,7 @@ public class ServletTestDAL extends HttpServlet {
 			System.out.println("----------------------------------------------");
 			
 			manager.supprimerEnchere(art.getNo_article(), enchInsert1.getUtilisateur().getNoUtilisateur());
-			
+			lesEncheres=manager.getLesEncheres();
 			System.out.println("delete inserted Enchere :");
 			for(Enchere u : lesEncheres) {
 				System.out.println(u.toString());

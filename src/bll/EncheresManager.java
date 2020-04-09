@@ -602,7 +602,7 @@ public class EncheresManager {
 	private void validerDateDebut(Date date, BusinessException businessException)
 	{
 		Date d = new Date(Calendar.getInstance().getTime().getTime());
-		if(date.compareTo(d)>=0)
+		if(date.compareTo(d)<0)
 		{
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_DATE_DEBUT_ENCHERE);
 		}
