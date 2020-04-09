@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bll.EncheresManager;
+import bo.Article;
 import bo.Categorie;
+import bo.Enchere;
+import bo.Retrait;
+import bo.Utilisateur;
 
 
 /**
@@ -46,17 +50,25 @@ public class ServletRedirection extends HttpServlet {
 		}
 		else {
 			if(choixUt.equals("Saisie")) {
-				this.getServletContext().getRequestDispatcher("/WEB-INF/Ajout.jsp").forward(request, response);
+				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Ajout.jsp").forward(request, response);
 			}
 			else if(choixUt.equals("Historique")) {
 				try {
-					EncheresManager repasManager = new EncheresManager();
-					ArrayList<Categorie> lesRepas = repasManager.getLesCategories();
-					request.setAttribute("lesRepas", lesRepas);
+					EncheresManager encheresManager = new EncheresManager();
+					ArrayList<Categorie> lesCategories = encheresManager.getLesCategories();
+					ArrayList<Utilisateur> lesUtilisateurs = encheresManager.getLesUtilisateurs();
+					ArrayList<Article> lesArticles = encheresManager.getLesArticles();
+					ArrayList<Enchere> lesEncheres = encheresManager.getLesEncheres();
+					ArrayList<Retrait> lesRetraits = encheresManager.getLesRetraits();
+					request.setAttribute("lesCategories", lesCategories);
+					request.setAttribute("lesUtilisateurs", lesUtilisateurs);
+					request.setAttribute("lesArticles", lesArticles);
+					request.setAttribute("lesEncheres", lesEncheres);
+					request.setAttribute("lesRetraits", lesRetraits);
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
-				this.getServletContext().getRequestDispatcher("/WEB-INF/Visu.jsp").forward(request, response);
+				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/visu.jsp").forward(request, response);
 			}
 			else {
 				doGet(request, response);
