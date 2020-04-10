@@ -51,7 +51,7 @@
 		<c:when test="${!empty sessionScope.connectedUser}">
 			<ul class="navbar-nav navbar-right ">
 	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Se déconnecter <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="Deconnexion">Se déconnecter <span class="sr-only">(current)</span></a>
 	      </li></ul>
 		</c:when>
 		<c:otherwise>
