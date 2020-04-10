@@ -247,8 +247,9 @@ public class EncheresManager {
 	
 	/**
 	 * 
-	 * M�thode en charge de la r�cup�rations des objets enchere
+	 * M�thode en charge de la récupération des objets enchere
 	 * @throws BusinessException
+	 * @return ArrayList<Enchere>
 	 */
 	public ArrayList<Enchere> getLesEncheres() throws BusinessException {
 		
@@ -263,7 +264,53 @@ public class EncheresManager {
 		return encheres;
 	}
 	
+	/**
+	 * 
+	 * Méthode en charge de la récupération de l'acheteur d'un article si l'article est vendu et que des enchères existent pour cet article
+	 * @param idArticle
+	 * @return Utilisateur
+	 * @throws BusinessException
+	 */
+	public Utilisateur getAcheteur(int idArticle) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		Article article = this.getArticle(idArticle);		
+		Utilisateur vendeur = new Utilisateur();
+		validerArticleVendu(article.getDate_fin_encheres(), exception);
+		ArrayList<Enchere> encheres = this.getEncheresByArticle(idArticle);
+		int prixVente=0; 
+		if(!exception.hasErreurs()&& encheres.size()!=0) {
+			for (Enchere e : encheres) {
+				if(e.getMontantEnchere()>prixVente) {
+					vendeur = e.getUtilisateur();
+					prixVente = e.getMontantEnchere();
+				}
+			}
+		}
+		else {
+			throw exception;
+		}	
+		return vendeur;
+	}
 	
+	/**
+	 * Méthode en charge de la récupérations des enchères faites pour un article
+	 * @param idArticle
+	 * @return ArrayList<Enchere>
+	 * @throws BusinessException 
+	 */
+	private ArrayList<Enchere> getEncheresByArticle(int idArticle) throws BusinessException {
+		BusinessException exception = new BusinessException();
+		ArrayList<Enchere> encheres = new ArrayList<Enchere>();
+		if(!exception.hasErreurs()) {
+			encheres= this.enchereDAO.selectByNoArticle(idArticle);
+		}
+		else {
+			throw exception;
+		}			
+		return encheres;
+	}
+
 	/**
 	 * 
 	 * M�thode en charge de l'ajout d'une categorie
@@ -581,6 +628,12 @@ public class EncheresManager {
 		return retrait;
 	}
 	
+	/**
+	 * 
+	 * Méthode en charge de la récupération des retraits
+	 * @return
+	 * @throws BusinessException
+	 */
 	public ArrayList<Retrait> getLesRetraits() throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
@@ -608,7 +661,7 @@ public class EncheresManager {
 	private void validerDateDebut(Date date, BusinessException businessException)
 	{
 		Date d = new Date(Calendar.getInstance().getTime().getTime());
-		if(date.compareTo(d)<0)
+		if(date.compareTo(d)<=0)
 		{
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_DATE_DEBUT_ENCHERE);
 		}
@@ -629,11 +682,33 @@ public class EncheresManager {
 		}
 	}
 	
+	/**
+	 * 
+	 * Méthode en charge de la vérification de la confirmation du mot de passe
+	 * @param mdp1
+	 * @param mdp2
+	 * @param businessException
+	 */
 	private void validerMotDePasse(String mdp1, String mdp2, BusinessException businessException)
 	{
 		if(mdp1!=mdp2)
 		{
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_MOTSDEPASSE_DIFFRENTS);
+		}
+	}
+	
+	/**
+	 * 
+	 * Méthode en charge de vérifier si la date de vente d'un article est passée
+	 * @param dateFin
+	 * @param businessException
+	 */
+	private void validerArticleVendu(Date dateFin, BusinessException businessException)
+	{
+		Date d = new Date(Calendar.getInstance().getTime().getTime());
+		if(dateFin.compareTo(d)>=0)
+		{
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_FIN_ENCHERE_NON_ATTEINTE);
 		}
 	}
 }

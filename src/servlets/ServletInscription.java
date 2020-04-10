@@ -46,16 +46,16 @@ public class ServletInscription extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		
-		String pseudo = (String) request.getAttribute("pseudoInscription");
-		String nom = (String) request.getAttribute("nomInscription");
-		String prenom = (String) request.getAttribute("prenomInscription");
-		String email = (String) request.getAttribute("emailInscription");
-		String telephone = (String) request.getAttribute("telephoneInscription");
-		String rue = (String) request.getAttribute("rueInscription");
-		String codePostal = (String) request.getAttribute("codePostalInscription");
-		String ville = (String) request.getAttribute("villeInscription");
-		String motDePasse = (String) request.getAttribute("motDePasseInscription");
-		String motDePasse2 = (String) request.getAttribute("confirmationInscription");
+		String pseudo = (String) request.getParameter("pseudoInscription");
+		String nom = (String) request.getParameter("nomInscription");
+		String prenom = (String) request.getParameter("prenomInscription");
+		String email = (String) request.getParameter("emailInscription");
+		String telephone = (String) request.getParameter("telephoneInscription");
+		String rue = (String) request.getParameter("rueInscription");
+		String codePostal = (String) request.getParameter("codePostalInscription");
+		String ville = (String) request.getParameter("villeInscription");
+		String motDePasse = (String) request.getParameter("motDePasseInscription");
+		String motDePasse2 = (String) request.getParameter("confirmationInscription");
 		boolean administrateur = false;
 		
 		try {
