@@ -76,6 +76,13 @@ public abstract class CodesResultatDAL {
 	public static final int DELETE_UTILISATEUR_ECHEC = 10026;
 	public static final int SELECT_UTILISATEUR_NULL = 10027;
 	public static final int SELECT_UTILISATEUR_ECHEC = 10028;
+	public static final int SELECT_UTILISATEURBYPSEUDO_NULL = 10059;
+	public static final int SELECT_UTILISATEURBYEMAIL_NULL = 10060;
+	public static final int SELECT_UTILISATEURBYPSEUDO_ECHEC = 10061;
+	public static final int SELECT_UTILISATEURBYEMAIL_ECHEC = 10062;
+
+
+
 
 	/**
 	 * CATEGORIE
@@ -118,4 +125,6 @@ public abstract class CodesResultatDAL {
 	public static final int DELETE_RETRAIT_ECHEC = 10056;
 	public static final int SELECT_RETRAIT_NULL = 10057;
 	public static final int SELECT_RETRAIT_ECHEC = 10058;
+
+	
 }

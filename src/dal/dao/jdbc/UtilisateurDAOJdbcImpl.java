@@ -20,6 +20,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ "telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=?,credit=?,administrateur=? WHERE no_utilisateur=?;";
 	private static final String DELETE="DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
 	private static final String SELECTBYID="SELECT * FROM UTILISATEURS WHERE no_utilisateur=?;";
+	private static final String SELECTBYPSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo=?;";
+	private static final String SELECTBYEMAIL = "SELECT * FROM UTILISATEURS WHERE email=?;";
+
 	
 	private Utilisateur itemBuilder(ResultSet rs) throws BusinessException{
 		Utilisateur rep;
@@ -207,5 +210,66 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;
 		}	
 		return listeRepas;
+	}
+
+
+	@Override
+	public Utilisateur selectByPseudo(String pseudo) throws BusinessException {
+		if(pseudo==null)
+		{
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_UTILISATEURBYPSEUDO_NULL);
+			throw businessException;
+		}
+		
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYPSEUDO);
+			pstmt.setString(1, pseudo);			
+
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return itemBuilder(rs);
+			}else {
+				return new Utilisateur();
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_UTILISATEURBYPSEUDO_ECHEC);			
+			throw businessException;
+		}	
+	}
+
+	@Override
+	public Utilisateur selectByEmail(String email) throws BusinessException {
+		if(email==null)
+		{
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_UTILISATEURBYEMAIL_NULL);
+			throw businessException;
+		}
+		
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYEMAIL);
+			pstmt.setString(1, email);			
+
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return itemBuilder(rs);
+			}else {
+				return new Utilisateur();
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_UTILISATEURBYEMAIL_ECHEC);			
+			throw businessException;
+		}	
 	}
 }
