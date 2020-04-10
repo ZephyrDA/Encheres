@@ -4,38 +4,38 @@
 <%@ include file="../header/header.jspf"%>
 <div class="row">
 	<div class="col-lg-6 offset-lg-3 col-xs-12">
-		<% Utilisateur utilisateur = (Utilisateur)request.getSession().getAttribute("utilisateurConnecte"); %>
-		<form action="<%= request.getContextPath()%>/GestionUtilisateurs" method="post">
+		<% Utilisateur utilisateur = (Utilisateur)request.getSession().getAttribute("connectedUser"); %>
+		<form action="<%= request.getContextPath()%>/MonProfil" method="post">
 			<p>
-				<strong>Pseudo : <%=utilisateur.getPseudo() %></strong>
+				<strong>Pseudo : <% out.print(utilisateur.getPseudo()); %></strong>
 			</p>
 			<br> <br>
 			<p>
-				<strong>Nom : <%=utilisateur.getNom() %></strong>
+				<strong>Nom :<% out.print(utilisateur.getNom()); %></strong>
 			</p>
 			<br> <br>
 			<p>
-				<strong>Prénom : <%=utilisateur.getPrenom() %></strong>
+				<strong>Prénom : <% out.print(utilisateur.getPrenom()); %></strong>
 			</p>
 			<br> <br>
 			<p>
-				<strong>Email : <%=utilisateur.getEmail() %></strong>
+				<strong>Email : <% out.print(utilisateur.getEmail()); %></strong>
 			</p>
 			<br> <br>
 			<p>
-				<strong>Téléphone : <%=utilisateur.getTelephone() %></strong>
+				<strong>Téléphone : <% out.print(utilisateur.getTelephone()); %></strong>
 			</p>
 			<br> <br>
 			<p>
-				<strong>Rue : <%=utilisateur.getRue() %></strong>
+				<strong>Rue : <% out.print(utilisateur.getRue()); %></strong>
 			</p>
 			<br> <br>
 			<p>
-				<strong>Code postal : <%=utilisateur.getCodePostal() %></strong>
+				<strong>Code postal : <% out.print(utilisateur.getCodePostal()); %></strong>
 			</p>
 			<br> <br>
 			<p>
-				<strong>Ville : <%=utilisateur.getVille() %></strong>
+				<strong>Ville : <% out.print(utilisateur.getVille()); %></strong>
 			</p>
 			<br> <br>
 			<button type="submit" class=" col-lg-4 btn btn-default">
