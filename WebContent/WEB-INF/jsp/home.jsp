@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@page import="bo.*"%>
+<%@page import="java.util.ArrayList"%>
 <div class="font-weight-bold display-5" style="text-align-last: center;font-size: xx-large;">Liste des enchères</div>
 
 <h5 class="font-weight-bold mt-5 ml-2">Filtres : </h5>
@@ -16,10 +18,11 @@
 <form action="<%=request.getContextPath()%>/categories" method="post">
 	<label style="margin-left: auto;margin-right: auto;">Catégories : 
 		<select name="category" class="dropdown btn btn-secondary" >
-		    <option name="catInfo" value="${fn:escapeXml(catInformatique)}">Informatique</option>
-		    <option name="catAmeublement" value="${fn:escapeXml(catAmeublement)}">Ameublement</option>
-		    <option name="catVetement" value="${fn:escapeXml(catVetement)}">Vêtements</option>
-		    <option name="cartSportLoisir" value="${fn:escapeXml(catSportLoisir)}">Sport et Loisirs</option>
+		<%	
+			ArrayList<Categorie> lesCat = (ArrayList<Categorie>)request.getAttribute("lesCategories");
+			for(Categorie cat : lesCat){
+				%><option><%out.print(cat.getLibelle());%></option>	
+			<%}%>
 		</select>
 	</label>
 	</form>

@@ -35,6 +35,17 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EncheresManager EM = new EncheresManager();
+		try {
+			ArrayList<Article> listArticles = EM.getLesArticles();
+			ArrayList<Categorie> listCategories = EM.getLesCategories();
+			
+			request.setAttribute("lesCategories", listCategories);
+			request.setAttribute("lesArticles", listCategories);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
 
@@ -42,23 +53,6 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String choixUt=request.getParameter("choixUtilisateur");
-		System.out.println(choixUt);
-		if(choixUt==null) {
-			doGet(request, response);
-		}
-		else {
-			if(choixUt.equals("Saisie")) {
-				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Ajout.jsp").forward(request, response);
-			}
-			else if(choixUt.equals("Historique")) {
-				
-			}
-			else {
-				doGet(request, response);
-				System.out.println("else"); 
-			}
-		}
+		
 	}
 }
