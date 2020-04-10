@@ -48,6 +48,6 @@
 <form method="post" class="d-flex mt-4 align-items-center font-weight-bold">
 	<input class="btn btn-primary" value="Saisie" name="choixUtilisateur" type="submit"/>					
 	<input class="btn btn-primary"  value="Historique" name="choixUtilisateur" type="submit"/>
-</form><
+</form>
 </body>
 </html>
