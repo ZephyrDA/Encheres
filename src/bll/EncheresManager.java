@@ -270,7 +270,6 @@ public class EncheresManager {
 		Utilisateur vendeur = new Utilisateur();
 		validerArticleVendu(article.getDate_fin_encheres(), exception);
 		ArrayList<Enchere> encheres = this.getEncheresByArticle(idArticle);
-		Enchere enchere= new Enchere();
 		int prixVente=0; 
 		if(!exception.hasErreurs()&& encheres.size()!=0) {
 			for (Enchere e : encheres) {

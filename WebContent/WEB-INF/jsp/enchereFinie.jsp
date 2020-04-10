@@ -25,7 +25,7 @@
 			<p><%=article.getPrix_vente()%> pts par <%= article.getAcheteur().getPseudo() %></p>
 			<p><%=article.getPrix_initial() %></p>
 			<p><%=article.getDate_fin_encheres() %></p>
-			<p><%= Retrait.%></p>
+			<p><%=Retrait.getRetrait(article.getNo_Article()).getRue() %></p>
 			<p><%=article.getVendeur().getPseudo() %></p>
 		</div>
 		<div class="col-md-12 offset-7">	
