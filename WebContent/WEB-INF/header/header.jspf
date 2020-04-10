@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="bo.Utilisateur"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +12,14 @@
 <title>Enchères</title>
 </head>
 <body class="container-fluid">
+<%
+			HttpSession sessionScope= (HttpSession) request.getSession();
+			Utilisateur user = (Utilisateur) sessionScope.getAttribute("connectedUser");				
+			%>
 <header class="row">
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-primary" style="width: 100%;">
   <a class="navbar-brand" href="#">ENI Enchères</a>
+  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,7 +35,13 @@
         <a class="nav-link" href="ListeDonnees">Liste Donnees</a>
       </li>
     </ul>
-        
+  	<c:if test="${!empty sessionScope.connectedUser}">
+      	<ul class="navbar-nav navbar-right ">
+     		<li class="nav-item active">
+ 				<%= user.getPseudo() %>
+  			</li>
+  		</ul>
+  	</c:if>
 	<c:choose>
 		<c:when test="${!empty sessionScope.connectedUser}">
 			<ul class="navbar-nav navbar-right ">
@@ -43,7 +56,7 @@
 	      </li></ul>
 	      <ul class="navbar-nav navbar-right ">
 	      <li class="nav-item active">
-	        <a class="nav-link" href="GestionInscription">S'inscire <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="GestionInscription">S'inscrire <span class="sr-only">(current)</span></a>
 	      </li></ul>
 		</c:otherwise>
 	</c:choose>

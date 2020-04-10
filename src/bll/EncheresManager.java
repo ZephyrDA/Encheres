@@ -691,7 +691,7 @@ public class EncheresManager {
 	 */
 	private void validerMotDePasse(String mdp1, String mdp2, BusinessException businessException)
 	{
-		if(mdp1!=mdp2)
+		if(!mdp1.equals(mdp2))
 		{
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_MOTSDEPASSE_DIFFRENTS);
 		}
