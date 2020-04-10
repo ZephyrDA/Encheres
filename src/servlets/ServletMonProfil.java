@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bo.Utilisateur;
+
 /**
  * Servlet implementation class ServletMonProfil
  */
@@ -28,6 +30,8 @@ public class ServletMonProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Utilisateur utilisateur = (Utilisateur)request.getSession().getAttribute("connectedUser");
+		request.setAttribute("utilisateur", utilisateur);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/monProfil.jsp").forward(request, response);
 	}
 
