@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class ServletJSPEnchereFini
  */
 @WebServlet("/ServletJSPEnchereFini")
-public class ServletJSPEnchereFini extends HttpServlet {
+public class ServletEnchereFini extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletJSPEnchereFini() {
+    public ServletEnchereFini() {
         super();
     }
 
