@@ -12,7 +12,7 @@ public class Utilisateur {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private Boolean administrateur;
+	private boolean administrateur;
 	private int credit;
 	
 	public Utilisateur(){

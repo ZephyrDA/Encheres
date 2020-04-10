@@ -6,16 +6,18 @@ package bll;
 public abstract class CodesResultatBLL {
 	
 	/**
-	 * Echec quand la date de debut d'enchère est passée
+	 * Echec quand la date de debut d'enchï¿½re est passï¿½e
 	 */
 	public static final int REGLE_DATE_DEBUT_ENCHERE = 20000;
 	
 	/**
-	 * Echec quand la date de fin d'enchère est avant la date de début
+	 * Echec quand la date de fin d'enchï¿½re est avant la date de dï¿½but
 	 */
 	public static final int REGLE_DATE_FIN_ENCHERE = 20001;
 
 	public static final int REGLE_MOTSDEPASSE_DIFFRENTS = 20002;
+
+	public static final int REGLE_FIN_ENCHERE_NON_ATTEINTE = 20003;
 	
 	
 }
