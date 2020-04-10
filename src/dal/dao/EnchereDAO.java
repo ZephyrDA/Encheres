@@ -21,11 +21,11 @@ public interface EnchereDAO {
 	
 	public Enchere selectById(int idArticle,int idUtilisateur) throws BusinessException;
 	
-	public List<Enchere> selectByNoArticle(int id) throws BusinessException;
+	public ArrayList<Enchere> selectByNoArticle(int id) throws BusinessException;
 	
-	public List<Enchere> selectByNoUtilisateur(int id) throws BusinessException;
+	public ArrayList<Enchere> selectByNoUtilisateur(int id) throws BusinessException;
 	
-	public List<Enchere> selectAll() throws BusinessException;
+	public ArrayList<Enchere> selectAll() throws BusinessException;
 	
 	public void delete(int idArticle,int idUtil) throws BusinessException;
 }

@@ -263,7 +263,47 @@ public class EncheresManager {
 		return encheres;
 	}
 	
+	public Utilisateur getAcheteur(int idArticle) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		Article article = this.getArticle(idArticle);		
+		Utilisateur vendeur = new Utilisateur();
+		validerArticleVendu(article.getDate_fin_encheres(), exception);
+		ArrayList<Enchere> encheres = this.getEncheresByArticle(idArticle);
+		Enchere enchere= new Enchere();
+		int prixVente=0; 
+		if(!exception.hasErreurs()&& encheres.size()!=0) {
+			for (Enchere e : encheres) {
+				if(e.getMontantEnchere()>prixVente) {
+					vendeur = e.getUtilisateur();
+					prixVente = e.getMontantEnchere();
+				}
+			}
+		}
+		else {
+			throw exception;
+		}	
+		return vendeur;
+	}
 	
+	/**
+	 * Méthode en charge de
+	 * @param idArticle
+	 * @return
+	 * @throws BusinessException 
+	 */
+	private ArrayList<Enchere> getEncheresByArticle(int idArticle) throws BusinessException {
+		BusinessException exception = new BusinessException();
+		ArrayList<Enchere> encheres = new ArrayList<Enchere>();
+		if(!exception.hasErreurs()) {
+			encheres= this.enchereDAO.selectByNoArticle(idArticle);
+		}
+		else {
+			throw exception;
+		}			
+		return encheres;
+	}
+
 	/**
 	 * 
 	 * M�thode en charge de l'ajout d'une categorie
@@ -608,7 +648,7 @@ public class EncheresManager {
 	private void validerDateDebut(Date date, BusinessException businessException)
 	{
 		Date d = new Date(Calendar.getInstance().getTime().getTime());
-		if(date.compareTo(d)<0)
+		if(date.compareTo(d)<=0)
 		{
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_DATE_DEBUT_ENCHERE);
 		}
@@ -634,6 +674,15 @@ public class EncheresManager {
 		if(mdp1!=mdp2)
 		{
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_MOTSDEPASSE_DIFFRENTS);
+		}
+	}
+	
+	private void validerArticleVendu(Date dateFin, BusinessException businessException)
+	{
+		Date d = new Date(Calendar.getInstance().getTime().getTime());
+		if(dateFin.compareTo(d)>=0)
+		{
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_FIN_ENCHERE_NON_ATTEINTE);
 		}
 	}
 }
