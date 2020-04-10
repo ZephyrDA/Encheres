@@ -28,10 +28,13 @@
         <a class="nav-link" href="ListeDonnees">Liste Donnees</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/AjoutEnchere">Nouvelle enchere</a>
+        <a class="nav-link" href="AjoutEnchere">Nouvelle enchere</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="Encherir">Encherir</a>
       </li>
     </ul>
-        
+
 	<c:choose>
 		<c:when test="${!empty sessionScope.connectedUser}">
 			<ul class="navbar-nav navbar-right ">
