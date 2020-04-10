@@ -38,9 +38,7 @@
 				<strong>Ville : <% out.print(utilisateur.getVille()); %></strong>
 			</p>
 			<br> <br>
-			<button type="submit" class=" col-lg-4 btn btn-default">
-				<p>Modifier</p>
-			</button>
+			  <a class="btn btn-primary" href="ModifierProfil">Modifier</a>
 		</form>
 	</div>
 </div>
