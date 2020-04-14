@@ -5,7 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <div class="container-fluid text-center col-md-8 offset-2 blocProfil mt-5">
 	<h3 class="mb-5"><strong>Mon Profil</strong></h3>
-	<form action="<%=request.getContextPath()%>/GestionModificationProfil" method="post">
+	<form action="<%=request.getContextPath()%>/ModifierProfil" method="post">
+	
 		<div class="col-md-6 offset-3">
 			Pseudo :<input type="text" name="spseudo" value="<%=user.getPseudo() %>"  class="form-control input-md">
 			<br> 
@@ -15,9 +16,9 @@
 			<br> 
 			Code postal :<input type="text" name="scodePostal" value="<%=user.getCodePostal()%>"  class="form-control input-md">
 			<br>
-			Mot de passe actuel :<input type="password" name="smotDePasseActuel" value="${fn:escapeXml(smotDePasseActuel)}" placeholder="Mot de passe actuel" class="form-control input-md">
+			Mot de passe actuel :<input type="password" name="smotDePasseActuel"  placeholder="Mot de passe actuel" class="form-control input-md">
 			<br> 
-			Nouveau mot de passe :<input type="password" name="snouveauMotDePasse" value="${fn:escapeXml(snouveauMotDePasse)}" placeholder="Nouveau mot de passe" class="form-control input-md">
+			Nouveau mot de passe :<input type="password" name="snouveauMotDePasse"  placeholder="Nouveau mot de passe" class="form-control input-md">
 			<br>
 		</div>
 		<div class="col-md-6 offset-3">

@@ -70,9 +70,6 @@ public class ServletConnexion extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
 	}
 
 }

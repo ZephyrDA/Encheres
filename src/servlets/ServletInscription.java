@@ -58,12 +58,18 @@ public class ServletInscription extends HttpServlet {
 		String motDePasse2 = (String) request.getParameter("confirmationInscription");
 		boolean administrateur = false;
 		
-		try {
-			Utilisateur user = manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, motDePasse2, administrateur);
-			session.setAttribute("connectedUser", user);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(pseudo.equals(null)||nom.equals(null)||prenom.equals(null)||email.equals(null)||telephone.equals(null)||rue.equals(null)||codePostal.equals(null)
+				||ville.equals(null)||motDePasse.equals(null)||motDePasse2.equals(null)) {
+			request.setAttribute("erreur", "Veuillez remplir tous les champs");
+		}
+		else {
+			try {
+				Utilisateur user = manager.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, motDePasse2, administrateur);
+				session.setAttribute("connectedUser", user);
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 				
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
