@@ -16,11 +16,11 @@
  					<p>Mot de passe actuel :</p> 
  				</div> 
  				<div class="col-md-3 formulaire"> 
-					<input type="text" name="spseudo" value="<%=user.getPseudo() %>"  class="form-control input-md"><br> 
- 					<input type="text" name="sprenom" value="<%=user.getPrenom()%>"  class="form-control input-md"><br> 
-					<input type="text" name="stelephone" value="<%=user.getTelephone()%>"  class="form-control input-md"><br>  
- 					<input type="text" name="scodePostal" value="<%=user.getCodePostal()%>"  class="form-control input-md"><br> 
- 					<input type="password" name="smotDePasseActuel"  placeholder="Mot de passe actuel" class="form-control input-md">
+					<input type="text" name="spseudo" value="<%=user.getPseudo() %>" ><br> 
+ 					<input type="text" name="sprenom" value="<%=user.getPrenom()%>"  ><br> 
+					<input type="text" name="stelephone" value="<%=user.getTelephone()%>"  ><br>  
+ 					<input type="text" name="scodePostal" value="<%=user.getCodePostal()%>"  ><br> 
+ 					<input type="password" name="smotDePasseActuel"  placeholder="Mot de passe actuel" >
  				</div> 
  				<div class="col-md-2 text-right"> 
  					<p>Nom :</p> 
@@ -30,11 +30,11 @@
  					<p>Nouveau mot de passe :</p> 
  				</div> 
  				<div class="col-md-3 formulaire">
- 					<input type="text" name="snom" value="<%=user.getNom()%>" class="form-control input-md"><br> 
- 					<input type="text" name="semail" value="<%=user.getEmail()%>"  class="form-control input-md"><br> 
- 					<input type="text" name="srue" value="<%=user.getRue()%>" class="form-control input-md"><br> 
- 					<input type="text" name="sville" value="<%=user.getVille()%>" class="form-control input-md"><br> 
- 					<input type="password" name="snouveauMotDePasse"  placeholder="Nouveau mot de passe" class="form-control input-md">
+ 					<input type="text" name="snom" value="<%=user.getNom()%>"> <br> 
+ 					<input type="text" name="semail" value="<%=user.getEmail()%>"> <br> 
+ 					<input type="text" name="srue" value="<%=user.getRue()%>" > <br> 
+ 					<input type="text" name="sville" value="<%=user.getVille()%>" ><br> 
+ 					<input type="password" name="snouveauMotDePasse"  placeholder="Nouveau mot de passe">
  				</div> 
  				<%
  					String erreur = (String) request.getAttribute("erreur");
