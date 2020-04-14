@@ -46,7 +46,7 @@ public class ServletModifierProfil extends HttpServlet {
 		Utilisateur user = (Utilisateur) session.getAttribute("connectedUser");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profilModifier.jsp");
 		
-		if(!request.getParameter("spseudo").equals(null)) {
+		if(!request.getParameter("spseudo").equals("")) {
 			if(!user.getPseudo().contentEquals(request.getParameter("spseudo"))) {
 				user.setPseudo(request.getParameter("spseudo"));				
 			}
@@ -55,7 +55,7 @@ public class ServletModifierProfil extends HttpServlet {
 			request.setAttribute("erreur", "Le pseudo ne peut être nul.");
 			rd.forward(request, response);
 		}
-		if(!request.getParameter("snom").equals(null)) {
+		if(!request.getParameter("snom").equals("")) {
 			if(!user.getNom().contentEquals(request.getParameter("snom"))) {
 				user.setNom(request.getParameter("snom"));					
 			}
@@ -64,7 +64,7 @@ public class ServletModifierProfil extends HttpServlet {
 			request.setAttribute("erreur", "Le nom ne peut être nul.");
 			rd.forward(request, response);
 		}
-		if(!request.getParameter("sprenom").equals(null)) {
+		if(!request.getParameter("sprenom").equals("")) {
 			if(!user.getPrenom().contentEquals(request.getParameter("sprenom"))) {
 				user.setPrenom(request.getParameter("sprenom"));
 			}
@@ -73,7 +73,7 @@ public class ServletModifierProfil extends HttpServlet {
 			request.setAttribute("erreur", "Le prenom ne peut être nul.");
 			rd.forward(request, response);
 		}
-		if(!request.getParameter("semail").equals(null)) {
+		if(!request.getParameter("semail").equals("")) {
 			if(!user.getEmail().contentEquals(request.getParameter("semail"))) {
 				user.setEmail(request.getParameter("semail"));
 			}
@@ -82,7 +82,7 @@ public class ServletModifierProfil extends HttpServlet {
 			request.setAttribute("erreur", "L'email ne peut être nul.");
 			rd.forward(request, response);
 		}
-		if(!request.getParameter("stelephone").equals(null)) {
+		if(!request.getParameter("stelephone").equals("")) {
 			if(!user.getTelephone().contentEquals(request.getParameter("stelephone"))) {
 				user.setTelephone(request.getParameter("stelephone"));
 			}
@@ -91,7 +91,7 @@ public class ServletModifierProfil extends HttpServlet {
 			request.setAttribute("erreur", "Le numéro de téléphone ne peut être nul.");
 			rd.forward(request, response);
 		}	
-		if(!request.getParameter("srue").equals(null)) {	
+		if(!request.getParameter("srue").equals("")) {	
 			if(!user.getRue().contentEquals(request.getParameter("srue"))) {
 				user.setRue(request.getParameter("srue"));
 			}
@@ -100,7 +100,7 @@ public class ServletModifierProfil extends HttpServlet {
 			request.setAttribute("erreur", "La rue ne peut être nulle.");
 			rd.forward(request, response);
 		}	
-		if(!request.getParameter("scodePostal").equals(null)) {	
+		if(!request.getParameter("scodePostal").equals("")) {	
 			if(!user.getCodePostal().contentEquals(request.getParameter("scodePostal"))) {
 				user.setCodePostal(request.getParameter("scodePostal"));
 			}
@@ -109,7 +109,7 @@ public class ServletModifierProfil extends HttpServlet {
 			request.setAttribute("erreur", "Le code postal ne peut être nul.");
 			rd.forward(request, response);
 		}
-		if(!request.getParameter("sville").equals(null)) {		
+		if(!request.getParameter("sville").equals("")) {		
 			if(!user.getVille().contentEquals(request.getParameter("sville"))) {
 				user.setVille(request.getParameter("sville"));
 			}
@@ -122,16 +122,17 @@ public class ServletModifierProfil extends HttpServlet {
 		String motDePasseActuel = (String) request.getParameter("smotDePasseActuel");
 		String motDePasseNouveau = (String) request.getParameter("snouveauMotDePasse");
 		
-		if(!motDePasseActuel.equals(null)) {
-			if(!motDePasseNouveau.equals(null) && motDePasseActuel.equals(motDePasseNouveau) ) {
-				user.setMotDePasse(motDePasseNouveau);
-			
+		if(!motDePasseActuel.equals("") && !motDePasseNouveau.equals("")) {
+			if(user.getMotDePasse().equals(motDePasseActuel)) {
+			user.setMotDePasse(motDePasseNouveau);		
 			}
 			else {
 				request.setAttribute("erreur", "Le mot de passe est incorrect.");				
 				rd.forward(request, response);
 			}
 		}
+		
+		
 			
 		
 		
@@ -143,6 +144,7 @@ public class ServletModifierProfil extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/monProfil.jsp");
 		rd.forward(request, response);
 		
 	}
