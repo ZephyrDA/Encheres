@@ -7,7 +7,7 @@
  		<form action="<%=request.getContextPath()%>/GestionInscription"	method="post">  			
  			<div class=" row col-md-offset-2 col-md-9 col-xs-12 blocProfil mt-5"> 
  				<h3 class="col-md-12">Création de mon Profil</h3><br>	
- 				<div class="col-md-2 text-right "> 
+ 				<div class="col-md-3 text-right "> 
  					<p>Pseudo :</p> 
  					<p>Prenom :</p> 
  					<p>Telephone :</p> 
@@ -21,7 +21,7 @@
  					<input type="text" name="codePostalInscription" value="${fn:escapeXml(codePostalInscription)}"><br> 
  					<input type="password" name="motDePasseInscription" value="${fn:escapeXml(motDePasseInscription)}"> 
  				</div> 
- 				<div class="col-md-2 text-right"> 
+ 				<div class="col-md-3 text-right"> 
  					<p>Nom :</p> 
  					<p>Email :</p> 
  					<p>Rue :</p> 

@@ -2,12 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<<<<<<< HEAD
-
-=======
 <%@page import="bo.*"%>
 <%@page import="java.util.ArrayList"%>
->>>>>>> 4aa01b2cbc810ee0ac8b8234fba8800f2db6e633
+
 <div class="font-weight-bold display-5" style="text-align-last: center;font-size: xx-large;">Liste des enchères</div>
 
 <h5 class="font-weight-bold mt-5 ml-2">Filtres : </h5>
