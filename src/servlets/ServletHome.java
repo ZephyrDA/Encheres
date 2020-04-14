@@ -40,9 +40,8 @@ public class ServletHome extends HttpServlet {
 		try {
 			ArrayList<Article> listArticles = EM.getLesArticles();
 			ArrayList<Categorie> listCategories = EM.getLesCategories();
-			HttpSession session = request.getSession();
-			session.setAttribute("lesCategories", listCategories);
-			request.setAttribute("lesArticles", listCategories);
+			request.setAttribute("lesCategories", listCategories);
+			request.setAttribute("lesArticles", listArticles);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -54,7 +53,6 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		String choixUt = request.getParameter("choixUtilisateur");
 		String idProduit = request.getParameter("idProduit");
@@ -89,8 +87,6 @@ public class ServletHome extends HttpServlet {
 				System.out.println("else"); 
 			}
 		}
-=======
-		
->>>>>>> 4aa01b2cbc810ee0ac8b8234fba8800f2db6e633
+
 	}
 }
