@@ -54,6 +54,43 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
+		// TODO Auto-generated method stub
+		String choixUt = request.getParameter("choixUtilisateur");
+		String idProduit = request.getParameter("idProduit");
 		
+		
+		
+		System.out.println(choixUt);
+		System.out.println(idProduit);
+		//Get IdArticle from BDD
+		try {
+			EncheresManager encheresManager = new EncheresManager();
+			ArrayList<Article> lesArticles = encheresManager.getLesArticles();
+			request.setAttribute("lesArticles", lesArticles);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		if(choixUt==null) {
+			doGet(request, response);
+		}
+		else {
+			if(choixUt.equals("Saisie")) {
+				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Ajout.jsp").forward(request, response);
+			}
+			else if(choixUt.equals("Historique")) {
+				
+			}
+			else {
+				doGet(request, response);
+				System.out.println("else"); 
+			}
+		}
+=======
+		
+>>>>>>> 4aa01b2cbc810ee0ac8b8234fba8800f2db6e633
 	}
 }

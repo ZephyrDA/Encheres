@@ -2,8 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<<<<<<< HEAD
+
+=======
 <%@page import="bo.*"%>
 <%@page import="java.util.ArrayList"%>
+>>>>>>> 4aa01b2cbc810ee0ac8b8234fba8800f2db6e633
 <div class="font-weight-bold display-5" style="text-align-last: center;font-size: xx-large;">Liste des enchères</div>
 
 <h5 class="font-weight-bold mt-5 ml-2">Filtres : </h5>
@@ -32,7 +36,8 @@
 <div class="p-2 bg-primary ml-2 text-white" style="width: 30%;height: 100%">
 	<img src="./assets/pc.jpg"  alt="pc">
 	<div class="float-right">
-	<div >Titre produit</div>
+	<a href="ServletDetailProduit" class="text-white">Titre produit 	{{}}				
+</a>
 	<div>Prix : 100 points</div>
 	<div>Fin de l'enchère : date</div>
 	<div>Vendeur : Nom Vendeur</div>
