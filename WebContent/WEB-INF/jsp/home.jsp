@@ -2,7 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<<<<<<< HEAD
 
+=======
+<%@page import="bo.*"%>
+<%@page import="java.util.ArrayList"%>
+>>>>>>> 4aa01b2cbc810ee0ac8b8234fba8800f2db6e633
 <div class="font-weight-bold display-5" style="text-align-last: center;font-size: xx-large;">Liste des enchères</div>
 
 <h5 class="font-weight-bold mt-5 ml-2">Filtres : </h5>
@@ -17,10 +22,11 @@
 <form action="<%=request.getContextPath()%>/categories" method="post">
 	<label style="margin-left: auto;margin-right: auto;">Catégories : 
 		<select name="category" class="dropdown btn btn-secondary" >
-		    <option name="catInfo" value="${fn:escapeXml(catInformatique)}">Informatique</option>
-		    <option name="catAmeublement" value="${fn:escapeXml(catAmeublement)}">Ameublement</option>
-		    <option name="catVetement" value="${fn:escapeXml(catVetement)}">Vêtements</option>
-		    <option name="cartSportLoisir" value="${fn:escapeXml(catSportLoisir)}">Sport et Loisirs</option>
+		<%	
+			ArrayList<Categorie> lesCat = (ArrayList<Categorie>) sessionScope.getAttribute("lesCategories");
+			for(Categorie cat : lesCat){
+				%><option><%out.print(cat.getLibelle());%></option>	
+			<%}%>
 		</select>
 	</label>
 	</form>
@@ -46,12 +52,6 @@
 	<div>Vendeur : Nom Vendeur</div>
 	</div>
 </div></div>
-
-
-<form method="post" class="d-flex mt-4 align-items-center font-weight-bold">
-	<input class="btn btn-primary" value="Saisie" name="choixUtilisateur" type="submit"/>					
-	<input class="btn btn-primary"  value="Historique" name="choixUtilisateur" type="submit"/>
-</form>
 
 </body>
 </html>

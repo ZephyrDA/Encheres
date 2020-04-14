@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletJSPEnchereFini
  */
-@WebServlet("/ServletJSPEnchereFini")
-public class ServletJSPEnchereFini extends HttpServlet {
+@WebServlet("/Encherir")
+public class ServletEncherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletJSPEnchereFini() {
+    public ServletEncherir() {
         super();
     }
 
@@ -27,7 +27,7 @@ public class ServletJSPEnchereFini extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/enchereFinie.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/encherir.jsp");
 		rd.forward(request, response);
 	}
 

@@ -1,5 +1,7 @@
 <%@page import="bo.Article"%>
 <%@page import="bo.Utilisateur"%>
+<%@page import="bo.Retrait" %>
+<%@page import="bll.EncheresManager" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
@@ -17,15 +19,16 @@
 		</div>
 		<div class="col-lg-6 col-xs-6">
 			<%
-			Article article = (Article) request.getAttribute("articleVendu");				
+			Article article = (Article) request.getAttribute("articleVendu");
+			EncheresManager manager = (EncheresManager) request.getAttribute("acheteur");			
 			%>
-			<p><strong><%=Acheteur.getPseudo() %> a remporté l'enchère</strong></p>
+			<p><strong><%= manager.getAcheteur(article.getNo_article()).getPseudo() %> a remporté l'enchère</strong></p>
 			<p><strong><%=article.getNom_article() %></strong></p>
 			<p><%=article.getDescription()%></p>
-			<p><%=article.getPrix_vente()%> pts par <%= article.getAcheteur().getPseudo() %></p>
+			<p><%=article.getPrix_vente()%> pts par <%= manager.getAcheteur(article.getNo_article()).getPseudo() %></p>
 			<p><%=article.getPrix_initial() %></p>
 			<p><%=article.getDate_fin_encheres() %></p>
-			<p><%=Retrait.getRetrait(article.getNo_Article()).getRue() %></p>
+			<p><%= manager.getRetrait(article.getNo_article()).getRue() + " " + manager.getRetrait(article.getNo_article()).getCode_postal() + " " + manager.getRetrait(article.getNo_article()).getVille() %></p>
 			<p><%=article.getVendeur().getPseudo() %></p>
 		</div>
 		<div class="col-md-12 offset-7">	

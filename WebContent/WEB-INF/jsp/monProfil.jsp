@@ -2,10 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
-<div class="row">
+<div class="container blocProfil mt-5">
+	<h3 class="formulaire text-center mb-5">Mon Profil</h3>	
 	<div class="col-lg-6 offset-lg-3 col-xs-12">
 		<% Utilisateur utilisateur = (Utilisateur)request.getSession().getAttribute("connectedUser"); %>
-		<form action="<%= request.getContextPath()%>/MonProfil" method="post">
+		<form class="col-md-12 offset-3"action="<%= request.getContextPath()%>/MonProfil" method="post">
 			<p>
 				<strong>Pseudo : <% out.print(utilisateur.getPseudo()); %></strong>
 			</p>
@@ -38,9 +39,7 @@
 				<strong>Ville : <% out.print(utilisateur.getVille()); %></strong>
 			</p>
 			<br> <br>
-			<button type="submit" class=" col-lg-4 btn btn-default">
-				<p>Modifier</p>
-			</button>
+			  <a class="btn btn-primary ml-5" href="ModifierProfil">Modifier</a>
 		</form>
 	</div>
 </div>

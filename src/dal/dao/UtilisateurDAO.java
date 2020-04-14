@@ -16,5 +16,7 @@ public interface UtilisateurDAO {
 	public void update(Utilisateur utilisateur) throws BusinessException;
 	public void delete (int id) throws BusinessException;
 	public Utilisateur selectById(int id) throws BusinessException;
-	public ArrayList<Utilisateur> selectAll() throws BusinessException;
+	public ArrayList<Utilisateur> selectAll() throws BusinessException;	
+	public Utilisateur selectByPseudo(String pseudo) throws BusinessException;
+	public Utilisateur selectByEmail(String email)throws BusinessException;
 }

@@ -518,6 +518,32 @@ public class EncheresManager {
 		return user;
 	}
 	
+	public Utilisateur getUtilisateurByPseudo(String pseudo) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		Utilisateur user = new Utilisateur();
+		if(!exception.hasErreurs()) {
+			user= this.utilisateurDAO.selectByPseudo(pseudo);
+		}
+		else {
+			throw exception;
+		}	
+		return user;
+	}
+	
+public Utilisateur getUtilisateurByEmail(String email) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		Utilisateur user = new Utilisateur();
+		if(!exception.hasErreurs()) {
+			user= this.utilisateurDAO.selectByEmail(email);
+		}
+		else {
+			throw exception;
+		}	
+		return user;
+	}
+	
 	/**
 	 * 
 	 * M�thode en charge de la r�cup�ration des utilisateurs

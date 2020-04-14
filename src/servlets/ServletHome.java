@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bll.EncheresManager;
 import bo.Article;
@@ -35,6 +36,17 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		EncheresManager EM = new EncheresManager();
+		try {
+			ArrayList<Article> listArticles = EM.getLesArticles();
+			ArrayList<Categorie> listCategories = EM.getLesCategories();
+			HttpSession session = request.getSession();
+			session.setAttribute("lesCategories", listCategories);
+			request.setAttribute("lesArticles", listCategories);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
 
@@ -42,6 +54,7 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		String choixUt = request.getParameter("choixUtilisateur");
 		String idProduit = request.getParameter("idProduit");
@@ -76,5 +89,8 @@ public class ServletHome extends HttpServlet {
 				System.out.println("else"); 
 			}
 		}
+=======
+		
+>>>>>>> 4aa01b2cbc810ee0ac8b8234fba8800f2db6e633
 	}
 }
