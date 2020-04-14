@@ -6,7 +6,7 @@
 	<div class="col-lg-6 offset-lg-3 col-xs-12  border border-primary p-2" >
 		<form action="<%= request.getContextPath()%>/DetailEnchere" method="post" style="margin-left: 35%;">
 			<span style="margin-left: auto;margin-right: auto;" id="usernameVendeur">Nom du vendeur : <br>
-		
+			<input type="text">
 			</span>
 			<span style="margin-left: auto;margin-right: auto;">Catégorie du produit : <br>
 		

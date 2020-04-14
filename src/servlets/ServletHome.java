@@ -43,8 +43,24 @@ public class ServletHome extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String choixUt=request.getParameter("choixUtilisateur");
+		String choixUt = request.getParameter("choixUtilisateur");
+		String idProduit = request.getParameter("idProduit");
+		
+		
+		
 		System.out.println(choixUt);
+		System.out.println(idProduit);
+		//Get IdArticle from BDD
+		try {
+			EncheresManager encheresManager = new EncheresManager();
+			ArrayList<Article> lesArticles = encheresManager.getLesArticles();
+			request.setAttribute("lesArticles", lesArticles);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 		if(choixUt==null) {
 			doGet(request, response);
 		}
