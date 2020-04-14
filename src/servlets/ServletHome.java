@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bll.EncheresManager;
 import bo.Article;
@@ -39,8 +40,8 @@ public class ServletHome extends HttpServlet {
 		try {
 			ArrayList<Article> listArticles = EM.getLesArticles();
 			ArrayList<Categorie> listCategories = EM.getLesCategories();
-			
-			request.setAttribute("lesCategories", listCategories);
+			HttpSession session = request.getSession();
+			session.setAttribute("lesCategories", listCategories);
 			request.setAttribute("lesArticles", listCategories);
 		}catch(Exception e) {
 			e.printStackTrace();

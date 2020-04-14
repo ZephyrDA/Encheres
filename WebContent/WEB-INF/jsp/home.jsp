@@ -19,7 +19,7 @@
 	<label style="margin-left: auto;margin-right: auto;">Catégories : 
 		<select name="category" class="dropdown btn btn-secondary" >
 		<%	
-			ArrayList<Categorie> lesCat = (ArrayList<Categorie>)request.getAttribute("lesCategories");
+			ArrayList<Categorie> lesCat = (ArrayList<Categorie>) sessionScope.getAttribute("lesCategories");
 			for(Categorie cat : lesCat){
 				%><option><%out.print(cat.getLibelle());%></option>	
 			<%}%>

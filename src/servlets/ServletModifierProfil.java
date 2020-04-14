@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ServletJSPEnchereFini
@@ -27,7 +28,13 @@ public class ServletModifierProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
+		HttpSession session = request.getSession();
+		/*
+		if(session.getAttribute("connectedUser")!=null) {
+			try
+		}
+		*/
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profilModifier.jsp");
 		rd.forward(request, response);
 	}
 
