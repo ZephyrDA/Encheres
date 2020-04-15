@@ -20,15 +20,10 @@
 </form>
 
 <div class="d-flex mt-4 align-items-center font-weight-bold">
-<form action="<%=request.getContextPath()%>/categories" method="post">
+<form action="" method="post">
 	<label style="margin-left: auto;margin-right: auto;">Catégories : 
 		<select name="category" class="dropdown btn btn-secondary" >
-
-		    <option name="catInfo" value="${fn:escapeXml(catInformatique)}">Informatique</option>
-		    <option name="catAmeublement" value="${fn:escapeXml(catAmeublement)}">Ameublement</option>
-		    <option name="catVetement" value="${fn:escapeXml(catVetement)}">Vêtements</option>
-		    <option name="cartSportLoisir" value="${fn:escapeXml(catSportLoisir)}">Sport et Loisirs</option>
-
+		<option value="0">toutes</option>
 		<%	
 			ArrayList<Categorie> lesCat = (ArrayList<Categorie>) request.getAttribute("lesCategories");
 			for(Categorie cat : lesCat){
@@ -37,17 +32,9 @@
 
 		</select>
 	</label>
-	</form>
-	<input type="button" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Rechercher">
+	<input type="submit" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Rechercher">
+</form>	
 </div>
-
-
-
-<form method="post" class="d-flex mt-4 align-items-center font-weight-bold">
-	<input class="btn btn-primary" value="Saisie" name="choixUtilisateur" type="submit"/>					
-	<input class="btn btn-primary"  value="Historique" name="choixUtilisateur" type="submit"/>
-</form>
-
 
 <div class="d-flex mt-5" >
 		<%	

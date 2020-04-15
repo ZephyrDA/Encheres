@@ -162,6 +162,26 @@ public class EncheresManager {
 	
 	/**
 	 * 
+	 * Methode en charge de la recuperations des objets article
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ArrayList<Article> getLesArticlesByCategorie(int idCategorie) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		ArrayList<Article> articles = new ArrayList<Article>();
+		try {
+			articles = this.articleDAO.selectByCategorie(idCategorie);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}	
+		return articles;
+	}
+	
+	
+	/**
+	 * 
 	 * M�thode en charge de l'ajout d'une enchere
 	 * @param montant
 	 * @param acheteur

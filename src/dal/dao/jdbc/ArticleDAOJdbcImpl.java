@@ -24,6 +24,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			+ " date_fin_encheres=?, prix_initial=?, prix_vente=?,  no_utilisateur=?, no_categorie=? WHERE no_article=? ";
 	private static final String DELETE="DELETE FROM ARTICLES_VENDUS WHERE no_article=?;";
 	private static final String SELECTBYID ="SELECT * FROM ARTICLES_VENDUS WHERE no_article=?";
+	private static final String SELECTBYCATEGORIE ="SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=?";
 	
 	private Article itemBuilder(ResultSet rs) throws BusinessException{
 		Article al;
@@ -192,6 +193,36 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTALL);
 
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				liste.add(itemBuilder(rs));
+			}
+			return liste;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_ECHEC);			
+			throw businessException;
+		}	
+	}
+
+
+	@Override
+	public ArrayList<Article> selectByCategorie(int idCategorie)  throws BusinessException  {
+		if(idCategorie==0)
+		{
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_NULL);
+			throw businessException;
+		}
+		
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			ArrayList<Article> liste = new ArrayList<Article>();
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYCATEGORIE);
+			pstmt.setInt(1, idCategorie);	
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				liste.add(itemBuilder(rs));
