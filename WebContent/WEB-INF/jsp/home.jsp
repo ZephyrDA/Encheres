@@ -15,20 +15,15 @@
 
 <form action="<%=request.getContextPath()%>/categories" method="post" class="form-inline d-flex justify-content-left w-25  md-form form-sm mt-3 ml-4">
   <i class="fas fa-search" aria-hidden="true"></i>
-  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" name="filtres" value="${fn:escapeXml(filtres)}"
+  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" name="filtres" value="${fn:escapeXml(filtres)}"  
     aria-label="Search">
 </form>
 
 <div class="d-flex mt-4 align-items-center font-weight-bold">
-<form action="<%=request.getContextPath()%>/categories" method="post">
+<form action="" method="post">
 	<label style="margin-left: auto;margin-right: auto;">Catégories : 
 		<select name="category" class="dropdown btn btn-secondary" >
-
-		    <option name="catInfo" value="${fn:escapeXml(catInformatique)}">Informatique</option>
-		    <option name="catAmeublement" value="${fn:escapeXml(catAmeublement)}">Ameublement</option>
-		    <option name="catVetement" value="${fn:escapeXml(catVetement)}">Vêtements</option>
-		    <option name="cartSportLoisir" value="${fn:escapeXml(catSportLoisir)}">Sport et Loisirs</option>
-
+		<option value="0">toutes</option>
 		<%	
 			ArrayList<Categorie> lesCat = (ArrayList<Categorie>) request.getAttribute("lesCategories");
 			for(Categorie cat : lesCat){
@@ -37,19 +32,11 @@
 
 		</select>
 	</label>
-	</form>
-	<input type="button" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Rechercher">
+	<input type="submit" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Rechercher">
+</form>	
 </div>
 
-
-
-<form method="post" class="d-flex mt-4 align-items-center font-weight-bold">
-	<input class="btn btn-primary" value="Saisie" name="choixUtilisateur" type="submit"/>					
-	<input class="btn btn-primary"  value="Historique" name="choixUtilisateur" type="submit"/>
-</form>
-
-
-<div class="d-flex mt-5" >
+<div class="d-flex mt-5 row" >
 		<%	
 			ArrayList<Article> lesArts = (ArrayList<Article>) request.getAttribute("lesArticles");
 			for(Article art : lesArts){
@@ -57,7 +44,7 @@
 	
 		<div class="p-2 bg-primary ml-2 text-white" style="width: 30%;height: 100%" >
 			<form method="post"  action="<%=request.getContextPath()%>/ServletDetailProduit">
-				<img src="./assets/pc.jpg"  alt="pc">
+				<img src="<%out.print(art.getVignette());%>" width="200" height="200"  alt="pc">
 				<div class="float-right">
 					<input type="hidden" id="idArticle" name="idArticle"  value="<%= art.getNo_article()%>">
 					<a class="text-white"><%out.print(art.getNom_article());%></a>

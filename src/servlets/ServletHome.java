@@ -40,6 +40,7 @@ public class ServletHome extends HttpServlet {
 		try {
 			ArrayList<Article> listArticles = EM.getLesArticles();
 			ArrayList<Categorie> listCategories = EM.getLesCategories();
+			
 			request.setAttribute("lesCategories", listCategories);
 			request.setAttribute("lesArticles", listArticles);
 		}catch(Exception e) {
@@ -55,39 +56,22 @@ public class ServletHome extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// TODO Auto-generated method stub
-		String choixUt = request.getParameter("choixUtilisateur");
-		String idProduit = request.getParameter("idProduit");
-		
-		
-		
-		System.out.println(choixUt);
-		System.out.println(idProduit);
-		//Get IdArticle from BDD
+		int idCategorie = Integer.parseInt(request.getParameter("category"));
 		try {
 			EncheresManager encheresManager = new EncheresManager();
-			ArrayList<Article> lesArticles = encheresManager.getLesArticles();
+			ArrayList<Article> lesArticles;
+			ArrayList<Categorie> listCategories = encheresManager.getLesCategories();
+			if(idCategorie != 0) {
+				lesArticles = encheresManager.getLesArticlesByCategorie(idCategorie);	
+			}else {
+				lesArticles = encheresManager.getLesArticles();
+			}
+			request.setAttribute("lesCategories", listCategories);
 			request.setAttribute("lesArticles", lesArticles);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		if(choixUt==null) {
-			doGet(request, response);
-		}
-		else {
-			if(choixUt.equals("Saisie")) {
-				this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Ajout.jsp").forward(request, response);
-			}
-			else if(choixUt.equals("Historique")) {
-				
-			}
-			else {
-				doGet(request, response);
-				System.out.println("else"); 
-			}
-		}
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 
 	}
 }

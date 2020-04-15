@@ -3,7 +3,7 @@
 <div class="col-md-10 formulaire">
 	<h3 class="text-center mb-5">Crediter un Utilisateur</h3>
 	<form action="<%=request.getContextPath()%>/crediter" method="post">
-		<div class="blocProfil mt-5">
+		<div class="blocProfil mt-5">			
 			<div class="col-lg-12 offset-4">
 				<p class="col-lg-2">Pseudo utilisateur :</p>
 				<input type="text" name="pseudoUtilisateur" value="" class="col-lg-3"><br>
@@ -18,7 +18,23 @@
 				</button>
 			</div>
 		</div>		
-	</form>
+	</form>	
+	<%
+		String erreur = (String)request.getAttribute("erreur");
+		if (erreur != null) {
+	%>
+			<p class="erreur text-center"><strong><%=erreur%></strong></p>
+	<%
+		}
+	%>
+	<%
+		String message = (String)request.getAttribute("message");
+		if (message != null) {
+	%>
+			<p class="text-center"><Strong><%= message %></Strong></p>
+	<%
+		}
+	%>
 </div>
 </body>
 </html>

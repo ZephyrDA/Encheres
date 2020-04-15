@@ -62,12 +62,12 @@ public class EncheresManager {
 	 * @throws BusinessException
 	 */
 	public Article ajouterArticle(String libelle, String description, Categorie categorie, int prixInitial, Date dateDebut, Date dateFin,
-			String rueRetrait, String cpRetrait, String villeRetrait, Utilisateur vendeur) throws BusinessException
+			String rueRetrait, String cpRetrait, String villeRetrait, Utilisateur vendeur,String vignette) throws BusinessException
 	{
 		BusinessException exception = new BusinessException();
 		this.validerDateDebut(dateDebut, exception);
 		this.validerDateFin(dateDebut, dateFin, exception);
-		Article article = new Article(libelle, description,dateDebut,dateFin,prixInitial,categorie,vendeur);	
+		Article article = new Article(libelle, description,dateDebut,dateFin,prixInitial,categorie,vendeur,vignette);	
 
 		if(!exception.hasErreurs())
 		{
@@ -159,6 +159,26 @@ public class EncheresManager {
 		}	
 		return articles;
 	}
+	
+	/**
+	 * 
+	 * Methode en charge de la recuperations des objets article
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ArrayList<Article> getLesArticlesByCategorie(int idCategorie) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		ArrayList<Article> articles = new ArrayList<Article>();
+		try {
+			articles = this.articleDAO.selectByCategorie(idCategorie);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}	
+		return articles;
+	}
+	
 	
 	/**
 	 * 

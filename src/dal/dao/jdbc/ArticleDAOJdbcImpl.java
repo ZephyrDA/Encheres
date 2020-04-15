@@ -17,13 +17,14 @@ import java.util.List;
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private static final String INSERT="INSERT INTO ARTICLES_VENDUS(nom_article, description,"
-			+ " date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
-			+ " VALUES(?,?,?,?,?,?,?,?) ;";
+			+ " date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie,vignette)"
+			+ " VALUES(?,?,?,?,?,?,?,?,?) ;";
 	private static final String SELECTALL="SELECT * FROM ARTICLES_VENDUS;";
 	private static final String UPDATE="UPDATE ARTICLES_VENDUS SET  nom_article=?, description=?, date_debut_encheres=?,"
-			+ " date_fin_encheres=?, prix_initial=?, prix_vente=?,  no_utilisateur=?, no_categorie=? WHERE no_article=? ";
+			+ " date_fin_encheres=?, prix_initial=?, prix_vente=?,  no_utilisateur=?, no_categorie=?, vignette = ? WHERE no_article=? ";
 	private static final String DELETE="DELETE FROM ARTICLES_VENDUS WHERE no_article=?;";
 	private static final String SELECTBYID ="SELECT * FROM ARTICLES_VENDUS WHERE no_article=?";
+	private static final String SELECTBYCATEGORIE ="SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=?";
 	
 	private Article itemBuilder(ResultSet rs) throws BusinessException{
 		Article al;
@@ -36,7 +37,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 						rs.getDate("date_debut_encheres"),rs.getDate("date_fin_encheres"),rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"),CategorieDAOImpl.selectById(rs.getInt("no_categorie")),
 						EnchereDAOJdbc.selectByNoArticle(rs.getInt("no_article")),
-						UtilisateurDAOImpl.selectById(rs.getInt("no_utilisateur"))
+						UtilisateurDAOImpl.selectById(rs.getInt("no_utilisateur")),
+						rs.getString("vignette")
 						);
 			}
 			else {
@@ -76,6 +78,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			pstmt.setInt(6,  article.getPrix_vente());
 			pstmt.setInt(7,  article.getVendeur().getNoUtilisateur());
 			pstmt.setInt(8,  article.getCategorie().getNo_categorie());
+			pstmt.setString(9,  article.getVignette());
 
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -114,6 +117,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			pstmt.setInt(7,  article.getVendeur().getNoUtilisateur());
 			pstmt.setInt(8,  article.getCategorie().getNo_categorie());
 			pstmt.setInt(9, article.getNo_article());
+			pstmt.setString(10, article.getVignette());
 
 
 			pstmt.executeUpdate();			
@@ -192,6 +196,36 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 			PreparedStatement pstmt = cnx.prepareStatement(SELECTALL);
 
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				liste.add(itemBuilder(rs));
+			}
+			return liste;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_ECHEC);			
+			throw businessException;
+		}	
+	}
+
+
+	@Override
+	public ArrayList<Article> selectByCategorie(int idCategorie)  throws BusinessException  {
+		if(idCategorie==0)
+		{
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ARTICLE_NULL);
+			throw businessException;
+		}
+		
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			ArrayList<Article> liste = new ArrayList<Article>();
+			PreparedStatement pstmt = cnx.prepareStatement(SELECTBYCATEGORIE);
+			pstmt.setInt(1, idCategorie);	
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				liste.add(itemBuilder(rs));
