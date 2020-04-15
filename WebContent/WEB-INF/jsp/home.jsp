@@ -54,15 +54,21 @@
 			ArrayList<Article> lesArts = (ArrayList<Article>) request.getAttribute("lesArticles");
 			for(Article art : lesArts){
 				%>
-	<div class="p-2 bg-primary ml-2 text-white" style="width: 30%;height: 100%" >
-		<img src="./assets/pc.jpg"  alt="pc">
-		<div class="float-right">
-			<a href="ServletDetailProduit" class="text-white"><%out.print(art.getNom_article());%></a>
-			<div><%out.print(art.getPrix_initial());%>€</div>
-			<div><%out.print("du " + art.getDate_debut_encheres()+" au "+art.getDate_fin_encheres());%></div>
-			<div>Vendeur : <%out.print(art.getVendeur().getPseudo());%></div>
+	
+		<div class="p-2 bg-primary ml-2 text-white" style="width: 30%;height: 100%" >
+			<form method="post"  action="<%=request.getContextPath()%>/ServletDetailProduit">
+				<img src="./assets/pc.jpg"  alt="pc">
+				<div class="float-right">
+					<input type="hidden" id="idArticle" name="idArticle"  value="<%= art.getNo_article()%>">
+					<a class="text-white"><%out.print(art.getNom_article());%></a>
+					<div><%out.print(art.getPrix_initial());%> credits</div>
+					<div><%out.print("du " + art.getDate_debut_encheres()+" au "+art.getDate_fin_encheres());%></div>
+					<div>Vendeur : <%out.print(art.getVendeur().getPseudo());%></div>
+					<input type="submit" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Afficher">
+				</div>
+			</form>
 		</div>
-	</div>
+	
 			<%		
 			}
 			%>
