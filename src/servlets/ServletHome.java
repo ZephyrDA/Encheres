@@ -53,10 +53,7 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< HEAD
 
-=======
->>>>>>> ba074443cdd5f5f0983b4a8cacc2036dd2bdcc73
 		// TODO Auto-generated method stub
 		String choixUt = request.getParameter("choixUtilisateur");
 		String idProduit = request.getParameter("idProduit");

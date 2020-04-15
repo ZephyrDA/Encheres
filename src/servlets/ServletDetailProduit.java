@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,16 +50,19 @@ public class ServletDetailProduit extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int idArticle = (int) request.getAttribute("idArticle");
+		int idArticle = (int) Integer.parseInt(request.getParameter("idArticle"));
 		try {
 			Article article = manager.getArticle(idArticle);
 			request.setAttribute("article", article);
+			System.out.println("ici");
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailProduit.jsp");
 			rd.forward(request, response);
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	
 	}
 
 }
