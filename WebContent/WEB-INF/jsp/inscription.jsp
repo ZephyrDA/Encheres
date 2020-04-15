@@ -44,7 +44,7 @@
  					}
  				%> 
  			</div>  			 			
-			<div class="row"> 
+			<div class="row" style="margin-left: 15%"> 
  				<button type="submit" class="bouton col-md-3 btn btn-default">Creer</button>  				
  				<button type="reset" class="bouton col-md-3 btn btn-default">Annuler</button>
  			</div>  	
