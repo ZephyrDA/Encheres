@@ -81,28 +81,34 @@
 			<span> Début de l'enchère : <br>
 			<c:choose>
 			    <c:when test="${empty sessionScope.connectedUser}">
-			       <textarea name="sdescription" style="resize: none" id="desc" rows="4" cols="50" readonly>
-							<%=article.getDescription() %>
-						</textarea>
+			       <input name="sDebut" type="date" value="<%=article.getDate_debut_encheres() %>" readonly>
 			    </c:when>    
 			    <c:when test="${!empty sessionScope.connectedUser}">
 			       <c:if test="${user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()}">
-						<textarea name="sdescription" style="resize: none" id="desc" rows="4" cols="50" readonly>
-							<%=article.getDescription() %>
-						</textarea>
+						<input name="sDebut" type="date" value="<%=article.getDate_debut_encheres() %>" readonly>
 			       </c:if>
 			       <c:if test="${user.getNoUtilisateur()==article.getVendeur().getNoUtilisateur()}">
-						<textarea name="sdescription" style="resize: none" id="desc" rows="4" cols="50" >
-							<%=article.getDescription() %>
-						</textarea>
+						<input name="sDebut" type="date" value="<%=article.getDate_debut_encheres() %>">
 			       </c:if>
 			    </c:when>
 			</c:choose>
-				<input name="sDebut" type="date" value="<%=article.getDate_debut_encheres() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
 			</span>
 			<br>
 			<span> Fin de l'enchère : <br>
-				<input name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
+			<c:choose>
+			    <c:when test="${empty sessionScope.connectedUser}">
+			       <input name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>" readonly>
+			    </c:when>    
+			    <c:when test="${!empty sessionScope.connectedUser}">
+			       <c:if test="${user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()}">
+						<input name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>" readonly>
+			       </c:if>
+			       <c:if test="${user.getNoUtilisateur()==article.getVendeur().getNoUtilisateur()}">
+						<input name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>">
+			       </c:if>
+			    </c:when>
+			</c:choose>
+				
 			</span>
 			<br>
 			<c:if test="${!empty sessionScope.connectedUser}"> 

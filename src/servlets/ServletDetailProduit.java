@@ -53,8 +53,7 @@ public class ServletDetailProduit extends HttpServlet {
 		int idArticle = (int) Integer.parseInt(request.getParameter("idArticle"));
 		try {
 			Article article = manager.getArticle(idArticle);
-			request.setAttribute("article", article);
-			System.out.println("ici");
+			request.setAttribute("article", article);			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailProduit.jsp");
 			rd.forward(request, response);
 		} catch (BusinessException e) {
