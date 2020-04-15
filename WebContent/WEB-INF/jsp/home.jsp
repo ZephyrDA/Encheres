@@ -40,27 +40,7 @@
 	</form>
 	<input type="button" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Rechercher">
 </div>
-<<<<<<< HEAD
-<div:forEach items="${lesArticles}" var="festival" >
-<div class="p-2 bg-primary ml-2 text-white" style="width: 30%;height: 100%">
-	<img src="./assets/pc.jpg"  alt="pc">
-	<div class="float-right">
-	<a href="ServletDetailProduit" class="text-white">Titre produit 				
-</a>
-	<div>Prix : 100 points</div>
-	<div>Fin de l'enchère : date</div>
-	<div>Vendeur : Nom Vendeur</div>
-	</div>
-</div>
-<div class="p-2 bg-dark text-white float-right mr-2" style="width: 30%;height: 100%;margin-left: auto;">
-	<div class="height: 100%">Image</div>
-	<div class="float-right">
-	<div>Titre produit</div>
-	<div>Prix : 100 points</div>
-	<div>Fin de l'enchère : date</div>
-	<div>Vendeur : Nom Vendeur</div>
-	</div>
-</div></div:forEach>
+
 
 
 <form method="post" class="d-flex mt-4 align-items-center font-weight-bold">
