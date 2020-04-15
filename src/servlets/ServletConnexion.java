@@ -55,7 +55,7 @@ public class ServletConnexion extends HttpServlet {
 			}
 			if(user.getNom()!=null && mdp.contentEquals(user.getMotDePasse())) {				
 				session.setAttribute("connectedUser", user);
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("");
 				rd.forward(request, response);
 			}
 			else{
