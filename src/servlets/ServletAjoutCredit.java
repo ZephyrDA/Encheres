@@ -1,6 +1,6 @@
 package servlets;
-
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,7 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import be.BusinessException;
+import bll.EncheresManager;
+import bo.Utilisateur;
+import dal.DALException;
 
 /**
  * Servlet implementation class ServletAjoutCredit
@@ -16,32 +20,49 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/crediter")
 public class ServletAjoutCredit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static EncheresManager manager = new EncheresManager();
+	Utilisateur user = new Utilisateur ();
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServletAjoutCredit() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp");
 		rd.forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String message=null;
+		String erreur=null;		
 		
-		
-		
+		if (request.getParameter("pseudoUtilisateur").trim().isEmpty()) {
+			erreur = "Erreur - Veuillez renseigner un pseudo uilisateur.";
+			request.setAttribute("erreur", erreur);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp").forward(request, response);
+		}
+		if (request.getParameter("credit").trim().isEmpty()) {
+			erreur = "Erreur - Veuillez renseigner un crédit.";
+			request.setAttribute("erreur", erreur);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp").forward(request, response);
+		}
+		String pseudo = request.getParameter("pseudoUtilisateur").trim();			
+		int credit = Integer.parseInt(request.getParameter("credit").trim()); 		
+		try {			
+			user = manager.getUtilisateurByPseudo(pseudo);	
+			user.setCredit(user.getCredit()+credit);
+			manager.modifierUtilisateur(user);	
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";
+		request.setAttribute("message", message);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp").forward(request, response);			
 	}
-
 }
