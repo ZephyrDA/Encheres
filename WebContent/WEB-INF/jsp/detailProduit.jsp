@@ -22,33 +22,49 @@
 			</span>
 			<br>
 			<span>  Nom de l'article : <br>
-				<input type="text" value="<%=article.getNom_article() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
+				<input type="text" name="snom" value="<%=article.getNom_article() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
 			</span>
 			<br>
 			<span > Prix du produit : <br>
-				<input type="text" value="<%=article.getPrix_initial() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
+				<input type="text" name="sprix" value="<%=article.getPrix_initial() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
 			</span>
 			<br>
 			<span> Descriptif : 
 			<br>
-				<textarea style="resize: none" id="desc" rows="4" cols="50" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
+				<textarea name="sdescription" style="resize: none" id="desc" rows="4" cols="50" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
 					<%=article.getDescription() %>
 				</textarea>
 			</span>
 			<br>
 			<span> Début de l'enchère : <br>
-				<input type="date" value="<%=article.getDate_debut_encheres() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
+				<input name="sDebut" type="date" value="<%=article.getDate_debut_encheres() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
 			</span>
 			<br>
 			<span> Fin de l'enchère : <br>
-				<input type="date" value="<%=article.getDate_fin_encheres() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
+				<input name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>" <%if(user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){%>readonly<%}%>>
 			</span>
 			<br>
 			<c:if test="${!empty sessionScope.connectedUser && sessionScope.connectedUser.getNoUtilisateur().equals(article.getVendeur().getNoUtilisateur())}">
 		      	<button type="submit" class="btn btn-primary mt-2" style="margin-left:20%" value="Valider"> Modifier </button>
-  			</c:if>
-			
+  			</c:if>		
 		</form>
+		
+		<div class="container-fluid text-center col-md-10 offset-2">	
+			<div class="col-md-5">
+			<% for(Enchere enchere : encheres){ %>
+				<div class="col-md-3">
+					<label>Date :</label>
+					<label>Utilisateur :</label>
+					<label>Offre :</label>
+				</div>
+				<div class="col-md-2">
+					<label> <%=enchere.getDateEnchere() %></label>
+					<label><%=enchere.getUtilisateur() %></label>
+					<label><%=enchere.getMontantEnchere() %> credits</label>
+				</div>
+			<% } %>
+			</div>
+		</div>
 	</div>
 </div>
 
