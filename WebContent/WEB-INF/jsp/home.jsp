@@ -15,7 +15,7 @@
 
 <form action="<%=request.getContextPath()%>/categories" method="post" class="form-inline d-flex justify-content-left w-25  md-form form-sm mt-3 ml-4">
   <i class="fas fa-search" aria-hidden="true"></i>
-  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" name="filtres" value="${fn:escapeXml(filtres)}"
+  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" name="filtres" value="${fn:escapeXml(filtres)}"  
     aria-label="Search">
 </form>
 
@@ -36,7 +36,7 @@
 </form>	
 </div>
 
-<div class="d-flex mt-5" >
+<div class="d-flex mt-5 row" >
 		<%	
 			ArrayList<Article> lesArts = (ArrayList<Article>) request.getAttribute("lesArticles");
 			for(Article art : lesArts){
@@ -44,7 +44,7 @@
 	
 		<div class="p-2 bg-primary ml-2 text-white" style="width: 30%;height: 100%" >
 			<form method="post"  action="<%=request.getContextPath()%>/ServletDetailProduit">
-				<img src="./assets/pc.jpg"  alt="pc">
+				<img src="<%out.print(art.getVignette());%>" width="200" height="200"  alt="pc">
 				<div class="float-right">
 					<input type="hidden" id="idArticle" name="idArticle"  value="<%= art.getNo_article()%>">
 					<a class="text-white"><%out.print(art.getNom_article());%></a>

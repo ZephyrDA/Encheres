@@ -21,13 +21,14 @@ public class Article implements Serializable {
 	private Categorie categorie;
 	private ArrayList<Enchere> encheres; 
 	private Utilisateur vendeur;
+	private String vignette;
 	
 	public Article() {
 		super();
 	}
 
 	public Article(String nom_article, String description, Date date_debut_encheres,
-			Date date_fin_encheres, int prix_initial, Categorie categorie, Utilisateur vendeur) {
+			Date date_fin_encheres, int prix_initial, Categorie categorie, Utilisateur vendeur,String vignette) {
 		super();
 		this.nom_article = nom_article;
 		this.description = description;
@@ -37,11 +38,12 @@ public class Article implements Serializable {
 		this.prix_vente = -1;
 		this.categorie = categorie;
 		this.vendeur = vendeur;
+		this.vignette = vignette;
 	}
 	
 	public Article(int no_article, String nom_article, String description, Date date_debut_encheres,
 			Date date_fin_encheres, int prix_initial, int prix_vente, Categorie categorie, ArrayList<Enchere> encheres,
-			Utilisateur vendeur) {
+			Utilisateur vendeur, String vignette) {
 		super();
 		this.no_article = no_article;
 		this.nom_article = nom_article;
@@ -52,7 +54,8 @@ public class Article implements Serializable {
 		this.prix_vente = prix_vente;
 		this.categorie = categorie;
 		this.encheres = encheres;
-		this.vendeur = vendeur;		
+		this.vendeur = vendeur;
+		this.vignette = vignette;
 	}
 
 	public int getNo_article() {
@@ -141,6 +144,14 @@ public class Article implements Serializable {
 				+ ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres=" + date_fin_encheres
 				+ ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente + ", categorie=" + categorie
 				+ ", encheres=" + encheres + ", vendeur=" + vendeur + "]";
+	}
+
+	public String getVignette() {
+		return vignette;
+	}
+
+	public void setVignette(String vignette) {
+		this.vignette = vignette;
 	}
 
 
