@@ -51,7 +51,7 @@
 					<div><%out.print(art.getPrix_initial());%> credits</div>
 					<div><%out.print("du " + art.getDate_debut_encheres()+" au "+art.getDate_fin_encheres());%></div>
 					<div>Vendeur : <%out.print(art.getVendeur().getPseudo());%></div>
-					<input type="submit" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Afficher">
+					<input type="submit" class="btn btn-info "  style="margin-left: auto;margin-right: auto;" value="Afficher">
 				</div>
 			</form>
 		</div>
