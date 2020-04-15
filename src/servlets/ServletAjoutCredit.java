@@ -40,29 +40,30 @@ public class ServletAjoutCredit extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String message=null;
-		String erreur=null;		
+		String erreur=null;
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp");
 		
 		if (request.getParameter("pseudoUtilisateur").trim().isEmpty()) {
 			erreur = "Erreur - Veuillez renseigner un pseudo uilisateur.";
 			request.setAttribute("erreur", erreur);
-			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp").forward(request, response);
+			rd.forward(request, response);
 		}
 		if (request.getParameter("credit").trim().isEmpty()) {
 			erreur = "Erreur - Veuillez renseigner un crédit.";
 			request.setAttribute("erreur", erreur);
-			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp").forward(request, response);
+			rd.forward(request, response);
 		}
 		String pseudo = request.getParameter("pseudoUtilisateur").trim();			
-		int credit = Integer.parseInt(request.getParameter("credit").trim()); 		
+		int credit = Integer.parseInt(request.getParameter("credit").trim());		
 		try {			
-			user = manager.getUtilisateurByPseudo(pseudo);	
+			Utilisateur user = manager.getUtilisateurByPseudo(pseudo);	
 			user.setCredit(user.getCredit()+credit);
 			manager.modifierUtilisateur(user);	
 		} catch (BusinessException e) {
 			e.printStackTrace();
-		}
+		}		
 		message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";
 		request.setAttribute("message", message);
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp").forward(request, response);			
+		rd.forward(request, response);
 	}
 }
