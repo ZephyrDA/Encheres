@@ -8,7 +8,7 @@
  		<form action="<%=request.getContextPath()%>/ModifierProfil"	method="post">  			
  			<div class=" row col-md-offset-2 col-md-9 col-xs-12 blocProfil mt-5"> 
  				<h3 class="col-md-12">Modifier de mon Profil</h3><br>	
- 				<div class="col-md-2 text-right "> 
+ 				<div class="col-md-3 text-right "> 
  					<p>Pseudo :</p> 
  					<p>Prenom :</p> 
  					<p>Telephone :</p> 
@@ -22,7 +22,7 @@
  					<input type="text" name="scodePostal" value="<%=user.getCodePostal()%>"  ><br> 
  					<input type="password" name="smotDePasseActuel"  placeholder="Mot de passe actuel" >
  				</div> 
- 				<div class="col-md-2 text-right"> 
+ 				<div class="col-md-3 text-right"> 
  					<p>Nom :</p> 
  					<p>Email :</p> 
  					<p>Rue :</p> 
