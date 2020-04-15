@@ -26,7 +26,7 @@
  					<p>Rue :</p> 
  					<p>Ville :</p> 
  				</div> 
- 				<div class="col-md-3 formulaire">
+ 				<div class="col-md-4 formulaire">
  					<p><% out.print(utilisateur.getNom()); %></p> 
 					<p><% out.print(utilisateur.getEmail()); %></p> 
 					<p><% out.print(utilisateur.getRue()); %></p> 
