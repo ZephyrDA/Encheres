@@ -19,4 +19,9 @@
   <servlet-name>home</servlet-name>
   <url-pattern>/home</url-pattern>
   </servlet-mapping>
+  
+  <session-config>
+    <session-timeout>5</session-timeout>
+  </session-config>
+  
 </web-app>
