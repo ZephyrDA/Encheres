@@ -14,7 +14,7 @@
 <body class="container-fluid">
 <%
 			HttpSession sessionScope= (HttpSession) request.getSession();
-			Utilisateur user = (Utilisateur) sessionScope.getAttribute("connectedUser");				
+			Utilisateur user = (Utilisateur) sessionScope.getAttribute("connectedUser");
 			%>
 <header class="row">
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-primary" style="width: 100%;">
@@ -26,11 +26,18 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="/Encheres">Home <span class="sr-only">(current)</span></a>
-      </li>
+      </li>      
       <c:if test="${!empty sessionScope.connectedUser}">
 	      <li class="nav-item active">
 	        <a class="nav-link" href="MonProfil">Mon Profil</a>
 	      </li>
+      </c:if>
+        <c:if test="${!empty sessionScope.connectedUser}">
+        	<c:if test="<% user.getAdministrateur(); %>">
+	      		<li class="nav-item active">
+	        		<a class="nav-link" href="crediter">Créditer un utilisateur</a>
+	      		</li>
+	      </c:if>
       </c:if>
       <li class="nav-item active">
         <a class="nav-link" href="ListeDonnees">Liste Donnees</a>

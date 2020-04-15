@@ -1,7 +1,5 @@
 package servlets;
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import be.BusinessException;
 import bll.EncheresManager;
 import bo.Utilisateur;
-import dal.DALException;
 
 /**
  * Servlet implementation class ServletAjoutCredit
