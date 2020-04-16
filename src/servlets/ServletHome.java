@@ -95,7 +95,7 @@ public class ServletHome extends HttpServlet {
 							if(CompareDate(a.getDate_debut_encheres(), y , m, d) || CompareDate(a.getDate_fin_encheres(),y,m,d)) {
 								addArticle = true;
 							}
-						}else if(mot.equals(a.getCategorie()) || mot.equals(a.getVendeur().getPseudo())){
+						}else if(mot.equals(a.getCategorie().getLibelle()) || mot.equals(a.getVendeur().getPseudo())){
 							addArticle = true;
 						}else{
 							String[] description = a.getDescription().split(" ");
