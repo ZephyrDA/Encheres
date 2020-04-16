@@ -49,7 +49,7 @@ public class ServletAjoutCredit extends HttpServlet {
 			erreur = "Erreur - Veuillez renseigner un crédit.";
 			request.setAttribute("erreur", erreur);
 			rd.forward(request, response);
-		}
+		}		 
 		String pseudo = request.getParameter("pseudoUtilisateur").trim();			
 		int credit = Integer.parseInt(request.getParameter("credit").trim());		
 		try {			
