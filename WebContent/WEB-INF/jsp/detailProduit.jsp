@@ -132,7 +132,7 @@
  			<br>			 			
 			<c:if test="${!empty sessionScope.connectedUser}"> 
 				<%if(user.getNoUtilisateur()==(article.getVendeur().getNoUtilisateur())) {%>
-					<input type="hidden" value="sidArticle" name="<%article.getNo_article() %>">
+					<input type="hidden" value="sidArticle" name="<%= article.getNo_article() %>">
 		      		<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Valider"> Modifier </button>
 		      	<%}%>		      	
   			</c:if>	
