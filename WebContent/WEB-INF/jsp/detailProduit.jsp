@@ -123,8 +123,34 @@
  		<div class="formulaire">  		
  			<div class=" row  col-md-10 col-xs-12 blocProfil mt-5"> 
  				<h3 class="col-md-12">Enchères</h3><br>	
- 				<%for(Enchere enchere : encheres){ %>
- 				<div class="row  col-md-5 col-xs-12 blocProfil mt-5 mr-1 ml-1">
+ 				<%
+ 				int i=0;
+ 				for(Enchere enchere : encheres){ 
+ 				if(i==0){%>
+ 				
+ 				<div class="row  col-md-12 col-xs-12 blocProfil mt-5 mr-1 ml-1">
+ 					<h5 class="col-md-12">Dernière enchère</h5>
+	 				<div class="col-md-4 text-right"> 
+	 					<p>Date :</p> 
+	 					<p>Pseudo :</p> 
+	 					<p>Montant :</p>  				 
+	 				</div> 
+	 				<div class="col-md-4 formulaire " > 
+						<p> <%=enchere.getDateEnchere() %></p> 
+	 					<p><%=enchere.getUtilisateur().getPseudo() %></p> 
+	 					<p><%=enchere.getMontantEnchere() %> credits</p> 
+	 				</div> 
+	 				<input type="hidden" value="<%=article.getNo_article() %>" name="noArt">
+	 				<div class="col-md-6 text-right"> 
+	 					<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Valider"> Enchérir </button>
+	 				</div>
+	 				
+ 				</div>
+	 			<%
+	 			i++;
+	 			}
+ 				else{ %>
+ 					<div class="row  col-md-5 col-xs-12 blocProfil mt-5 mr-1 ml-1">
 	 				<div class="col-md-6 text-right"> 
 	 					<p>Date :</p> 
 	 					<p>Pseudo :</p> 
@@ -135,8 +161,10 @@
 	 					<p><%=enchere.getUtilisateur().getPseudo() %></p> 
 	 					<p><%=enchere.getMontantEnchere() %> credits</p> 
 	 				</div> 
- 				</div>
-	 			<%} %>
+ 				</div>	
+ 				<%}
+ 				} %>
+ 				
 			</div>  			 			
 			  		
  	</div> 						
