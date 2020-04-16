@@ -133,7 +133,7 @@ public class ServletTestDAL extends HttpServlet {
 			Utilisateur vendeur = manager.getUtilisateur(1);
 
 			Article artInsert1 = manager.ajouterArticle("Ballon de volley", "Parfait etat, jamais servi", cat, 15, date1, date2,
-					"1 Rue des Lilas", "22130", "Dinan", vendeur); 			
+					"1 Rue des Lilas", "22130", "Dinan", vendeur,"./assets/alienware.jpg"); 			
 			Article artGet1 = manager.getArticle(1);
 			ArrayList<Article> lesArticles = manager.getLesArticles();
 			
@@ -179,7 +179,7 @@ public class ServletTestDAL extends HttpServlet {
 			Utilisateur vendeur = manager.getUtilisateur(1);
 
 			Article artInsert1 = manager.ajouterArticle("Ballon de volley", "Parfait etat, jamais servi", cat, 15, date1, date2,
-					"1 Rue des Lilas", "22130", "Dinan", vendeur); 			
+					"1 Rue des Lilas", "22130", "Dinan", vendeur,"./assets/alienware.jpg"); 			
 			Article artGet1 = manager.getArticle(artInsert1.getNo_article());
 			
 			Retrait retGet1 = manager.getRetrait(1);
