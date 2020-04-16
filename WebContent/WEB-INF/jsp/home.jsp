@@ -11,16 +11,12 @@
 
 <div class="font-weight-bold display-5" style="text-align-last: center;font-size: xx-large;">Liste des enchères</div>
 
-<h5 class="font-weight-bold mt-5 ml-2">Filtres : </h5>
-
-<form action="<%=request.getContextPath()%>/categories" method="post" class="form-inline d-flex justify-content-left w-25  md-form form-sm mt-3 ml-4">
-  <i class="fas fa-search" aria-hidden="true"></i>
-  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" name="filtres" value="${fn:escapeXml(filtres)}"  
-    aria-label="Search">
-</form>
-
 <div class="d-flex mt-4 align-items-center font-weight-bold">
 <form action="" method="post">
+	<h5 class="font-weight-bold mt-5 ml-2">Filtres : </h5>
+  	<input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" name="filtres"  
+    aria-label="Search">
+    <br/>
 	<label style="margin-left: auto;margin-right: auto;">Catégories : 
 		<select name="category" class="dropdown btn btn-secondary" >
 		<option value="0">toutes</option>
@@ -32,6 +28,7 @@
 
 		</select>
 	</label>
+	<br/>
 	<input type="submit" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Rechercher">
 </form>	
 </div>

@@ -22,7 +22,7 @@ INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville
 
 INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,vignette) VALUES
 	('AlienWare','PC Gaming','2020/04/06','2020/04/10',1000,10000,1,1,'./assets/alienware.jpg'),
-	('souris ROCCAT','Souris gaming','2020/04/06','2020/04/10',100000,2000000,1,1,'./assets/roccat.jpg'),
+	('souris ROCCAT','Souris gaming','2020/04/07','2020/04/10',100000,2000000,1,1,'./assets/roccat.jpg'),
 	('Table Ikea','Gifi des idees de genie','2020/04/06','2020/04/10',500,20000,2,2,'./assets/ikea.jpg'),
 	('Armoire Castorama','Decathlon, a fond la forme !','2020/04/06','2020/04/10',20000,21000,2,2,'./assets/castorama.jpg'),
 	('Robe de soiree','Plein de paillettes, partout','2020/04/06','2020/04/10',15,20,3,3,'./assets/robe.jpg'),
