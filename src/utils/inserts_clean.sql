@@ -18,7 +18,7 @@ INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville
 	('JeffBezos','Bezos','Jeff','jeffbezos@yahoo.de','0767676767','Amazon','55555','New York','JeffBezos',0,0),
 	('KarlLagerfeld','Lagerfeld','Karl','vetements@gmail.com','0712345678','Chapelle sixtine','00120','Vatican','KarlLagerfeld',0,0),
 	('TiboInShape','InShape','Tibo','enormeetsec@orange.fr','0696969420','100 AV DU PRESIDENT','75016','Paris','TiboInShape',0,0),
-	('Manu','Macron','Emmanuel','sybethsaitpasmettreunmasque@neuf.Fr','0600000000','55 Rue du Faubourg Saint-Honore','75008','Paris','Manu',6000000,0);
+	('Manu','Macron','Emmanuel','sybethsaitpasmettreunmasque@neuf.Fr','0600000000','55 Rue du Faubourg Saint-Honore','75008','Paris','Manu',6000000,1);
 
 INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,vignette) VALUES
 	('AlienWare','PC Gaming','2020/04/06','2020/04/10',1000,10000,1,1,'./assets/alienware.jpg'),
