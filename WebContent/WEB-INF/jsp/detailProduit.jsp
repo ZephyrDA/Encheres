@@ -119,18 +119,19 @@
   			</div> 	
  		</form>
 		
- 		<div class="container-fluid text-center col-md-10 ">			
- 		<div class="formulaire">  		
+ 		<div class="container-fluid text-center col-md-11 ">			
+ 		<div class="formulaire" style="text-align: -webkit-center;">  		
  			<div class=" row  col-md-10 col-xs-12 blocProfil mt-5"> 
  				<h3 class="col-md-12">Enchères</h3><br>	
  				<%
  				int i=0;
  				for(Enchere enchere : encheres){ 
- 				if(i==0){%>
+ 				if(i==0){
+ 					%>
  				
  				<div class="row  col-md-12 col-xs-12 blocProfil mt-5 mr-1 ml-1">
  				<form action="<%=request.getContextPath()%>/GestionInscription" style="display: contents;"	method="post">
- 					<h5 class="col-md-12">Dernière enchère</h5>
+ 					<h5 class="col-md-12">Dernière enchère</h5><br>
 	 				<div class="col-md-4 text-right"> 
 	 					<p>Date :</p> 
 	 					<p>Pseudo :</p> 
@@ -142,16 +143,16 @@
 	 					<p><%=enchere.getMontantEnchere() %> credits</p> 
 	 				</div> 
 	 				<input type="hidden" value="<%=article.getNo_article() %>" name="noArt">
-	 				<div class="col-md-4"> 
+	 				<div class="col-md-4 p-3"> 
 	 					<button type="submit" class="btn btn-primary mt-2" value="Valider"> Enchérir </button>
 	 				</div>
-	 				</form>
+ 				</form>
  				</div>
 	 			<%
 	 			i++;
 	 			}
  				else{ %>
- 					<div class="row  col-md-5 col-xs-12 blocProfil mt-5 mr-1 ml-1">
+ 					<div class="row  col-md-5 col-xs-12 blocProfil mt-5 mr-1 ml-1" style="margin-left: auto !important; margin-right: auto !important;">
 	 				<div class="col-md-6 text-right"> 
 	 					<p>Date :</p> 
 	 					<p>Pseudo :</p> 
