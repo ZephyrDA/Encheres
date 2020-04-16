@@ -22,6 +22,9 @@
 			{
 				dateDebutOk=false;
 			}
+			System.out.println("Date debut ok :" +dateDebutOk);
+			System.out.println("Date fin ok :" +dateFinOk);
+
 		%>
 <div class="container-fluid text-center col-md-12 justify-content-center">			
  	<div class="formulaire">  		
@@ -180,7 +183,7 @@
 	 				
 			 				<%
 			 				if((user!=null)){
-			 				if( user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){ %>
+			 				if( user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur() && dateDebutOk==false){ %>
 				 				<!--&& DateDebutOK==true && DateFinOK==true -->
 				 					<div class="col-md-4 p-3"> 	 					
 					 					<%
