@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import be.BusinessException;
 import bll.EncheresManager;
+import bo.Article;
+import bo.Categorie;
 import bo.Utilisateur;
 
 /**
@@ -55,7 +59,24 @@ public class ServletConnexion extends HttpServlet {
 			}
 			if(user.getNom()!=null && mdp.contentEquals(user.getMotDePasse())) {				
 				session.setAttribute("connectedUser", user);
-				RequestDispatcher rd = request.getRequestDispatcher("");
+				ArrayList<Article> listArticles = new ArrayList<Article>();
+				try {
+					listArticles = manager.getLesArticles();
+				} catch (BusinessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ArrayList<Categorie> listCategories = new ArrayList<Categorie>();
+				try {
+					listCategories = manager.getLesCategories();
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				request.setAttribute("lesCategories", listCategories);
+				request.setAttribute("lesArticles", listArticles);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 				rd.forward(request, response);
 			}
 			else{

@@ -29,9 +29,9 @@ import bo.Utilisateur;
 @WebServlet("")
 public class ServletHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     private String dateFormat;
-    
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,17 +44,24 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// Set standard HTTP/1.1 no-cache headers.
+		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+
+		// Set standard HTTP/1.0 no-cache header.
+		response.setHeader("Pragma", "no-cache");
+
 		EncheresManager EM = new EncheresManager();
 		try {
 			ArrayList<Article> listArticles = EM.getLesArticles();
 			ArrayList<Categorie> listCategories = EM.getLesCategories();
-			
+
 			request.setAttribute("lesCategories", listCategories);
 			request.setAttribute("lesArticles", listArticles);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
 
@@ -62,15 +69,13 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// TODO Auto-generated method stub
 		int idCategorie = Integer.parseInt(request.getParameter("category"));
 		try {
 			EncheresManager encheresManager = new EncheresManager();
 			ArrayList<Article> lesArticlesFiltre = (idCategorie != 0) ? encheresManager.getLesArticlesByCategorie(idCategorie) : encheresManager.getLesArticles();
 			ArrayList<Categorie> listCategories = encheresManager.getLesCategories();
 			String filtres = ((String)request.getParameter("filtres") == null) ? "" : (String)request.getParameter("filtres") ;
-			
+
 			ArrayList<Article> lesArticles = new ArrayList<Article>();
 			if(filtres != "") {
 				String[] lesMotsCles = filtres.split(" ");
@@ -103,7 +108,7 @@ public class ServletHome extends HttpServlet {
 					}
 				}
 			}
-			
+
 			request.setAttribute("lesCategories", listCategories);
 			request.setAttribute("lesArticles", lesArticles);
 		}catch(Exception e) {
@@ -111,8 +116,8 @@ public class ServletHome extends HttpServlet {
 		}
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
-	
-	 
+
+
     public boolean isValid(String dateStr) {
         DateFormat sdf = new SimpleDateFormat(this.dateFormat);
         sdf.setLenient(false);
@@ -123,7 +128,7 @@ public class ServletHome extends HttpServlet {
         }
         return true;
     }
-    
+
     private boolean CompareDate(Date date, int y, int m, int d) {
     	boolean ret = false;
     	String dateStr = date.toString();
@@ -134,8 +139,8 @@ public class ServletHome extends HttpServlet {
     		ret = true;
     	}
     	return ret;
-    	
+
     }
-	
-	
+
+
 }

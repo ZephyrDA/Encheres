@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
 <div class="col-md-10 formulaire">
-	<h3 class="text-center mb-5">Crediter un Utilisateur</h3>
+	<h3 class="text-center mb-5 mt-5">Créditer un Utilisateur</h3>
 	<form action="<%=request.getContextPath()%>/crediter" method="post">
 		<div class="blocProfil mt-5">			
 			<div class="col-lg-12 offset-4">
