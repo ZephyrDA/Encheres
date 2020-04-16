@@ -9,9 +9,9 @@
 			Article article = (Article) request.getAttribute("article");
 			ArrayList<Enchere> encheres = article.getEncheres();
 		%>
-<div class="container-fluid text-center col-md-12 offset-2">			
+<div class="container-fluid text-center col-md-12 justify-content-center">			
  	<div class="formulaire">  		
- 		<form action="<%=request.getContextPath()%>/ModifierArticle"	method="post">  			
+ 		<form action="<%=request.getContextPath()%>/ModifierArticle" style="text-align: -webkit-center;"	method="post">  			
  			<div class=" row  col-md-9 col-xs-10 blocProfil mt-5"> 
  				<h3 class="col-md-12">Détail de l'article</h3><br>	 				
  				<!--  <div class="p-2 bg-primary ml-2 text-white" style="width: 30%;height: 100%;margin-left:50px;margin-right:auto;" >
@@ -129,6 +129,7 @@
  				if(i==0){%>
  				
  				<div class="row  col-md-12 col-xs-12 blocProfil mt-5 mr-1 ml-1">
+ 				<form action="<%=request.getContextPath()%>/GestionInscription" style="display: contents;"	method="post">
  					<h5 class="col-md-12">Dernière enchère</h5>
 	 				<div class="col-md-4 text-right"> 
 	 					<p>Date :</p> 
@@ -141,10 +142,10 @@
 	 					<p><%=enchere.getMontantEnchere() %> credits</p> 
 	 				</div> 
 	 				<input type="hidden" value="<%=article.getNo_article() %>" name="noArt">
-	 				<div class="col-md-6 text-right"> 
-	 					<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Valider"> Enchérir </button>
+	 				<div class="col-md-4"> 
+	 					<button type="submit" class="btn btn-primary mt-2" value="Valider"> Enchérir </button>
 	 				</div>
-	 				
+	 				</form>
  				</div>
 	 			<%
 	 			i++;
