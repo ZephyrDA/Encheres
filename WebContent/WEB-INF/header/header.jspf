@@ -12,10 +12,10 @@
 <title>Enchères</title>
 </head>
 <body class="container-fluid">
-<%
-			HttpSession sessionScope= (HttpSession) request.getSession();
-			Utilisateur user = (Utilisateur) sessionScope.getAttribute("connectedUser");
-			%>
+	<%
+		HttpSession sessionScope= (HttpSession) request.getSession();
+		Utilisateur user = (Utilisateur) sessionScope.getAttribute("connectedUser");
+	%>
 <header class="row">
 	<nav class="navbar navbar-expand-lg  navbar-dark bg-primary" style="width: 100%;">
   <a class="navbar-brand" href="/Encheres">ENI Enchères</a>
@@ -33,7 +33,7 @@
 	      </li>
       </c:if>
         <c:if test="${!empty sessionScope.connectedUser}">
-        	<c:if test="<% user.getAdministrateur(); %>">
+        	<c:if test="${sessionScope.connectedUser.getAdministrateur() == true}">
 	      		<li class="nav-item active">
 	        		<a class="nav-link" href="crediter">Créditer un utilisateur</a>
 	      		</li>
