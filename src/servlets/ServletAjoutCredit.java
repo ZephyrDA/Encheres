@@ -1,5 +1,7 @@
 package servlets;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,16 +52,26 @@ public class ServletAjoutCredit extends HttpServlet {
 			rd.forward(request, response);
 		}		 
 		String pseudo = request.getParameter("pseudoUtilisateur").trim();			
-		int credit = Integer.parseInt(request.getParameter("credit").trim());		
-		try {			
-			Utilisateur user = manager.getUtilisateurByPseudo(pseudo);
-			user.setCredit(user.getCredit()+credit);
-			manager.modifierUtilisateur(user);	
+		int credit = Integer.parseInt(request.getParameter("credit").trim());
+		
+		try {
+			ArrayList<Utilisateur> listUtilisateur = manager.getLesUtilisateurs();
+			for ( Utilisateur unUtilisateur : listUtilisateur) {
+				if (unUtilisateur.getPseudo() == pseudo) {
+					Utilisateur user = manager.getUtilisateurByPseudo(pseudo);
+					user.setCredit(user.getCredit()+credit);
+					manager.modifierUtilisateur(user);	
+					message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";
+					request.setAttribute("message", message);
+					rd.forward(request, response);
+				} else {
+					message = "L'utilisateur " + pseudo + " n'existe pas dans la base.";
+					request.setAttribute("message", message);
+					rd.forward(request, response);
+				}
+			}			
 		} catch (BusinessException e) {
 			e.printStackTrace();
-		}		
-		message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";
-		request.setAttribute("message", message);
-		rd.forward(request, response);
+		}			
 	}
 }
