@@ -9,7 +9,8 @@
 			Article article = (Article) request.getAttribute("article");
 			ArrayList<Enchere> encheres = article.getEncheres();
 		%>
-<div class="container-fluid text-center col-md-12 offset-2">			
+		
+<div class="container-fluid text-center col-md-12 ">			
  	<div class="formulaire">  		
  		<form action="<%=request.getContextPath()%>/ModifierArticle"	method="post">  			
  			<div class=" row  col-md-9 col-xs-10 blocProfil mt-5"> 
@@ -24,7 +25,24 @@
  					 
  				</div> 
  				<div class="col-md-4 formulaire"> 
-					<input type="text" value=<%=article.getVendeur().getPseudo() %>> <br>
+					<c:choose>
+					    <c:when test="${empty sessionScope.connectedUser}">
+					        <input type="text" value=<%=article.getVendeur().getPseudo() %> readonly> 
+					        <%System.out.print("non connecté /"); %>
+					    </c:when>    
+					    <c:when test="${!empty sessionScope.connectedUser}">
+					       <c:if test="${user.getNoUtilisateur().equals(article.getVendeur().getNoUtilisateur())}">
+					       		<input type="text" value=<%=article.getVendeur().getPseudo() %> readonly> 
+					       		<%System.out.print(" pas vendeur /"); %>
+					       		<%System.out.print(" user id : " + user.getNoUtilisateur()); %>
+					       		<%System.out.print(" vendeur id : " + article.getVendeur().getNoUtilisateur()); %>					       		
+					       </c:if>
+					       <c:if test="${user.getNoUtilisateur().equals(article.getVendeur().getNoUtilisateur())}">
+					       		<input type="text" value=<%=article.getVendeur().getPseudo() %> >
+					       		<%System.out.print(" vendeur /"); %> 
+					       </c:if>
+					    </c:when>
+					</c:choose>  <br>
 					<c:choose>
 					    <c:when test="${empty sessionScope.connectedUser}">
 					        <input type="text" name="snom" value="<%=article.getNom_article() %>" readonly> 
