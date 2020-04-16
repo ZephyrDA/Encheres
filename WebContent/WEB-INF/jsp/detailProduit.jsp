@@ -126,10 +126,12 @@
  				<%
  				int i=0;
  				for(Enchere enchere : encheres){ 
- 				if(i==0){%>
+ 				if(i==0){
+ 					%>
  				
  				<div class="row  col-md-12 col-xs-12 blocProfil mt-5 mr-1 ml-1">
- 					<h5 class="col-md-12">Dernière enchère</h5>
+ 				<form class="form-horizontal" style="display:contents;" action="<%=request.getContextPath()%>/encherir" method="post">
+ 					<h5 class="col-md-12">Dernière enchère</h5><br>
 	 				<div class="col-md-4 text-right"> 
 	 					<p>Date :</p> 
 	 					<p>Pseudo :</p> 
@@ -141,10 +143,10 @@
 	 					<p><%=enchere.getMontantEnchere() %> credits</p> 
 	 				</div> 
 	 				<input type="hidden" value="<%=article.getNo_article() %>" name="noArt">
-	 				<div class="col-md-6 text-right"> 
-	 					<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Valider"> Enchérir </button>
+	 				<div class="col-md-4 p-3"> 
+	 					<button type="submit" class="btn btn-primary mt-2" value="Valider"> Enchérir </button>
 	 				</div>
-	 				
+ 				</form>
  				</div>
 	 			<%
 	 			i++;
