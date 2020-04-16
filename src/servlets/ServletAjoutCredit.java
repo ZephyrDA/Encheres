@@ -57,10 +57,9 @@ public class ServletAjoutCredit extends HttpServlet {
 		try {
 			ArrayList<Utilisateur> listUtilisateur = manager.getLesUtilisateurs();
 			for ( Utilisateur unUtilisateur : listUtilisateur) {
-				if (unUtilisateur.getPseudo() == pseudo) {
-					Utilisateur user = manager.getUtilisateurByPseudo(pseudo);
-					user.setCredit(user.getCredit()+credit);
-					manager.modifierUtilisateur(user);	
+				if (unUtilisateur.getPseudo() == pseudo) {					
+					unUtilisateur.setCredit(unUtilisateur.getCredit()+credit);
+					manager.modifierUtilisateur(unUtilisateur);	
 					message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";
 					request.setAttribute("message", message);
 					rd.forward(request, response);
