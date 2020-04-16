@@ -95,12 +95,18 @@ public class ServletHome extends HttpServlet {
 							if(CompareDate(a.getDate_debut_encheres(), y , m, d) || CompareDate(a.getDate_fin_encheres(),y,m,d)) {
 								addArticle = true;
 							}
-						}else if(mot.equals(a.getCategorie()) || mot.equals(a.getVendeur().getPseudo()) || mot.equals(a.getNom_article()) ){
+						}else if(mot.equals(a.getCategorie()) || mot.equals(a.getVendeur().getPseudo())){
 							addArticle = true;
 						}else{
 							String[] description = a.getDescription().split(" ");
+							String[] nomArticle = a.getNom_article().split(" ");
 							for(String motDesc : description) {
 								if(motDesc.length() > 2 && motDesc.equals(mot)) {
+									addArticle = true;
+								}
+							}
+							for(String motNom : nomArticle) {
+								if(mot.equals(motNom)) {
 									addArticle = true;
 								}
 							}
