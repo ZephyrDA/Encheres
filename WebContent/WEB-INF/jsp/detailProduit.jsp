@@ -9,10 +9,9 @@
 			Article article = (Article) request.getAttribute("article");
 			ArrayList<Enchere> encheres = article.getEncheres();
 		%>
-		
-<div class="container-fluid text-center col-md-12 ">			
+<div class="container-fluid text-center col-md-12 justify-content-center">			
  	<div class="formulaire">  		
- 		<form action="<%=request.getContextPath()%>/ModifierArticle"	method="post">  			
+ 		<form action="<%=request.getContextPath()%>/ModifierArticle" style="text-align: -webkit-center;"	method="post">  			
  			<div class=" row  col-md-9 col-xs-10 blocProfil mt-5"> 
  				<h3 class="col-md-12">Détail de l'article</h3><br>	 				
  				<!--  <div class="p-2 bg-primary ml-2 text-white" style="width: 30%;height: 100%;margin-left:50px;margin-right:auto;" >
@@ -113,7 +112,7 @@
 					</c:choose><br>
 					<c:choose>
 					    <c:when test="${empty sessionScope.connectedUser}">
-					       <input "name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>" readonly>
+					       <input name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>" readonly>
 					    </c:when>    
 					    <c:when test="${!empty sessionScope.connectedUser}">
 					       <c:if test="${user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()}">
@@ -137,8 +136,8 @@
   			</div> 	
  		</form>
 		
- 		<div class="container-fluid text-center col-md-10 ">			
- 		<div class="formulaire">  		
+ 		<div class="container-fluid text-center col-md-11 ">			
+ 		<div class="formulaire" style="text-align: -webkit-center;">  		
  			<div class=" row  col-md-10 col-xs-12 blocProfil mt-5"> 
  				<h3 class="col-md-12">Enchères</h3><br>	
  				<%
@@ -148,7 +147,7 @@
  					%>
  				
  				<div class="row  col-md-12 col-xs-12 blocProfil mt-5 mr-1 ml-1">
- 				<form class="form-horizontal" style="display:contents;" action="<%=request.getContextPath()%>/encherir" method="post">
+ 				<form action="<%=request.getContextPath()%>/GestionInscription" style="display: contents;"	method="post">
  					<h5 class="col-md-12">Dernière enchère</h5><br>
 	 				<div class="col-md-4 text-right"> 
 	 					<p>Date :</p> 
@@ -170,7 +169,7 @@
 	 			i++;
 	 			}
  				else{ %>
- 					<div class="row  col-md-5 col-xs-12 blocProfil mt-5 mr-1 ml-1">
+ 					<div class="row  col-md-5 col-xs-12 blocProfil mt-5 mr-1 ml-1" style="margin-left: auto !important; margin-right: auto !important;">
 	 				<div class="col-md-6 text-right"> 
 	 					<p>Date :</p> 
 	 					<p>Pseudo :</p> 
