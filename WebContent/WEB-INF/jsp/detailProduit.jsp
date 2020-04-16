@@ -5,9 +5,23 @@
 <%@page import="bo.Article"%>
 <%@page import="bo.Enchere"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.util.Calendar"%>
 <% 
 			Article article = (Article) request.getAttribute("article");
 			ArrayList<Enchere> encheres = article.getEncheres();
+			Date d = new Date(Calendar.getInstance().getTime().getTime());
+			boolean dateFinOk= true;
+			boolean dateDebutOk= true;
+			//Si la date de fin est passée
+			if(article.getDate_fin_encheres().compareTo(d)<=0)
+			{
+				dateFinOk=false;
+			}
+			if(article.getDate_debut_encheres().compareTo(d)<=0)
+			{
+				dateDebutOk=false;
+			}
 		%>
 <div class="container-fluid text-center col-md-12 justify-content-center">			
  	<div class="formulaire">  		
@@ -30,7 +44,7 @@
 					        <%System.out.print("non connecté /"); %>
 					    </c:when>    
 					    <c:when test="${!empty sessionScope.connectedUser}">
-					      <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur())) {%>
+					      <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur()) || dateDebutOk==false)  {%>
 					       		<input type="text" value=<%=article.getVendeur().getPseudo() %> readonly> 
 					       		<%System.out.print(" pas vendeur /"); %>
 					       		<%System.out.print(" user id : " + user.getNoUtilisateur()); %>
@@ -49,7 +63,7 @@
 					        <input type="text" name="snom" value="<%=article.getNom_article() %>" readonly> 
 					    </c:when>    
 					    <c:when test="${!empty sessionScope.connectedUser}">
-					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur())) {%>
+					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur()) || dateDebutOk==false)  {%>
 					       		<input type="text" name="snom" value="<%=article.getNom_article() %>" readonly>
 					       <%}
 					      else{%>
@@ -64,7 +78,7 @@
 								</textarea>
 					    </c:when>    
 					    <c:when test="${!empty sessionScope.connectedUser}">
-					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur())) {%>
+					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur()) || dateDebutOk==false)  {%>
 								<textarea name="sdescription" style="resize: none" id="desc" rows="3" cols="22.9" readonly>
 									<%=article.getDescription() %>
 								</textarea>
@@ -91,7 +105,7 @@
 					       <input type="text" name="sprix" value="<%=article.getPrix_initial() %>" readonly>
 					    </c:when>    
 					    <c:when test="${!empty sessionScope.connectedUser}">
-					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur())) {%>
+					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur()) || dateDebutOk==false)  {%>
 								<input type="text" name="sprix" value="<%=article.getPrix_initial() %>" readonly>
 					       <%}
 					      else{%>
@@ -104,7 +118,7 @@
 					       <input name="sDebut" type="date" value="<%=article.getDate_debut_encheres() %>" readonly>
 					    </c:when>    
 					    <c:when test="${!empty sessionScope.connectedUser}">
-					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur())) {%>
+					      <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur()) || dateDebutOk==false)  {%>
 								<input name="sDebut" type="date" value="<%=article.getDate_debut_encheres() %>" readonly>
 					       <%}
 					      else{%>
@@ -117,7 +131,7 @@
 					       <input name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>" readonly>
 					    </c:when>    
 					    <c:when test="${!empty sessionScope.connectedUser}">
-					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur())) {%>
+					       <%if(user.getNoUtilisateur()!=(article.getVendeur().getNoUtilisateur()) || dateDebutOk==false)  {%>
 								<input name="sFin" type="date" value="<%=article.getDate_fin_encheres() %>" readonly>
 					       <%}
 					      else{%>
@@ -131,8 +145,8 @@
  			 
  			<br>			 			
 			<c:if test="${!empty sessionScope.connectedUser}"> 
-				<%if(user.getNoUtilisateur()==(article.getVendeur().getNoUtilisateur())) {%>
-					<input type="hidden" value="sidArticle" name="<%= article.getNo_article() %>">
+				<%if(user.getNoUtilisateur()==article.getVendeur().getNoUtilisateur() && dateDebutOk==true)  {%>
+					<input type="hidden" value="sidArticle" name="<%=article.getNo_article()%>">
 		      		<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Valider"> Modifier </button>
 		      	<%}%>		      	
   			</c:if>	
@@ -163,25 +177,28 @@
 	 					<p><%=enchere.getMontantEnchere() %> credits</p> 
 	 				</div> 
 	 				<input type="hidden" value="<%=article.getNo_article() %>" name="noArt">
-	 				<c:if test="${!empty sessionScope.connectedUser}">
-		 				<!--<c:if test="${user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()}"> -->
-		 					<div class="col-md-4 p-3"> 	 					
-			 					<%
-			 						
-				 					String erreur = (String) request.getAttribute("erreur");
-				 					if (erreur != null) { 
-				 				%> 
-				 						<p class="erreur"><%=erreur%></p> 
-				 				<% 
-				 					}
-				 				%> 
-				 				<input type="hidden" name="sMontantMinimum" value="<%=enchere.getMontantEnchere()+1%>">
-				 				<input type="hidden" name="sIdArticle" value="<%=article.getNo_article()%>">
-			 					<input type="text" name="sMontantOffre" value="" ><br>
-			 					<button type="submit" class="btn btn-primary mt-2" value="Valider"> Enchérir </button>
-	 						</div>
-		 				<!--</c:if> -->
-	 				</c:if>
+	 				
+			 				<%
+			 				if((user!=null)){
+			 				if( user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur()){ %>
+				 				<!--&& DateDebutOK==true && DateFinOK==true -->
+				 					<div class="col-md-4 p-3"> 	 					
+					 					<%
+					 						
+						 					String erreur = (String) request.getAttribute("erreur");
+						 					if (erreur != null) { 
+						 				%> 
+						 						<p class="erreur"><%=erreur%></p> 
+						 				<% 
+						 					}
+						 				%> 
+						 				<input type="hidden" name="sMontantMinimum" value="<%=enchere.getMontantEnchere()+1%>">
+						 				<input type="hidden" name="sIdArticle" value="<%=article.getNo_article()%>">
+					 					<input type="text" name="sMontantOffre" value="" ><br>
+					 					<button type="submit" class="btn btn-primary mt-2" value="Valider"> Enchérir </button>
+			 						</div>
+			 				<%}} %>
+	 					
 	 				
  				</form>
  				</div>

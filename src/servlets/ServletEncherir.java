@@ -59,16 +59,18 @@ public class ServletEncherir extends HttpServlet {
 		int montantmini = Integer.parseInt(request.getParameter("sMontantMinimum"));
 		try {
 			
-			if(montant>=montantmini) {
+			if(montant>=montantmini && montant<user.getCredit()) {
 			Enchere enchere = manager.ajouterEnchere(montant, user, idArticle);
 			Article article = manager.getArticle(idArticle);
 			article.getEncheres().add(enchere);
+			manager.modifierArticle(article);
 			request.setAttribute("article", article);			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailProduit.jsp");
 			rd.forward(request, response);
 			}
+			
 			else {
-				request.setAttribute("erreur", "L'identifiant ou le mot de passe est incorrect.");	
+				request.setAttribute("erreur", "Votre offre doit être supérieure la dernière offre, et inférieur à votre montant de crédits");	
 				Article article = manager.getArticle(idArticle);
 				request.setAttribute("article", article);			
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailProduit.jsp");
