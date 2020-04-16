@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -76,8 +77,9 @@ public class ServletConnexion extends HttpServlet {
 				
 				request.setAttribute("lesCategories", listCategories);
 				request.setAttribute("lesArticles", listArticles);
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
-				rd.forward(request, response);
+				//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+				//rd.forward(request, response);
+				response.sendRedirect("/Encheres");
 			}
 			else{
 				request.setAttribute("erreur", "L'identifiant ou le mot de passe est incorrect.");

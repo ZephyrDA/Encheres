@@ -82,7 +82,7 @@ public class ServletHome extends HttpServlet {
 			String filtres = ((String)request.getParameter("filtres") == null) ? "" : (String)request.getParameter("filtres") ;
 
 			ArrayList<Article> lesArticles = new ArrayList<Article>();
-			if(filtres != "") {
+			if(filtres.trim() != "") {
 				String[] lesMotsCles = filtres.split(" ");
 				for(Article a : lesArticlesFiltre) {
 					Boolean addArticle = false;
@@ -118,6 +118,8 @@ public class ServletHome extends HttpServlet {
 						}
 					}
 				}
+			}else {
+				lesArticles = lesArticlesFiltre;
 			}
 
 			request.setAttribute("lesCategories", listCategories);
