@@ -18,7 +18,6 @@ import bo.Utilisateur;
 public class ServletAjoutCredit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static EncheresManager manager = new EncheresManager();
-	Utilisateur user = new Utilisateur ();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -53,7 +52,7 @@ public class ServletAjoutCredit extends HttpServlet {
 		String pseudo = request.getParameter("pseudoUtilisateur").trim();			
 		int credit = Integer.parseInt(request.getParameter("credit").trim());		
 		try {			
-			Utilisateur user = manager.getUtilisateurByPseudo(pseudo);	
+			Utilisateur user = manager.getUtilisateurByPseudo(pseudo);
 			user.setCredit(user.getCredit()+credit);
 			manager.modifierUtilisateur(user);	
 		} catch (BusinessException e) {
