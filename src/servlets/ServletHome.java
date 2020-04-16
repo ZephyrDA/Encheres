@@ -36,6 +36,13 @@ public class ServletHome extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// Set standard HTTP/1.1 no-cache headers.
+		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+
+		// Set standard HTTP/1.0 no-cache header.
+		response.setHeader("Pragma", "no-cache");
+		
 		EncheresManager EM = new EncheresManager();
 		try {
 			ArrayList<Article> listArticles = EM.getLesArticles();
@@ -55,7 +62,11 @@ public class ServletHome extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// TODO Auto-generated method stub
+		// Set standard HTTP/1.1 no-cache headers.
+		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+
+		// Set standard HTTP/1.0 no-cache header.
+		response.setHeader("Pragma", "no-cache");
 		int idCategorie = Integer.parseInt(request.getParameter("category"));
 		try {
 			EncheresManager encheresManager = new EncheresManager();
