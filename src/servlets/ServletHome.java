@@ -131,8 +131,8 @@ public class ServletHome extends HttpServlet {
 							String[] dateStr = mot.split("-");
 							int y = Integer.parseInt(dateStr[0]);
 							int m = Integer.parseInt(dateStr[1]);
-							int d = Integer.parseInt(dateStr[2]);
-							if(CompareDate(a.getDate_debut_encheres(), y , m, d) || CompareDate(a.getDate_fin_encheres(),y,m,d)) {
+							int day = Integer.parseInt(dateStr[2]);
+							if(CompareDate(a.getDate_debut_encheres(), y , m, day) || CompareDate(a.getDate_fin_encheres(),y,m,day)) {
 								addArticle = true;
 							}
 						}else if(mot.equals(a.getCategorie().getLibelle()) || mot.equals(a.getVendeur().getPseudo())){

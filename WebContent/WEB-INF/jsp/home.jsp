@@ -47,7 +47,7 @@
 					<a class="text-white"><%out.print(art.getNom_article());%></a>
 					<div><%out.print(art.getPrix_initial());%> credits</div>
 					<div><%out.print("du " + art.getDate_debut_encheres()+" au "+art.getDate_fin_encheres());%></div>
-					<div>Vendeur : <%out.print(art.getVendeur().getPseudo());%></div>
+					<div>Vendeur : <a style="color:white;"href="profilUtilisateur"> <%out.print(art.getVendeur().getPseudo());%> </a></div>
 					<input type="submit" class="btn btn-info "  style="margin-left: auto;margin-right: auto;" value="Afficher">
 				</div>
 			</form>

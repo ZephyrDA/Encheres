@@ -26,16 +26,17 @@
 			<p><%=utilisateur.getRue()%></p>
 			<p><%=utilisateur.getCodePostal()%></p>
 			<p><%=utilisateur.getVille()%></p>
-		</div>			
- 		<% boolean btnModif = (boolean) request.getAttribute("btnModif"); 
- 		   if (btnModif == true) {
- 		%> 
-				<form action="<%=request.getContextPath()%>/GestionModificationProfil" method="get" >
-					<input type="submit" class="bouton btn btn-default" value="Modifier" name="Modifier"> 
+		</div>	 		
+		<form action="<%=request.getContextPath()%>/GestionModificationProfil" method="get" >
+			<input type="submit" class="bouton btn btn-default" value="Modifier" name="Modifier"> 
+		</form>
+		<c:if test="${!empty sessionScope.connectedUser}">
+        	<c:if test="${sessionScope.connectedUser.getAdministrateur() == true}">
+				<form action="<%=request.getContextPath()%>/GestionSupprimerProfil" method="get" >
+					<input type="submit" class="bouton btn btn-default" value="Supprimer" name="Supprimer"> 
 				</form>
- 		<% 
- 			}
- 		%> 
+			</c:if>
+		</c:if> 
 	</div>
 </div>
 </body>
