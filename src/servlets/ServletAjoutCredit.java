@@ -53,23 +53,24 @@ public class ServletAjoutCredit extends HttpServlet {
 		}		 
 		String pseudo = request.getParameter("pseudoUtilisateur").trim();			
 		int credit = Integer.parseInt(request.getParameter("credit").trim());
-		
+		int compteur = 0;
 		try {
 			ArrayList<Utilisateur> listUtilisateur = manager.getLesUtilisateurs();
-			//fonction marche pour les bon pseudo mais affiche le message erreur 
 			for ( Utilisateur unUtilisateur : listUtilisateur) {
 				if (unUtilisateur.getPseudo().equals(pseudo)) {					
 					unUtilisateur.setCredit(unUtilisateur.getCredit()+credit);
-					manager.modifierUtilisateur(unUtilisateur);	
-					message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";
-					
-				} else {
-					message = "L'utilisateur " + pseudo + " n'existe pas dans la base.";
+					manager.modifierUtilisateur(unUtilisateur);
+					compteur = compteur + 1;					
 				}
 			}			
 		} catch (BusinessException e) {
 			e.printStackTrace();
-		}	
+		}
+		if (compteur == 1) {
+			message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";			
+		} else {
+			message = "L'utilisateur " + pseudo + " n'existe pas dans la base.";			
+		}
 		request.setAttribute("message", message);
 		rd.forward(request, response);
 	}
