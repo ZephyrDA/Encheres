@@ -64,7 +64,7 @@ public class ServletEncherir extends HttpServlet {
 			Article article = manager.getArticle(idArticle);
 			article.getEncheres().add(enchere);
 			manager.modifierArticle(article);
-			request.setAttribute("article", article);			
+			request.setAttribute("idArticle", article.getNo_article());			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailProduit.jsp");
 			rd.forward(request, response);
 			}

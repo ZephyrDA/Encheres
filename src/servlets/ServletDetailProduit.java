@@ -40,13 +40,8 @@ public class ServletDetailProduit extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Set standard HTTP/1.1 no-cache headers.
-		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
-
-		// Set standard HTTP/1.0 no-cache header.
-		response.setHeader("Pragma", "no-cache");
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/detailProduit.jsp");
-		rd.forward(request, response);
+		request.setAttribute("idArticle", request.getParameter("idArticle"));
+		doPost( request,  response);
 	}
 
 	/**

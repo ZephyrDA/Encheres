@@ -1,9 +1,22 @@
 <%@page import="bo.Utilisateur"%>
+<%@page import="bo.Article"%>
+<%@page import="bo.Enchere"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jspf"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<% Utilisateur utilisateur = (Utilisateur)request.getSession().getAttribute("connectedUser"); %>
+<% Utilisateur utilisateur = (Utilisateur)request.getSession().getAttribute("connectedUser");
+	ArrayList<Article> lesArticles = (ArrayList<Article>) request.getAttribute("lesArticles");
+	ArrayList<Enchere> ToutesLesEncheres = (ArrayList<Enchere>) request.getAttribute("lesEncheres");
+	ArrayList<Enchere> lesEncheres = new ArrayList<Enchere>();
+	for(Enchere enchere : ToutesLesEncheres){
+		if(enchere.getUtilisateur().getNoUtilisateur()==user.getNoUtilisateur()){
+			lesEncheres.add(enchere);
+		}
+	}
+
+	%>
 <div class="container-fluid text-center col-md-10 offset-2">			
  	<div class="formulaire">  		
  			<div class=" row col-md-offset-2 col-md-9 col-xs-12 blocProfil mt-5"> 
@@ -47,5 +60,56 @@
 		</div>
  	</div> 						
 </div>
+<%if(lesArticles!=null){ %>
+<div class="container-fluid text-center col-md-10 offset-2">			
+ 	<div class="formulaire">  		
+ 			<div class=" row col-md-offset-2 col-md-9 col-xs-12 blocProfil mt-5"> 
+ 				<h3 class="col-md-12">Mes Achats</h3><br>
+ 				<%for(Article article : lesArticles){
+ 					ArrayList<Enchere> encheres = article.getEncheres();
+ 					if(encheres.size()>0){
+ 						if(encheres.get(0).getUtilisateur().getNoUtilisateur()==user.getNoUtilisateur() && article.getPrix_vente()!=-1){%>	
+ 					
+ 				<div class="col-md-5 text-right "> 
+ 					<p>Nom : <% out.print(article.getNom_article()); %></p> 
+ 					<form method="post" action="<%=request.getContextPath()%>/ServletDetailProduit" >
+	 				<div > 
+	 					<input type="hidden" name="idArticle" value="<%=article.getNo_article()%>">
+		 				<button type="submit" class="bouton col-md-3  btn btn-primary"> Afficher</button><span class="sr-only">(current)</span>		
+					</div>
+				</form>					  
+ 				</div> <br> 				
+ 				<%}}} %>
+ 			
+ 			</div> 
+ 	</div> 						
+</div>
+<%}
+if(lesEncheres!=null){ %>
+<!-- <div class="container-fluid text-center col-md-10 offset-2">			 -->
+<!--  	<div class="formulaire">  		 -->
+<!--  			<div class=" row col-md-offset-2 col-md-9 col-xs-12 blocProfil mt-5">  -->
+<!--  				<h3 class="col-md-12">Mes Encheres</h3><br> -->
+<%--  				<%for(Article article : lesArticles){ --%>
+<%--   					for(Enchere enchere : lesEncheres){
+<%--   						if(article.getEncheres().contains(enchere)){
+<%--  				%>	 --%>
+ 					
+<!--  				<div class="col-md-5 text-right ">  -->
+<%--  					<p>Article : <% out.print(article.getNom_article()); %></p>  --%>
+<%--  					<p>Montant : <% out.print(enchere.getMontantEnchere()); %></p>  --%>
+<%--  					<form method="post" action="<%=request.getContextPath()%>/ServletDetailProduit" > --%>
+<!-- 	 				<div >  -->
+<%-- 	 					<input type="hidden" name="idArticle" value="<%=article.getNo_article()%>"> --%>
+<!-- 		 				<button type="submit" class="bouton col-md-3  btn btn-primary"> Afficher</button><span class="sr-only">(current)</span>		 -->
+<!-- 					</div> -->
+<!-- 				</form>					   -->
+<!--  				</div> <br> 				 -->
+<%--  				<%}} }%> --%>
+ 			
+<!--  			</div>  -->
+<!--  	</div> 						 -->
+<!-- </div> -->
+<%}%>
 </body>
 </html>
