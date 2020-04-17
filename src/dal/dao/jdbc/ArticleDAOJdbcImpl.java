@@ -116,8 +116,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			pstmt.setInt(6,  article.getPrix_vente());
 			pstmt.setInt(7,  article.getVendeur().getNoUtilisateur());
 			pstmt.setInt(8,  article.getCategorie().getNo_categorie());
-			pstmt.setInt(9, article.getNo_article());
-			pstmt.setString(10, article.getVignette());
+			pstmt.setInt(10, article.getNo_article());
+			pstmt.setString(9, article.getVignette());
 
 
 			pstmt.executeUpdate();			

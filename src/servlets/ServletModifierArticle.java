@@ -148,7 +148,7 @@ public class ServletModifierArticle extends HttpServlet {
 	//		if(!art.getPrix_initial().contentEquals(request.getParameter("sprix"))) {
 	//			art.setPrix_initial(request.getParameter("sprix"));
 	//		}
-
+	}
 
 
 }
