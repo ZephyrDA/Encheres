@@ -8,10 +8,10 @@
 				<p class="col-lg-2">Votre Pseudo :</p>
 				<input type="text" name="pseudoUtilisateur" placeholder="Saisir votre pseudo" class="col-lg-3"><br>
 			</div>
-<!-- 			<div class="col-lg-12 offset-4"> -->
-<!-- 				<p class="col-lg-2">Votre Email :</p> -->
-<!-- 				<input type="text" name="email" value="" class="col-lg-3"><br> -->
-<!-- 			</div> -->
+			<div class="col-lg-12 offset-4">
+				<p class="col-lg-2">Votre Email :</p>
+				<input type="text" name="mailUtilisateur" placeholder="Saisir votre email" class="col-lg-3"><br>
+			</div>
 			<div class="col-lg-12 offset-4">		
 				<button type="submit" class="bouton btn btn-default">
 					Valider

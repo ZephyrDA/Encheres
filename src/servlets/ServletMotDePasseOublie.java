@@ -42,17 +42,23 @@ public class ServletMotDePasseOublie extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/motDePasseOublie.jsp");
 		
 		if (request.getParameter("pseudoUtilisateur").trim().isEmpty()) {
-			erreur = "Erreur - Veuillez renseigner un pseudo uilisateur.";
+			erreur = "Erreur - Veuillez renseigner votre pseudo.";
 			request.setAttribute("erreur", erreur);
 			rd.forward(request, response);
-		}				 
-		String pseudo = request.getParameter("pseudoUtilisateur").trim();			
+		}	
+		if (request.getParameter("mailUtilisateur").trim().isEmpty()) {
+			erreur = "Erreur - Veuillez renseigner votre email.";
+			request.setAttribute("erreur", erreur);
+			rd.forward(request, response);
+		}
+		String pseudo = request.getParameter("pseudoUtilisateur").trim();
+		String mail = request.getParameter("mailUtilisateur").trim();
 		int compteur = 0;
 		String mdp = null;
 		try {
 			ArrayList<Utilisateur> listUtilisateur = manager.getLesUtilisateurs();
 			for ( Utilisateur unUtilisateur : listUtilisateur) {
-				if (unUtilisateur.getPseudo().equals(pseudo)) {	
+				if (unUtilisateur.getPseudo().equals(pseudo) && unUtilisateur.getEmail().equals(mail)) {	
 					mdp = unUtilisateur.getMotDePasse();
 					compteur = compteur + 1;					
 				}
@@ -61,11 +67,13 @@ public class ServletMotDePasseOublie extends HttpServlet {
 			e.printStackTrace();
 		}
 		if (compteur == 1) {
-			message = "Votre mot de passe est : " + mdp ;			
+			message = "Votre mot de passe est : " + mdp ;
+			request.setAttribute("message", message);
 		} else {
-			message = "L'utilisateur " + pseudo + " n'existe pas dans la base.";			
+			erreur = "L'utilisateur " + pseudo + " ou le mail " + mail + " n'existe pas dans la base.";	
+			request.setAttribute("erreur", erreur);
 		}
-		request.setAttribute("message", message);
+		
 		rd.forward(request, response);
 	}
 }

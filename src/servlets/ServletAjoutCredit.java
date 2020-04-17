@@ -42,7 +42,7 @@ public class ServletAjoutCredit extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp");
 		
 		if (request.getParameter("pseudoUtilisateur").trim().isEmpty()) {
-			erreur = "Erreur - Veuillez renseigner un pseudo uilisateur.";
+			erreur = "Erreur - Veuillez renseigner un pseudo utilisateur.";
 			request.setAttribute("erreur", erreur);
 			rd.forward(request, response);
 		}
@@ -67,11 +67,12 @@ public class ServletAjoutCredit extends HttpServlet {
 			e.printStackTrace();
 		}
 		if (compteur == 1) {
-			message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";			
+			message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";
+			request.setAttribute("message", message);
 		} else {
-			message = "L'utilisateur " + pseudo + " n'existe pas dans la base.";			
-		}
-		request.setAttribute("message", message);
+			erreur = "L'utilisateur " + pseudo + " n'existe pas dans la base.";
+			request.setAttribute("erreur", erreur);
+		}		
 		rd.forward(request, response);
 	}
 }
