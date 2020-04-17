@@ -5,15 +5,17 @@
 
 <div class="row" style="margin-top:15%;">
 	<div class="col-lg-6 offset-lg-3 col-xs-12  border border-primary p-2" >
-		<form action="<%= request.getContextPath()%>/NouvelleEnchere" method="post" style="margin-left: 35%;">
-	<span style="margin-left: auto;margin-right: auto;">Catégories : <br>
+		<form action="<%= request.getContextPath()%>/categories" method="post" style="margin-left: 35%;">
+<div class="d-flex mt-4 align-items-center font-weight-bold">
+
+	<label style="margin-left: auto;margin-right: auto;">Catégories : 
 		<select name="category" class="dropdown btn btn-secondary" >
-		    <option name="catInfo" value="${fn:escapeXml(catInformatique)}">Informatique</option>
-		    <option name="catAmeublement" value="${fn:escapeXml(catAmeublement)}">Ameublement</option>
-		    <option name="catVetement" value="${fn:escapeXml(catVetement)}">Vêtements</option>
-		    <option name="cartSportLoisir" value="${fn:escapeXml(catSportLoisir)}">Sport et Loisirs</option>
+		<option value="0">toutes</option>
+
 		</select>
-	</span>
+	</label>
+	<input type="submit" class="btn btn-primary "  style="margin-left: auto;margin-right: auto;" value="Rechercher">
+</div>
 	<br>
 	<span> Prix : <br>
 		<input type="number" value="prix">
