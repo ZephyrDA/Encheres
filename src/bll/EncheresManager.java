@@ -109,10 +109,14 @@ public class EncheresManager {
 		
 		if(!exception.hasErreurs()) {
 			ArrayList<Retrait> retraits = this.getLesRetraits();
+			ArrayList<Enchere> encheres = this.getEncheresByArticle(id);
 			for(Retrait ret : retraits) {
 				if(ret.getArticle().getNo_article()==id) {
 					this.supprimerRetrait(id);
-				}
+				}			
+			}
+			for(Enchere enchere : encheres) {
+				this.supprimerEnchere(id, enchere.getUtilisateur().getNoUtilisateur());
 			}
 			this.articleDAO.delete(id);
 		}

@@ -150,11 +150,17 @@
 			<c:if test="${!empty sessionScope.connectedUser}"> 
 				<%if(user.getNoUtilisateur()==article.getVendeur().getNoUtilisateur() && dateDebutOk==true)  {%>
 					<input type="hidden" value="sidArticle" name="<%=article.getNo_article()%>">
-		      		<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Valider"> Modifier </button>
+		      		<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Modifier"> Modifier </button>		      		
 		      	<%}%>		      	
   			</c:if>	
   			</div> 	
  		</form>
+ 		<%if(user.getNoUtilisateur()==article.getVendeur().getNoUtilisateur() && dateDebutOk){ %>
+     		<form method="post" action="<%=request.getContextPath()%>/ServletSupprimerArticle">
+     			<input type="hidden" value="<%=article.getNo_article()%>" name="sidArticle">
+     			<button type="submit" class="btn btn-primary mt-2" style="margin-right:2%" value="Supprimer"> Annuler la vente </button>
+     		</form>
+   		<%} %>
 		
  		<div class="container-fluid text-center col-md-11 ">			
  		<div class="formulaire" style="text-align: -webkit-center;">  		
