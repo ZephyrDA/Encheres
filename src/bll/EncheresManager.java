@@ -323,7 +323,7 @@ public class EncheresManager {
 	 * @return ArrayList<Enchere>
 	 * @throws BusinessException 
 	 */
-	private ArrayList<Enchere> getEncheresByArticle(int idArticle) throws BusinessException {
+	public ArrayList<Enchere> getEncheresByArticle(int idArticle) throws BusinessException {
 		BusinessException exception = new BusinessException();
 		ArrayList<Enchere> encheres = new ArrayList<Enchere>();
 		if(!exception.hasErreurs()) {

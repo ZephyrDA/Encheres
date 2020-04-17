@@ -54,6 +54,26 @@ public class ServletHome extends HttpServlet {
 		EncheresManager EM = new EncheresManager();
 		try {
 			ArrayList<Article> listArticles = EM.getLesArticles();
+			Date d = new Date(Calendar.getInstance().getTime().getTime());
+			boolean dateFinOk= false;
+
+			for(Article unArticle : listArticles) {
+				//Si la date de fin est passée
+				if(unArticle.getDate_fin_encheres().compareTo(d)<0)
+				{
+					dateFinOk=true;
+				}
+				if(unArticle.getPrix_vente()==-1 && dateFinOk==true) {
+					ArrayList<Enchere> encheres = EM.getEncheresByArticle(unArticle.getNo_article());
+					if(encheres.size()>0) {
+					unArticle.setPrix_vente(encheres.get(0).getMontantEnchere());
+					EM.modifierArticle(unArticle);					
+					Utilisateur user = EM.getLesEncheres().get(0).getUtilisateur();
+					user.setCredit(user.getCredit()-(encheres.get(0).getMontantEnchere()));
+					EM.modifierUtilisateur(user);
+					}
+				}
+			}
 			ArrayList<Categorie> listCategories = EM.getLesCategories();
 
 			request.setAttribute("lesCategories", listCategories);
@@ -78,6 +98,26 @@ public class ServletHome extends HttpServlet {
 		try {
 			EncheresManager encheresManager = new EncheresManager();
 			ArrayList<Article> lesArticlesFiltre = (idCategorie != 0) ? encheresManager.getLesArticlesByCategorie(idCategorie) : encheresManager.getLesArticles();
+			Date d = new Date(Calendar.getInstance().getTime().getTime());
+			boolean dateFinOk= false;
+
+			for(Article unArticle : lesArticlesFiltre) {
+				//Si la date de fin est passée
+				if(unArticle.getDate_fin_encheres().compareTo(d)<0)
+				{
+					dateFinOk=true;
+				}
+				if(unArticle.getPrix_vente()==-1 && dateFinOk==true) {
+					ArrayList<Enchere> encheres = encheresManager.getEncheresByArticle(unArticle.getNo_article());
+					if(encheres.size()>0) {
+					unArticle.setPrix_vente(encheres.get(0).getMontantEnchere());
+					encheresManager.modifierArticle(unArticle);					
+					Utilisateur user = encheresManager.getLesEncheres().get(0).getUtilisateur();
+					user.setCredit(user.getCredit()-(encheres.get(0).getMontantEnchere()));
+					encheresManager.modifierUtilisateur(user);
+					}
+				}
+			}
 			ArrayList<Categorie> listCategories = encheresManager.getLesCategories();
 			String filtres = ((String)request.getParameter("filtres") == null) ? "" : (String)request.getParameter("filtres") ;
 
