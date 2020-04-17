@@ -37,10 +37,10 @@
 	      		<li class="nav-item active">
 	        		<a class="nav-link" href="crediter">Créditer un utilisateur</a>
 	      		</li>
-	      		<li class="nav-item active">
+<!--       		<li class="nav-item active">
 			        <a class="nav-link" href="ListeDonnees">Liste Donnees</a>
 		      	</li>
-	      </c:if>
+ -->	    </c:if>
       </c:if>
       
       <c:if test="${!empty sessionScope.connectedUser}">

@@ -56,6 +56,7 @@ public class ServletModifierArticle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 //		HttpSession session = request.getSession();
 //		Article art = (Article) session.getAttribute("connectedUser");
 //		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profilModifier.jsp");
@@ -128,6 +129,29 @@ public class ServletModifierArticle extends HttpServlet {
 //		rd = request.getRequestDispatcher("/WEB-INF/jsp/monProfil.jsp");
 //		rd.forward(request, response);
 //		
+
+	//		String[] dateStr = ((String)request.getParameter("sFin")).split("-");
+	//		int y = Integer.parseInt(dateStr[0]);
+	//		int m = Integer.parseInt(dateStr[1]);
+	//		int day = Integer.parseInt(dateStr[2]);
+	//		java.util.Date date = new java.util.Date(y,m,day,0,0, 0);
+	//		java.sql.Date dateSql = new java.sql.Date(date.getTime());
+	//		if(art.getDate_debut_encheres().compareTo(request.getParameter("sDebut"))!=0) {
+	//			art.setDate_debut_encheres(request.getParameter("sDebut"));
+	//		}
+
+	//		if(!art.getDate_fin_encheres().compareTo(request.getParameter("sFin"))) {
+	//			art.setDate_fin_encheres(request.getParameter("sFin"));
+	//		}
+
+	//		if(!art.getPrix_initial().contentEquals(request.getParameter("sprix"))) {
+	//			art.setPrix_initial(request.getParameter("sprix"));
+	//		}
+
+	
+		
+		
+
 	}
 
 }
