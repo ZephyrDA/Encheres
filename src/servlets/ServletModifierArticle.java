@@ -59,7 +59,7 @@ public class ServletModifierArticle extends HttpServlet {
 		HttpSession session = request.getSession();
 		Article art = (Article) session.getAttribute("connectedUser");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profilModifier.jsp");
-
+		EncheresManager EM = new EncheresManager();
 		if(!request.getParameter("snom").equals("")) {
 			if(!art.getNom_article().contentEquals(request.getParameter("snom"))) {
 				art.setNom_article(request.getParameter("snom"));					
@@ -79,33 +79,33 @@ public class ServletModifierArticle extends HttpServlet {
 			rd.forward(request, response);
 		}
 		if(!request.getParameter("sDebut").equals("")) {
-			String[] dateStr = ((String)request.getParameter("sFin")).split("-");
-			int y = Integer.parseInt(dateStr[0]);
-			int m = Integer.parseInt(dateStr[1]);
-			int day = Integer.parseInt(dateStr[2]);
-			java.util.Date date = new java.util.Date(y,m,day,0,0, 0);
-			java.sql.Date dateSql = new java.sql.Date(date.getTime());
-			if(art.getDate_debut_encheres().compareTo(request.getParameter("sDebut"))!=0) {
-				art.setDate_debut_encheres(request.getParameter("sDebut"));
-			}
+	//		String[] dateStr = ((String)request.getParameter("sFin")).split("-");
+	//		int y = Integer.parseInt(dateStr[0]);
+	//		int m = Integer.parseInt(dateStr[1]);
+	//		int day = Integer.parseInt(dateStr[2]);
+	//		java.util.Date date = new java.util.Date(y,m,day,0,0, 0);
+	//		java.sql.Date dateSql = new java.sql.Date(date.getTime());
+	//		if(art.getDate_debut_encheres().compareTo(request.getParameter("sDebut"))!=0) {
+	//			art.setDate_debut_encheres(request.getParameter("sDebut"));
+	//		}
 		}
 		else {
 			request.setAttribute("erreur", "Echec modif date debut enchere");
 			rd.forward(request, response);
 		}	
 		if(!request.getParameter("sFin").equals("")) {	
-			if(!art.getDate_fin_encheres().compareTo(request.getParameter("sFin"))) {
-				art.setDate_fin_encheres(request.getParameter("sFin"));
-			}
+	//		if(!art.getDate_fin_encheres().compareTo(request.getParameter("sFin"))) {
+	//			art.setDate_fin_encheres(request.getParameter("sFin"));
+	//		}
 		}
 		else {
 			request.setAttribute("erreur", "Echec modif date fin enchere");
 			rd.forward(request, response);
 		}	
 		if(!request.getParameter("sprix").equals("")) {	
-			if(!art.getPrix_initial().contentEquals(request.getParameter("sprix"))) {
-				art.setPrix_initial(request.getParameter("sprix"));
-			}
+	//		if(!art.getPrix_initial().contentEquals(request.getParameter("sprix"))) {
+	//			art.setPrix_initial(request.getParameter("sprix"));
+	//		}
 		}
 		else {
 			request.setAttribute("erreur", "Echec modif prix enchere");
@@ -118,7 +118,7 @@ public class ServletModifierArticle extends HttpServlet {
 		
 		
 		try {
-			manager.modifierArticle(art);
+			EM.modifierArticle(art);
 			session.setAttribute("connectedUser", art);
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
