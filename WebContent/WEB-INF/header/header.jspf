@@ -28,26 +28,24 @@
         <a class="nav-link" href="/Encheres">Home <span class="sr-only">(current)</span></a>
       </li>      
       <c:if test="${!empty sessionScope.connectedUser}">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="MonProfil">Mon Profil</a>
-	      </li>
-      </c:if>
-        <c:if test="${!empty sessionScope.connectedUser}">
-        	<c:if test="${sessionScope.connectedUser.getAdministrateur() == true}">
-	      		<li class="nav-item active">
-	        		<a class="nav-link" href="crediter">Créditer un utilisateur</a>
-	      		</li>
-	      </c:if>
-      </c:if>
-      <li class="nav-item active">
-        <a class="nav-link" href="ListeDonnees">Liste Donnees</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="AjoutEnchere">Nouvelle enchere</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="Encherir">Encherir</a>
-      </li>
+	  	<li class="nav-item active">
+	    	<a class="nav-link" href="MonProfil">Mon Profil</a>
+	    </li>       
+        <c:if test="${sessionScope.connectedUser.getAdministrateur() == true}">
+	    	<li class="nav-item active">
+	       		<a class="nav-link" href="crediter">Créditer un utilisateur</a>
+	    	</li>
+	    </c:if>      
+      	<li class="nav-item active">
+        	<a class="nav-link" href="ListeDonnees">Liste Donnees</a>
+      	</li>      
+      	<li class="nav-item active">
+        	<a class="nav-link" href="AjoutEnchere">Nouvelle enchere</a>
+      	</li>
+      	<li class="nav-item active">
+        	<a class="nav-link" href="Encherir">Encherir</a>
+      	</li>
+      </c:if>	
     </ul>
   	<c:if test="${!empty sessionScope.connectedUser}">
       	<ul class="navbar-nav navbar-right ">
