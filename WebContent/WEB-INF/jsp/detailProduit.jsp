@@ -150,12 +150,19 @@
 			<c:if test="${!empty sessionScope.connectedUser}"> 
 				<%if(user.getNoUtilisateur()==article.getVendeur().getNoUtilisateur() && dateDebutOk==true)  {%>
 					<input type="hidden" value="sidArticle" name="<%=article.getNo_article()%>">
-		      		<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Valider"> Modifier </button>
+		      		<button type="submit" class="btn btn-primary mt-2" style="margin-left:45%" value="Modifier"> Modifier </button>		      		
 		      	<%}%>		      	
   			</c:if>	
   			</div> 	
  		</form>
-		
+ 		<c:if test="${!empty sessionScope.connectedUser}"> 
+ 		<%if(user.getNoUtilisateur()==article.getVendeur().getNoUtilisateur() && dateDebutOk==true){ %>
+     		<form method="post" action="<%=request.getContextPath()%>/ServletSupprimerArticle">
+     			<input type="hidden" value="<%=article.getNo_article()%>" name="idArticle">
+     			<button type="submit" class="btn btn-primary mt-2" style="margin-right:2%" value="Supprimer"> Annuler la vente </button>
+     		</form>
+   		<%} %>
+		</c:if>	
  		<div class="container-fluid text-center col-md-11 ">			
  		<div class="formulaire" style="text-align: -webkit-center;">  		
  			<div class=" row  col-md-10 col-xs-12 blocProfil mt-5"> 
@@ -169,6 +176,9 @@
  				<div class="row  col-md-12 col-xs-12 blocProfil mt-5 mr-1 ml-1">
  				<form action="<%=request.getContextPath()%>/Encherir" style="display: contents;"	method="post">
  					<h5 class="col-md-12">Dernière enchère</h5><br>
+ 					<%if(dateFinOk==false){ %>
+ 					 	<h6 class="col-md-12" style="color:green;">Enchère remportée par <%= enchere.getUtilisateur().getPseudo() %></h6><br> 				
+ 					<%} %>
 	 				<div class="col-md-4 text-right"> 
 	 					<p>Date :</p> 
 	 					<p>Pseudo :</p> 
