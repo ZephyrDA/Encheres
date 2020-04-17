@@ -193,7 +193,7 @@
 	 				
 			 				<%
 			 				if((user!=null)){
-			 				if( user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur() && dateDebutOk==false){ %>
+			 				if( user.getNoUtilisateur()!=article.getVendeur().getNoUtilisateur() && dateDebutOk==false && dateFinOk==true){ %>
 				 				<!--&& DateDebutOK==true && DateFinOK==true -->
 				 					<div class="col-md-4 p-3"> 	 					
 					 					<%

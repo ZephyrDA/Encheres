@@ -98,12 +98,12 @@ public class ServletHome extends HttpServlet {
 		try {
 			EncheresManager encheresManager = new EncheresManager();
 			ArrayList<Article> lesArticlesFiltre = (idCategorie != 0) ? encheresManager.getLesArticlesByCategorie(idCategorie) : encheresManager.getLesArticles();
-			Date d = new Date(Calendar.getInstance().getTime().getTime());
+			Date da = new Date(Calendar.getInstance().getTime().getTime());
 			boolean dateFinOk= false;
 
 			for(Article unArticle : lesArticlesFiltre) {
 				//Si la date de fin est passée
-				if(unArticle.getDate_fin_encheres().compareTo(d)<0)
+				if(unArticle.getDate_fin_encheres().compareTo(da)<0)
 				{
 					dateFinOk=true;
 				}
