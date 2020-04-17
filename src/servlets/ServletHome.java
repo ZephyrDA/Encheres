@@ -63,7 +63,7 @@ public class ServletHome extends HttpServlet {
 				{
 					dateFinOk=true;
 				}
-				if(unArticle.getPrix_vente()==-1 && dateFinOk==true) {
+				if(unArticle.getPrix_vente()==0 && dateFinOk==true) {
 					ArrayList<Enchere> encheres = EM.getEncheresByArticle(unArticle.getNo_article());
 					if(encheres.size()>0) {
 					unArticle.setPrix_vente(encheres.get(0).getMontantEnchere());
@@ -107,7 +107,7 @@ public class ServletHome extends HttpServlet {
 				{
 					dateFinOk=true;
 				}
-				if(unArticle.getPrix_vente()==-1 && dateFinOk==true) {
+				if(unArticle.getPrix_vente()==0 && dateFinOk==true) {
 					ArrayList<Enchere> encheres = encheresManager.getEncheresByArticle(unArticle.getNo_article());
 					if(encheres.size()>0) {
 					unArticle.setPrix_vente(encheres.get(0).getMontantEnchere());

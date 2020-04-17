@@ -68,7 +68,7 @@
  				<%for(Article article : lesArticles){
  					ArrayList<Enchere> encheres = article.getEncheres();
  					if(encheres.size()>0){
- 						if(encheres.get(0).getUtilisateur().getNoUtilisateur()==user.getNoUtilisateur() && article.getPrix_vente()!=-1){%>	
+ 						if(encheres.get(0).getUtilisateur().getNoUtilisateur()==user.getNoUtilisateur() && article.getPrix_vente()!=0){%>	
  					
  				<div class="col-md-5 text-right "> 
  					<p>Nom : <% out.print(article.getNom_article()); %></p> 
