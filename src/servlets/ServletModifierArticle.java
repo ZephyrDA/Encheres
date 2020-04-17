@@ -57,6 +57,7 @@ public class ServletModifierArticle extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
 //		HttpSession session = request.getSession();
 //		Article art = (Article) session.getAttribute("connectedUser");
 //		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profilModifier.jsp");
@@ -148,10 +149,6 @@ public class ServletModifierArticle extends HttpServlet {
 	//			art.setPrix_initial(request.getParameter("sprix"));
 	//		}
 
-	
-		
-		
 
-	}
 
 }
