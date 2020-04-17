@@ -16,21 +16,21 @@ import bo.Utilisateur;
 /**
  * Servlet implementation class ServletAjoutCredit
  */
-@WebServlet("/crediter")
-public class ServletAjoutCredit extends HttpServlet {
+@WebServlet("/motDePasseOublie")
+public class ServletMotDePasseOublie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static EncheresManager manager = new EncheresManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAjoutCredit() {
+    public ServletMotDePasseOublie() {
         super();
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/motDePasseOublie.jsp");
 		rd.forward(request, response);
 	}
 	/**
@@ -39,40 +39,41 @@ public class ServletAjoutCredit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String message=null;
 		String erreur=null;
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ajoutCredit.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/motDePasseOublie.jsp");
 		
 		if (request.getParameter("pseudoUtilisateur").trim().isEmpty()) {
-			erreur = "Erreur - Veuillez renseigner un pseudo utilisateur.";
+			erreur = "Erreur - Veuillez renseigner votre pseudo.";
+			request.setAttribute("erreur", erreur);
+			rd.forward(request, response);
+		}	
+		if (request.getParameter("mailUtilisateur").trim().isEmpty()) {
+			erreur = "Erreur - Veuillez renseigner votre email.";
 			request.setAttribute("erreur", erreur);
 			rd.forward(request, response);
 		}
-		if (request.getParameter("credit").trim().isEmpty()) {
-			erreur = "Erreur - Veuillez renseigner un crédit.";
-			request.setAttribute("erreur", erreur);
-			rd.forward(request, response);
-		}		 
-		String pseudo = request.getParameter("pseudoUtilisateur").trim();			
-		int credit = Integer.parseInt(request.getParameter("credit").trim());
+		String pseudo = request.getParameter("pseudoUtilisateur").trim();
+		String mail = request.getParameter("mailUtilisateur").trim();
 		int compteur = 0;
+		String mdp = null;
 		try {
 			ArrayList<Utilisateur> listUtilisateur = manager.getLesUtilisateurs();
 			for ( Utilisateur unUtilisateur : listUtilisateur) {
-				if (unUtilisateur.getPseudo().equals(pseudo)) {					
-					unUtilisateur.setCredit(unUtilisateur.getCredit()+credit);
-					manager.modifierUtilisateur(unUtilisateur);
+				if (unUtilisateur.getPseudo().equals(pseudo) && unUtilisateur.getEmail().equals(mail)) {	
+					mdp = unUtilisateur.getMotDePasse();
 					compteur = compteur + 1;					
 				}
-			}			
+			}
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
 		if (compteur == 1) {
-			message = "L'utilisateur " + pseudo + " à bien été créditer de " + credit + " crédits.";
+			message = "Votre mot de passe est : " + mdp ;
 			request.setAttribute("message", message);
 		} else {
-			erreur = "L'utilisateur " + pseudo + " n'existe pas dans la base.";
+			erreur = "L'utilisateur " + pseudo + " ou le mail " + mail + " n'existe pas dans la base.";	
 			request.setAttribute("erreur", erreur);
-		}		
+		}
+		
 		rd.forward(request, response);
 	}
 }

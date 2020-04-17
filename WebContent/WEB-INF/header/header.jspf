@@ -37,17 +37,18 @@
 	      		<li class="nav-item active">
 	        		<a class="nav-link" href="crediter">Créditer un utilisateur</a>
 	      		</li>
+	      		<li class="nav-item active">
+			        <a class="nav-link" href="ListeDonnees">Liste Donnees</a>
+		      	</li>
 	      </c:if>
       </c:if>
-      <li class="nav-item active">
-        <a class="nav-link" href="ListeDonnees">Liste Donnees</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="AjoutEnchere">Nouvelle enchere</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="Encherir">Encherir</a>
-      </li>
+      
+      <c:if test="${!empty sessionScope.connectedUser}">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="AjoutEnchere">Nouvelle enchere</a>
+	      </li>
+      </c:if>
+     
     </ul>
   	<c:if test="${!empty sessionScope.connectedUser}">
       	<ul class="navbar-nav navbar-right ">

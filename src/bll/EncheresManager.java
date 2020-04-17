@@ -323,7 +323,7 @@ public class EncheresManager {
 	 * @return ArrayList<Enchere>
 	 * @throws BusinessException 
 	 */
-	private ArrayList<Enchere> getEncheresByArticle(int idArticle) throws BusinessException {
+	public ArrayList<Enchere> getEncheresByArticle(int idArticle) throws BusinessException {
 		BusinessException exception = new BusinessException();
 		ArrayList<Enchere> encheres = new ArrayList<Enchere>();
 		if(!exception.hasErreurs()) {
@@ -513,6 +513,12 @@ public class EncheresManager {
 		
 		if(!exception.hasErreurs())
 		{
+			ArrayList<Article> lesArticles = this.articleDAO.selectAll();
+			for(Article a : lesArticles) {
+				if(a.getVendeur().getNoUtilisateur() == id) {
+					this.articleDAO.delete(a.getNo_article());
+				}
+			}
 			this.utilisateurDAO.delete(id);
 		}
 		

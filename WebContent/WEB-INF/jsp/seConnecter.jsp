@@ -28,7 +28,7 @@
 			<label for="souvenir">Se souvenir de moi</label>
         	<input type="checkbox" id="souvenir" name="souvenir" />
 		</form>		-->		
-		<a href="#ServletPourGestionEnvoiMail">Mot de passe oublié</a>
+		<a href="motDePasseOublie">Mot de passe oublié</a>
 		<br>
 		<br>
 		<button type="submit" class="col-lg-11 btn btn-default">
