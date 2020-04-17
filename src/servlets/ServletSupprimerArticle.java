@@ -43,7 +43,7 @@ public class ServletSupprimerArticle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idArticle = Integer.parseInt(request.getParameter("sidArticle"));
+		int idArticle = Integer.parseInt(request.getParameter("idArticle"));
 		ArrayList<Categorie> listCategories = new ArrayList<Categorie>();
 		ArrayList<Article> listArticles = new ArrayList<Article>();
 		try {
