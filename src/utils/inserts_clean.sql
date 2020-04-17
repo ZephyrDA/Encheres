@@ -22,13 +22,13 @@ INSERT INTO UTILISATEURS(pseudo,nom,prenom,email,telephone,rue,code_postal,ville
 
 INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie,vignette) VALUES
 	('AlienWare','PC Gaming','2020/04/06','2020/04/10',1000,10000,1,1,'./assets/alienware.jpg'),
-	('souris ROCCAT','Souris gaming','2020/04/20','2020/04/24',100000,2000000,1,1,'./assets/roccat.jpg'),
+	('souris ROCCAT','Souris gaming','2020/04/20','2020/04/24',100000,-1,1,1,'./assets/roccat.jpg'),
 	('Table Ikea','Gifi des idees de genie','2020/04/06','2020/04/10',500,2000,2,2,'./assets/ikea.jpg'),
-	('Armoire Castorama','Decathlon, a fond la forme !','2020/04/20','2020/04/24',20000,21000,2,2,'./assets/castorama.jpg'),
-	('Robe de soiree','Plein de paillettes, partout','2020/04/13','2020/04/18',15,0,3,3,'./assets/robe.jpg'),
+	('Armoire Castorama','Decathlon, a fond la forme !','2020/04/20','2020/04/24',20000,-1,2,2,'./assets/castorama.jpg'),
+	('Robe de soiree','Plein de paillettes, partout','2020/04/13','2020/04/18',15,-1,3,3,'./assets/robe.jpg'),
 	('Talon Haut','Pour les gens qui aiment marcher sur la pointe des pieds tout en faisant du bruit','2020/04/13','2020/04/18',2000,0,3,3,'./assets/talon_haut.jpg'),
-	('Ballon de foot','Zidane a joue avec quand il etait gosse','2020/04/13','2020/04/18',50,0,4,4,'./assets/zidane.jpg'),
-	('Raquette de tennis','Une raquette magique qui permet de gagner tous les matchs','2020/04/20','2020/04/24',10,0,4,4,'./assets/raquette.jpg');
+	('Ballon de foot','Zidane a joue avec quand il etait gosse','2020/04/13','2020/04/18',50,-1,4,4,'./assets/zidane.jpg'),
+	('Raquette de tennis','Une raquette magique qui permet de gagner tous les matchs','2020/04/20','2020/04/24',10,-1,4,4,'./assets/raquette.jpg');
 
 INSERT INTO RETRAITS(no_article,rue,code_postal,ville) VALUES
 	(1,'1 rue du trou perdu','04104','Au milieu du desert'),
